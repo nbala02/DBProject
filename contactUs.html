@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Contact Us">
+        <title>Contact Us</title>
+        <link rel="stylesheet" type= text/css href="main.css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito|Pontano+Sans|Poppins:500" rel="stylesheet">
+    </head>
+    <body>
+        <?php session_start(); ?>
+        
+        <header>
+            <div id="logo"><a><img src="images/logo.png"></a></div>
+            <nav>
+                <ul>
+                    <?php
+                        if(isset($_SESSION['wholesaler']) || isset($_SESSION['name']))
+                        {
+                            echo '<li><a href="logout.php">Logout</a></li>';
+                            echo '<li><a href=# style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
+                        } else
+                        {
+                            echo '<li><a href="signIn.html">Sign In</a></li>';
+                            echo '<li><a href="registerPage.html">Register</a></li>';
+                        }
+                    ?>
+                    <li><a>|</a></li>
+                    <li id="current-page"><a href="contactUs.html">Contact Us</a></li>
+                    <li><a href="findDealer.html">Find Dealer</a></li>
+                    <li><a href="vehicles.html">Vehicles</a></li>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+            <section>
+                <div>
+                    <img class="center-top" src="images/contactBanner.png" style="width: 100%; height: 230px; border-top: red 6px solid;">
+                </div>
+            </section>
+        </header>
+        <div id="contactUs">
+            <form method="post" action="storeContactInfo.php">
+                <table border="0">
+                    <tr>
+                        <td for="email" id="cell">Email:</td>
+                        <td><input type="email" name="email" id="email" placeholder="Enter valid email" required></td>
+                    </tr>
+                    <tr>
+                        <td for="fname" id="cell">First Name:</td>
+                        <td><input type="text" name="fname" id="fname" placeholder="Enter First Name" required></td>
+                    </tr>
+                    <tr>
+                        <td for="lname" id="cell">Last Name:</td>
+                        <td><input type="text" name="lname" id="lname" placeholder="Enter Last Name" required></td>
+                    </tr>
+                    <tr>
+                        <td for="phone" id="cell">Phone:</td>
+                        <td><input type="text" name="phone" id="phone" maxlength="13" placeholder="Enter phone #" required></td>
+                    </tr>
+                    <tr>
+                        <td>Address:</td>
+                    </tr>
+                    <tr>
+                        <td for="streetaddress" id="cell">Street Address:</td>
+                        <td><input type="text" name="streetaddress" id="streetaddress" maxlength="50" placeholder="Enter Street Address"></td>
+                    </tr>
+                    <tr>
+                        <td for="city" id="cell">City:</td>
+                        <td><input type="text" name="city" id="city" maxlength="50" placeholder="Enter City"></td>
+                    </tr>
+                    <tr>
+                        <td for="city" id="cell">State:</td>
+                        <td><input type="text" name="state" id="state" maxlength="50" placeholder="Enter State"></td>
+                    </tr>
+                    <tr>
+                        <td for="city" id="cell">Zip Code:</td>
+                        <td><input type="number" name="zipcode" id="zipcode" maxlength="5" placeholder="Enter Zipcode"></td>
+                    </tr>
+                    <tr id="submit">
+                        <td>&nbsp;</td>
+                        <td><input type="submit" name="submit" value="Submit">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <footer>
+            <h3>All Rights Reserved, Copyright &copy; 2020</h3>
+        </footer>
+    </body>
+</html>
+
+<!-- <h2 style="text-align: center; font-size: 100px; padding: 120px; background: black; color: white;">Contact Information</h2> -->
