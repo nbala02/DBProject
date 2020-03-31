@@ -1,5 +1,4 @@
 create database dealer_two;
-use dealer_two;
 
 
 create table sales_person
