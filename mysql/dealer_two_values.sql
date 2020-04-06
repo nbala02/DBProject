@@ -6,10 +6,10 @@ VALUES('654', 'Sally Rogers', '45 Cross St', '573-555-8888', '$52,000', '$55,000
 INSERT INTO customer_d2(buyer_no, name, address, phone)
 VALUES('5678', 'Mike King', '33 Second', '573-555-7890');
 
-INSERT INTO rebate2(model, amount, start_date, end_date)
+INSERT INTO rebate2(model, rebate_amt, start_date, end_date)
 VALUES('Rav4', '$1,750', '2014/02/01', '2014/05/31');
 
-INSERT INTO rebate2(model, amount, start_date, end_date)
+INSERT INTO rebate2(model, rebate_amt, start_date, end_date)
 VALUES('Tundra', '$2,750', '2014/02/01', '2014/05/31');
 
 INSERT INTO autos(vehicle_no, model, color, autotrans, warehouse, financed)

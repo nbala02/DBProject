@@ -32,7 +32,7 @@ create table customer_d1
 create table rebate1
 (
 	model               varchar(10) NOT NULL, #unique model for car
-    amount				varchar(11) NOT NULL, #how much the rebate1 is
+    rebate_amt				varchar(11) NOT NULL, #how much the rebate1 is
     start_date 			DATE	   NOT NULL, # start date of rebate1
     end_date 			DATE	   NOT NULL, # end date of the rebate1
     

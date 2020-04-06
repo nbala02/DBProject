@@ -1,5 +1,5 @@
 create database dealer_two;
-
+use dealer_two;
 
 create table sales_person
 (	
@@ -29,7 +29,7 @@ create table customer_d2
 create table rebate2
 (
 	model               varchar(10) NOT NULL, #unique model for car
-    amount				varchar(11) NOT NULL, #how much the rebate2 is
+    rebate_amt			varchar(11) NOT NULL, #how much the rebate2 is
     start_date 			DATE	   NOT NULL, # start date of rebate2
     end_date 			DATE	   NOT NULL, # end date of the rebate2
     
@@ -74,5 +74,3 @@ create table deal
     FOREIGN KEY(buyer_no) REFERENCES customer_d2(buyer_no),
     FOREIGN KEY(vehicle_no) REFERENCES autos (vehicle_no)
 );
-
-
