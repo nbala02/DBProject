@@ -1,20 +1,4 @@
 
-CREATE ALGORITHM=MERGE VIEW  available_autoo (
-	serial_no,
-    model,
-    color
-    
-
-) AS
-	SELECT 
-    dealer_one.serial_no,
-    dealer_one.model, 
-    dealer_one.color
-FROM cars.dealer_one;
-
-
-
-
 create database globalview;
 
 
