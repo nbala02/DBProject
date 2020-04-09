@@ -51,7 +51,7 @@ create table finance
 (
 	vehicle_no			varchar(6) NOT NULL, #Unique id for car
     buyer_no	        varchar(4) NOT NULL, #unique id for the customer 
-    amount				DECIMAL(11) NOT NULL, #how much is the finance 
+    amount				varchar(11) NOT NULL, #how much is the finance 
     months 				INT (20)    NOT NULL, # how many months to finance 
     balance 			varchar(11) NOT NULL, #how much the balance is
     
