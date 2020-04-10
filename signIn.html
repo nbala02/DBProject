@@ -6,14 +6,23 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Sign In">
         <title>Sign In</title>
+        <link rel="icon" type="image/png" href="images/caricon.png">
         <link rel="stylesheet" type= text/css href="main.css">
-        <link href="https://fonts.googleapis.com/css?family=Nunito|Pontano+Sans|Poppins:500" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+        <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="styles/util.css">
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
+        <link rel="stylesheet" type="text/css" href="styles/services.css">
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="styles/plugins/parallax-js-master/parallax.min.js"></script>
     </head>
+    
     <body>
         <?php session_start(); ?>
         
         <header>
             <div id="logo"><a><img src="images/logo.png"></a></div>
+            
             <nav>
                 <ul>
                     <?php
@@ -34,35 +43,51 @@
                     <li><a href="index.html">Home</a></li>
                 </ul>
             </nav>
-            <section>
-                <div>
-                    <img class="center-top" src="images/signinBanner.png" style="width: 100%; height: 230px; border-top: red 6px solid;">
+            
+           <div class="services">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="section_title">Sign In</div>
+                            <div class="section_subtitle">Welcome back!</div>
+                        </div>
+                    </div>	
                 </div>
-            </section>
+            </div>
         </header>
-        <div id="contactUs">
-            <form method="post" action="loginauth.php">
-                <table border="0">
-                    <tr>
-                        <td for="username" id="cell">Username:</td>
-                        <td><input type="text" name="username" id="username" placeholder="Enter Username" required></td>
-                    </tr>
-                    <tr>
-                        <td for="password" id="cell">Password:</td>
-                        <td><input type="password" name="password" id="password" placeholder="Enter Last Name" required></td>
-                    </tr>
-                    <tr id="submit">
-                        <td>&nbsp;</td>
-                        <td><input type="submit" name="submit" value="Sign In">
-                        </td>
-                    </tr>
-                </table>
-            </form>
+        
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                    <div class="signup-form">
+                        <form method="POST" class="register-form" id="register-form" action = "loginauth.php">
+                            <span class="login100-form-title p-b-33">Account Info:</span>
+                            
+                            <div class="wrap-input100 validate-input" data-validate = "Username required">
+                                <input class="input100" type="text" name="username" placeholder="Username" id="username" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+
+                            <div class="wrap-input100 rs1 validate-input" data-validate="Password required">
+                                <input class="input100" type="password" name="password" placeholder="Password" id="password" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+
+                            <div class="container-login100-form-btn m-t-20">
+                                <button class="login100-form-btn">
+                                    Sign In
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <footer>
             <h3>All Rights Reserved, Copyright &copy; 2020</h3>
         </footer>
     </body>
 </html>
-
-<!-- <h2 style="text-align: center; font-size: 100px; padding: 120px; background: black; color: white;">Contact Information</h2> -->

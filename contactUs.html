@@ -6,8 +6,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Contact Us">
         <title>Contact Us</title>
+        <link rel="icon" type="image/png" href="images/caricon.png">
         <link rel="stylesheet" type= text/css href="main.css">
-        <link href="https://fonts.googleapis.com/css?family=Nunito|Pontano+Sans|Poppins:500" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="styles/util.css">
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
+        <link rel="stylesheet" type="text/css" href="styles/services.css">
     </head>
     <body>
         <?php session_start(); ?>
@@ -34,62 +38,87 @@
                     <li><a href="index.html">Home</a></li>
                 </ul>
             </nav>
-            <section>
-                <div>
-                    <img class="center-top" src="images/contactBanner.png" style="width: 100%; height: 230px; border-top: red 6px solid;">
+            
+           <div class="services">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="section_title">Contact Us</div>
+                            <div class="section_subtitle">Just fill the form below</div>
+                        </div>
+                    </div>	
                 </div>
-            </section>
+            </div>
         </header>
-        <div id="contactUs">
-            <form method="post" action="storeContactInfo.php">
-                <table border="0">
-                    <tr>
-                        <td for="email" id="cell">Email:</td>
-                        <td><input type="email" name="email" id="email" placeholder="Enter valid email" required></td>
-                    </tr>
-                    <tr>
-                        <td for="fname" id="cell">First Name:</td>
-                        <td><input type="text" name="fname" id="fname" placeholder="Enter First Name" required></td>
-                    </tr>
-                    <tr>
-                        <td for="lname" id="cell">Last Name:</td>
-                        <td><input type="text" name="lname" id="lname" placeholder="Enter Last Name" required></td>
-                    </tr>
-                    <tr>
-                        <td for="phone" id="cell">Phone:</td>
-                        <td><input type="text" name="phone" id="phone" maxlength="13" placeholder="Enter phone #" required></td>
-                    </tr>
-                    <tr>
-                        <td>Address:</td>
-                    </tr>
-                    <tr>
-                        <td for="streetaddress" id="cell">Street Address:</td>
-                        <td><input type="text" name="streetaddress" id="streetaddress" maxlength="50" placeholder="Enter Street Address"></td>
-                    </tr>
-                    <tr>
-                        <td for="city" id="cell">City:</td>
-                        <td><input type="text" name="city" id="city" maxlength="50" placeholder="Enter City"></td>
-                    </tr>
-                    <tr>
-                        <td for="city" id="cell">State:</td>
-                        <td><input type="text" name="state" id="state" maxlength="50" placeholder="Enter State"></td>
-                    </tr>
-                    <tr>
-                        <td for="city" id="cell">Zip Code:</td>
-                        <td><input type="number" name="zipcode" id="zipcode" maxlength="5" placeholder="Enter Zipcode"></td>
-                    </tr>
-                    <tr id="submit">
-                        <td>&nbsp;</td>
-                        <td><input type="submit" name="submit" value="Submit">
-                        </td>
-                    </tr>
-                </table>
-            </form>
+        
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                    <div class="signup-form">
+                        <form method="POST" class="register-form" id="register-form" action="storeContactInfo.php">
+                            <span class="login100-form-title p-b-33">Basic Info:</span>
+
+                            <div class="wrap-input100 validate-input" data-validate = "Email required">
+                                <input class="input100" type="text" name="email" placeholder="Email" id="email" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+                            
+                             <div class="wrap-input100 validate-input" data-validate = "First Name required">
+                                <input class="input100" type="text" name="fname" placeholder="First Name" id="fname" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+                            
+                            <div class="wrap-input100 validate-input" data-validate = "Last Name required">
+                                <input class="input100" type="text" name="lname" placeholder="Last Name" id="lname" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+
+                            <div class="wrap-input100 validate-input" data-validate = "Phone Number required">
+                                <input class="input100" type="text" maxlength="13" name="phone" placeholder="Phone Number" id="phone" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+                            
+                            <span class="login100-form-title p-b-33">Address:</span>
+                            
+                            <div class="wrap-input100 rs1 validate-input" data-validate="Street Address required">
+                            <input class="input100" type="text" maxlength="50" name="streetaddress" placeholder="Street Address" id="streetaddress" required>
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                            </div>
+
+                            <div class="wrap-input100 rs1 validate-input" data-validate="City required">
+                                <input class="input100" type="text" name="city" placeholder="City" id="city" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+                            
+                            <div class="wrap-input100 rs1 validate-input" data-validate="State required">
+                                <input class="input100" type="text" name="state" placeholder="State" id="state" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+                            
+                            <div class="wrap-input100 rs1 validate-input" data-validate="Zip Code required">
+                                <input class="input100" type="text" name="zipcode" placeholder="Zip Code" id="zipcode" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+
+                            <div class="container-login100-form-btn m-t-20">
+                                <button class="login100-form-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+        
         <footer>
             <h3>All Rights Reserved, Copyright &copy; 2020</h3>
         </footer>
     </body>
 </html>
-
-<!-- <h2 style="text-align: center; font-size: 100px; padding: 120px; background: black; color: white;">Contact Information</h2> -->

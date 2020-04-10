@@ -4,11 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Sign In">
-        <title>Sign In</title>
+        <meta name="description" content="Register">
+        <title>Register</title>
+        <link rel="icon" type="image/png" href="images/caricon.png">
         <link rel="stylesheet" type= text/css href="main.css">
-        <link href="https://fonts.googleapis.com/css?family=Nunito|Pontano+Sans|Poppins:500" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="styles/util.css">
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
+        <link rel="stylesheet" type="text/css" href="styles/services.css">
     </head>
+    
     <body>
         <?php session_start(); ?>
         
@@ -34,47 +39,69 @@
                     <li><a href="index.html">Home</a></li>
                 </ul>
             </nav>
-            <section>
-                <div>
-                    <img class="center-top" src="images/registerBanner.png" style="width: 100%; height: 230px; border-top: red 6px solid;">
+            
+           <div class="services">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="section_title">Register</div>
+                            <div class="section_subtitle">Make sure to fill all the info</div>
+                        </div>
+                    </div>	
                 </div>
-            </section>
+            </div>
         </header>
-        <div id="contactUs">
-            <form method="post" action="wssignup.php">
-                <table border="0">
-                    <tr>
-                    <td for="email" id="cell">Email:</td>
-                    <td><input type="email" name="email" id="email" placeholder="Enter valid email" required></td>
-                </tr>
-                <tr>
-                    <td for="fname" id="cell">First Name:</td>
-                    <td><input type="text" name="fname" id="fname" placeholder="Enter First Name" required></td>
-                </tr>
-                <tr>
-                    <td for="lname" id="cell">Last Name:</td>
-                    <td><input type="text" name="lname" id="lname" placeholder="Enter Last Name" required></td>
-                </tr>
-                    <tr>
-                        <td for="username" id="cell">Username:</td>
-                        <td><input type="text" name="username" id="username" placeholder="Enter Username" required></td>
-                    </tr>
-                    <tr>
-                        <td for="password" id="cell">Password:</td>
-                        <td><input type="password" name="password" id="password" placeholder="Enter Last Name" required></td>
-                    </tr>
-                    <tr id="submit">
-                        <td>&nbsp;</td>
-                        <td><input type="submit" name="submit" value="Sign In">
-                        </td>
-                    </tr>
-                </table>
-            </form>
+        
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                    <div class="signup-form">
+                        <form method="POST" class="register-form" id="register-form" action = "wssignup.php">
+                            <span class="login100-form-title p-b-33">Basic Info:</span>
+
+                            <div class="wrap-input100 validate-input" data-validate = "Email required">
+                                <input class="input100" type="text" name="email" placeholder="Email" id="email" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+                            
+                             <div class="wrap-input100 validate-input" data-validate = "First Name required">
+                                <input class="input100" type="text" name="fname" placeholder="First Name" id="fname" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+                            
+                            <div class="wrap-input100 validate-input" data-validate = "Last Name required">
+                                <input class="input100" type="text" name="lname" placeholder="Last Name" id="lname" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+
+                            <div class="wrap-input100 validate-input" data-validate = "Username required">
+                                <input class="input100" type="text" name="username" placeholder="Username" id="username" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+
+                            <div class="wrap-input100 rs1 validate-input" data-validate="Password required">
+                                <input class="input100" type="password" name="password" placeholder="Password" id="password" required>
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+
+                            <div class="container-login100-form-btn m-t-20">
+                                <button class="login100-form-btn">
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+       
         <footer>
             <h3>All Rights Reserved, Copyright &copy; 2020</h3>
         </footer>
     </body>
 </html>
-
-<!-- <h2 style="text-align: center; font-size: 100px; padding: 120px; background: black; color: white;">Contact Information</h2> -->

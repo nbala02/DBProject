@@ -16,11 +16,13 @@ footer{
     background: red;
     margin-top: 10px;
     text-align: center;
+    font-family: serif;
 }
 
 /*Main Navigiation*/
 nav{
     text-align:center;
+    padding-bottom: 50px;
 }
 ul{
     background-color: #F2F3F4;    
@@ -104,9 +106,4 @@ nav a:hover{
 }
 #mainpageContent .content p{
     font-size: 19px;
-}
-
-/****** Contact Us ******/
-#contactUs form{
-   padding: 55px 600px 55px 600px;
 }
