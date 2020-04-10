@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Sales Representative Account">
+        <title>My Account</title>
+        <link rel="icon" type="image/png" href="images/caricon.png">
+        <link rel="stylesheet" type= text/css href="styles/main.css">
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="styles/util.css">
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
+    </head>
+    
+    <body>
+        <?php session_start(); ?>
+        
+        <header>
+            <div id="logo"><a><img src="images/logo.png"></a></div>
+            <nav>
+                <ul>
+                    <?php
+                        if(isset($_SESSION['wholesaler']) || isset($_SESSION['name']))
+                        {
+                            echo '<li><a href="logout.php">Logout</a></li>';
+                            echo '<li><a href=# style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
+                        } else
+                        {
+                            echo '<li><a href="signIn.html">Sign In</a></li>';
+                            echo '<li><a href="registerPage.html">Register</a></li>';
+                        }
+                    ?>
+                    <li><a>|</a></li>
+                    <li><a href="contactUs.html">Contact Us</a></li>
+                    <li><a href="findDealer.html">Find Dealer</a></li>
+                    <li><a href="vehicles.html">Vehicles</a></li>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+            
+           <div class="services">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="section_title">My Account</div>
+                            <div class="section_subtitle">Choose what to do</div>
+                        </div>
+                    </div>	
+                </div>
+            </div>
+        </header>
+        
+        <div class="contact">
+            <div class="container">
+                <div class="row">
+                    <!-- Section 1 -->
+                    <div class="col-lg-6 contact_col">
+                        <div class="info_form_container">
+                            <div class="info_form_title">Customers</div>
+                            <div class="info_form" id="info_form">
+                                <button class="info_form_button" onclick="window.location.href='#'">New Customer</button>
+                                <button class="info_form_button" onclick="window.location.href='#'">Transactions</button>
+                                <button class="info_form_button" onclick="window.location.href='#'">Schedule Maintenance</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2 -->
+                    <div class="col-lg-6 contact_col">
+                        <div class="info_form_container">
+                            <div class="info_form_title">Personnel Information</div>
+                            <div class="info_form" id="info_form">
+                                <button class="info_form_button" onclick="window.location.href='#'">Update Profile</button>
+                                <button class="info_form_button" onclick="window.location.href='#'">View Employees</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <h3>All Rights Reserved, Copyright &copy; 2020</h3>
+        </footer>
+    </body>
+</html>
