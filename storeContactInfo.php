@@ -21,10 +21,10 @@ $sql = "INSERT INTO contactInfo (email, fname, lname, phone, streetaddress, city
 VALUES ('$email', '$fname', '$lname', '$phone', '$streetaddress', '$city', '$state', '$zipcode')";
 
 if ($dbconnect->query($sql) === TRUE) {
-    echo "Thank You";
+        echo "<script>alert('Thank you!'); window.location.href='index.html';</script>";
 }
 else {
-    echo "Try Again -_-" . "<br>" . $dbconnect->error;
+    echo "<script>alert('You already filled one'); window.location.href='contactUs.html';</script>";
 }
 
 $dbconnect->close();

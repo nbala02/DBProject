@@ -1,79 +1,92 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Welcome to Vehicle Dealership">
-        <link rel="icon" type="image/png" href="images/caricon.png">
-        <title>Welcome to Vehicle Dealership</title>
-        <link rel="stylesheet" type= text/css href="styles/main.css">
-    </head>
-    <body>
-        <?php session_start(); ?>
-        
-        <header>
-            <div id="logo"><a><img src="images/logo.png"></a></div>
-            <nav>
-                <ul>
-                    <?php
-                        if(isset($_SESSION['wholesaler']) || isset($_SESSION['name']))
-                        {
-                            echo '<li><a href="logout.php">Logout</a></li>';
-                            echo '<li><a href=# style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                        } else
-                        {
-                            echo '<li><a href="signIn.html">Sign In</a></li>';
-                            echo '<li><a href="registerPage.html">Register</a></li>';
-                        }
-                    ?>
-                    <li><a>|</a></li>
-                    <li><a href="contactUs.html">Contact Us</a></li>
-                    <li><a href="findDealer.html">Find Dealer</a></li>
-                    <li><a href="vehicles.html">Vehicles</a></li>
-                    <li id="current-page"><a href="index.html">Home</a></li>
-                </ul>
-            </nav>
-            
-            <section>
-                <div>
-                    <img class="center-top" src="images/dealership1.jpg" style="width: 100%; height: 500px; border-top: red 6px solid;">
-                </div>
-            </section>
-        </header>
-        
-        <section id="searchbar">
-            <div class="section">
-                <h1 id="header">Search New Inventory</h1>
-                <form id="form">
-                    <input type="search" placeholder="Type Search Here">
-                    <button type="submit" id="button">Search</button>
-                </form>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Welcome to Vehicle Dealership">
+    <link rel="icon" type="image/png" href="images/caricon.png">
+    <title>Welcome to Vehicle Dealership</title>
+    <link rel="stylesheet" type=text/css href="styles/main.css">
+</head>
+
+<body>
+    <?php session_start(); ?>
+
+    <header>
+        <div id="logo"><a><img src="images/logo.png"></a></div>
+        <nav>
+            <ul>
+                <?php
+                    if(isset($_SESSION['customer']) || isset($_SESSION['name']))
+                    {
+                        echo '<li><a href="logout.php">Logout</a></li>';
+                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager']) || isset($_SESSION['salesrep']) ||                     isset($_SESSION['employee']))
+                    {
+                        echo '<li><a href="logout.php">Logout</a></li>';
+                        echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
+                    } else
+                    {
+                        echo '<li>';
+                            echo '<a style=color:red;>Sign In</a>';
+                                echo '<ul class="dropdown">';
+                                    echo '<li><a href="signIn.html">Customers</a></li>';
+                                    echo '<li><a href="empSignin.html">Employees</a></li>';
+                                echo '</ul>';
+                        echo '</li>';
+                        echo '<li><a href="registerPage.html">Register</a></li>';
+                    }
+                ?>
+                <li><a>|</a></li>
+                <li><a href="contactUs.html">Contact Us</a></li>
+                <li><a href="findDealer.html">Find Dealer</a></li>
+                <li><a href="vehicles.html">Vehicles</a></li>
+                <li id="current-page"><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+
+        <section>
+            <div>
+                <img class="center-top" src="images/dealership1.jpg" style="width: 100%; height: 500px; border-top: red 6px solid;">
             </div>
         </section>
-        
-        <section id="mainpageContent">
-            <div class="section">
-                <div class="content">
-                    <h2>Explore Vehicles</h2>
-                    <img src="images/searchVehicle.png" style="width: 110px; height: 100px;">
-                    <p>Check out some of our vehicles including: cars, minivans, trucks, SUVs, hybrids, and more</p>
-                </div>
-                <div class="content">
-                    <h2>Find a Dealer</h2>
-                    <img src="images/locateDealer.jpeg" style="width: 90px; height: 100px;">
-                    <p>Find you local dealer to select your ideal vehicle in our company to help you explore our vehicles.</p>
-                </div>
-                <div class="content">
-                    <h2>Buy Your Vehicle</h2>
-                    <img src="images/buyCar.png" style="width: 130px; height: 100px;">
-                    <p>Work with our representative to purchase your ideal vehicle and process a affordable payment method</p>
-                </div>
+    </header>
+
+    <section id="searchbar">
+        <div class="section">
+            <h1 id="header">Search New Inventory</h1>
+            <form id="form">
+                <input type="search" placeholder="Type Search Here">
+                <button type="submit" id="button">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="mainpageContent">
+        <div class="section">
+            <div class="content">
+                <h2>Explore Vehicles</h2>
+                <img src="images/searchVehicle.png" style="width: 110px; height: 100px;">
+                <p>Check out some of our vehicles including: cars, minivans, trucks, SUVs, hybrids, and more</p>
             </div>
-        </section>
-        
-        <footer>
-            <h3>All Rights Reserved, Copyright &copy; 2020</h3>
-        </footer>
-    </body>
+            <div class="content">
+                <h2>Find a Dealer</h2>
+                <img src="images/locateDealer.jpeg" style="width: 90px; height: 100px;">
+                <p>Find you local dealer to select your ideal vehicle in our company to help you explore our vehicles.</p>
+            </div>
+            <div class="content">
+                <h2>Buy Your Vehicle</h2>
+                <img src="images/buyCar.png" style="width: 130px; height: 100px;">
+                <p>Work with our representative to purchase your ideal vehicle and process a affordable payment method</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>All Rights Reserved, Copyright &copy; 2020</h3>
+    </footer>
+</body>
+
 </html>
