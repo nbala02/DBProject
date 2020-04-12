@@ -64,10 +64,7 @@
                         <td for="warehouse" id="cell">Warehouse:</td>
                         <td><input type="text" name="warehouse" id="warehouse" placeholder="Enter warehouse" required></td>
                     </tr>
-                     <tr>
-                        <td for="financed" id="cell">Financed:</td>
-                        <td><input type="text" name="financed" id="financed" placeholder="Was this purchase financed? " required></td>
-                    </tr>
+
                     <tr id="submit">
                         <td>&nbsp;</td>
                         <td><input type="submit" name="submit" value="Enter Car">

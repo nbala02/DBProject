@@ -63,7 +63,6 @@
                                     <th class="cell100 column2">Color</th>
                                     <th class="cell100 column2">Autotrans</th>
                                     <th class="cell100 column2">Warehouse</th>
-                                    <th class="cell100 column2">Financed</th>
                                     
 								</tr>
 							</thead>
@@ -83,8 +82,7 @@
             
             $query = "SELECT * FROM autos ";
              $output = $dbconnect->query($query);
-          var_dump($output);
-       
+          
        
 
         
@@ -105,8 +103,6 @@
                                         <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=autotrans value='".$result['autotrans']."'>"?></td>
                                         <td class="cell100 column2"><?php echo "<input style=text-align:center; type=text name=warehouse
                                     value='".$result['warehouse']."'>"?>\</td>
-                                    <td class="cell100 column2"><?php echo "<input style=text-align:center; type=text name=financed
-                                    value='".$result['financed']."'>"?>\</td>
 
                                     </tr>
                                 </form>

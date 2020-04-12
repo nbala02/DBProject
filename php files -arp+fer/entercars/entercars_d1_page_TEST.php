@@ -41,8 +41,12 @@
             </section>
         </header>
         
+        
+        
+
+        
         <div id="enter car">
-            <form method="post" action="entercars_d1_sql_TEST.php">
+            <form method="post" action="entercars_d1_page_TEST.php">
                 <table border="0">
                     <tr>
                     <td for="serial_no" id="cell">Serial NO:</td>

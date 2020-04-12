@@ -15,11 +15,10 @@ $model = filter_input(INPUT_POST, 'model');
 $color = filter_input(INPUT_POST, 'color');
 $autotrans = filter_input(INPUT_POST, 'autotrans');
 $warehouse = filter_input(INPUT_POST, 'warehouse');
-$financed = filter_input(INPUT_POST, 'financed');
 
 
-$sql1 = "INSERT INTO autos (vehicle_no, model, color, autotrans, warehouse,financed)
-VALUES ('$vehicle_no', '$model', '$color', '$autotrans', '$warehouse','$financed')";
+$sql1 = "INSERT INTO autos (vehicle_no, model, color, autotrans, warehouse)
+VALUES ('$vehicle_no', '$model', '$color', '$autotrans', '$warehouse')";
 
 
     $email = $_POST['email'];

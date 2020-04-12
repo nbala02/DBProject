@@ -82,8 +82,7 @@
             
             $query = "SELECT * FROM cars ";
              $output = $dbconnect->query($query);
-          var_dump($output);
-       
+     
        
 
         
