@@ -1,0 +1,30 @@
+[
+    {
+        "fname": "Bob",
+        "lname": "Ross",
+        "email": "bross@nyit.edu",
+        "password": "hello",
+        "position": "Wholesale Manager"
+    },
+    {
+        "fname": "Rachel",
+        "lname": "Green",
+        "email": "rgreen@nyit.edu",
+        "password": "hello",
+        "position": "Local Manager"
+    },
+    {
+        "fname": "Selena",
+        "lname": "Gomez",
+        "email": "sgomez@nyit.edu",
+        "password": "hello",
+        "position": "Sales Representative"
+    },
+    {
+        "fname": "Bill",
+        "lname": "Gates",
+        "email": "bgates@nyit.edu",
+        "password": "hello",
+        "position": "Employee"
+    }
+]
