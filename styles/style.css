@@ -243,7 +243,8 @@ input.input100 {
 .services
 {
 	width: 100%;
-	background: #808080;
+	/*background: #808080;*/
+    background: url(../images/dealership.jpg);
 	padding-top: 50px;
 	padding-bottom: 102px;
     height: 180px; 
@@ -254,10 +255,12 @@ input.input100 {
 .contact
 {
 	width: 100%;
-	background: #FFFFFF;
 	padding-top: 100px;
 	padding-bottom: 42px;
 	z-index: 2;
+    background: url(../images/showroom.jpeg); 
+    background-position:bottom; 
+    background-size: cover
 }
 .info_form_container
 {
