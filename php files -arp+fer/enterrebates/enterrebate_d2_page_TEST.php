@@ -45,6 +45,10 @@
             <form method="post" action="enterrebate_d2_sql_TEST.php">
                 <table border="0">
                 <tr>
+                    <td for="rebate_no" id="cell">Rebate No:</td>
+                    <td><input type="text" name="rebate_no" id="rebate_no" placeholder="Enter rebate_no" required></td>
+                </tr>
+                <tr>
                     <td for="model" id="cell">Model:</td>
                     <td><input type="text" name="model" id="model" placeholder="Enter model of car" required></td>
                 </tr>
@@ -57,7 +61,7 @@
                         <td><input type="text" name="start_date" id="start_date" placeholder="Enter start date for rebate" required></td>
                     </tr>
                      <tr>
-                        <td for="end_date" id="cell">Start Date:</td>
+                        <td for="end_date" id="cell">End Date:</td>
                         <td><input type="text" name="end_date" id="end_date" placeholder="Enter end date for rebate" required></td>
                     </tr>
                   

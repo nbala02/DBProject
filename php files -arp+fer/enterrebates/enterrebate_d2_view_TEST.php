@@ -47,8 +47,7 @@
             </section>
         </header>
         
-       
-            
+  <!-- rebates in the database for dealer -->       
 
      <div class="limiter">
 		<div class="container">
@@ -58,6 +57,7 @@
 						<table> 
                             <thead class="table100-head">
 								<tr class="row100 head">
+                                     <th class="cell100 column2">Rebate No </th>
                                     <th class="cell100 column2">Model</th>
                                     <th class="cell100 column2">Rebate Amount</th>
                                     <th class="cell100 column2">Start Date</th>
@@ -82,20 +82,21 @@
             
             $query = "SELECT * FROM rebate2 ";
              $output = $dbconnect->query($query);
-          var_dump($output);
-       
+             $sql3 = "UPDATE rebate2 SET rebate_no='expired' WHERE ('$end_date' < CURRENT_DATE  )";
+
        
 
         
-        // Query specified database for value
-        if($output->num_rows != 0){
+         // Query specified database for value
+        if(($output->num_rows != 0)&& ($dbconnect->query($sql3) === TRUE)){
+            
             while($result = mysqli_fetch_assoc($output)) {
 
 
                  ?>
-
                                 <form method=POST >
                                     <tr class="row100 body">
+                                        <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=rebate_no value='".$result['rebate_no']."'>"?></td>
                                         <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=model
                                         value='".$result['model']."'>"?></td>
                                         <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=rebate_amt value='".$result['rebate_amt']."'>"?></td>
