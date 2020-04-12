@@ -42,7 +42,7 @@
         </header>
         
         <div id="enter car">
-            <form method="post" action="entersalesper_sql_TEST.php">
+            <form method="post" action="entersalesper_d1_sql_TEST.php">
                 <table border="0">
                     <tr>
                     <td for="rep_no" id="cell">Representative NO:</td>
@@ -57,7 +57,7 @@
                     <td><input type="text" name="address" id="address" placeholder="Enter address" required></td>
                 </tr>
                     <tr>
-                        <td for="phone" id="cell">Phone NO:</td>
+                        <td for="phone" id="cell">Phone:</td>
                         <td><input type="text" name="phone" id="phone" placeholder="Enter phone number" required></td>
                     </tr>
                     <tr>
