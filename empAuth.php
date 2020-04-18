@@ -80,7 +80,7 @@ if (isset($_POST['email']) and isset($_POST['password']))
 
 //If the user is logged in go to account dashboard
 if (isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) 
-    || isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep1']))
+    || isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
 {
     header("Location: empaccount.html");
 }
