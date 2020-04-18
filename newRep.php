@@ -41,7 +41,7 @@
 
     if ($connection->query($sql) === TRUE && $dbconnect->query($query) === TRUE) 
     {
-        echo "<script>alert('New Person Added'); window.location.href='index.html';</script>";
+        echo "<script>alert('New Person Added'); window.location.href='empAccount.html';</script>";
     }
     else 
     {
