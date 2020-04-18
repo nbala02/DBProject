@@ -26,7 +26,7 @@
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager']) || isset($_SESSION['salesrep']) ||                     isset($_SESSION['employee']))
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -72,8 +72,9 @@
                     <div class="info_form_container">
                         <div class="info_form_title">Vehicle Operations</div>
                         <div class="info_form" id="info_form">
-                            <button class="info_form_button" onclick="window.location.href='#'">Add Vehicle</button>
-                            <button class="info_form_button" onclick="window.location.href='#'">Update Vehicle Information</button>
+                            <button class="info_form_button" onclick="window.location.href='#'">View Vehicles</button>
+                            <!--Model is for global table-->
+                            <button class="info_form_button" onclick="window.location.href='#'">Add Vehicle Model</button>
                             <button class="info_form_button" onclick="window.location.href='#'">Sales Information</button>
                         </div>
                     </div>
@@ -89,13 +90,27 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Section 3 -->
+                <div class="col-lg-6 contact_col">
+                    <div class="info_form_container">
+                        <div class="info_form_title">Customer Information</div>
+                        <div class="info_form" id="info_form">
+                            <button class="info_form_button" onclick="window.location.href='#'">View Potential Buyers</button>
+                            <!--Customer personal info and vehicle bought and transaction receipt-->
+                            <button class="info_form_button" onclick="window.location.href='#'">View Sales</button>
+                            <!--Customer loan and finance info-->
+                            <button class="info_form_button" onclick="window.location.href='#'">View Finance Info</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <?php } ?>
     
     <!--------------------------------------------- Local Manager ------------------------------------------------->
-    <?php if(isset($_SESSION['ldmanager'])) { ?>
+    <?php if(isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2'])) { ?>
     <div class="contact">
         <div class="container">
             <div class="row">
@@ -129,8 +144,7 @@
                         <div class="info_form_title">Personnel Management</div>
                         <div class="info_form" id="info_form">
                             <button class="info_form_button" onclick="window.location.href='#'">Add Salesperson</button>
-                            <button class="info_form_button" onclick="window.location.href='#'">Employee Information</button>
-                            <button class="info_form_button" onclick="window.location.href='#'">Salesperson Information</button>
+                            <button class="info_form_button" onclick="window.location.href='#'">View Salesperson Information</button>
                         </div>
                     </div>
                 </div>

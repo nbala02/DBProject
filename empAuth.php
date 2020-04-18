@@ -21,6 +21,7 @@ if (isset($_POST['email']) and isset($_POST['password']))
     if(is_array($row))
     {
         $emp_no = $row['emp_no'];
+        $location = $row['location'];
     }
     
     switch ($emp_no[0]) 
@@ -34,29 +35,35 @@ if (isset($_POST['email']) and isset($_POST['password']))
         case "S":
             $emp_no = "salesrep";
             break;
-        case "E":
-            $emp_no = "employee";
-            break;
     }
     
     //If the posted values are equal to the database values, then session will be created for the user.
     if ($count == 1 && $position == $emp_no)
     {
-        switch ($position) 
-        {
-            case "wsmanager":
-                $_SESSION['wsmanager'] = $id;
-                break;
-            case "ldmanager":
-                $_SESSION['ldmanager'] = $id;
-                break;
-            case "salesrep":
-                $_SESSION['salesrep'] = $id;
-                break;
-            case "employee":
-                $_SESSION['employee'] = $id;
-                break;
-        }
+            switch ($position) 
+            {
+                case "wsmanager":
+                    $_SESSION['wsmanager'] = $id;
+                    break;
+                case "ldmanager":
+                    if($location == "D1")
+                    {
+                        $_SESSION['ldmanager1'] = $id;
+                    } else 
+                    {
+                        $_SESSION['ldmanager2'] = $id;
+                    }
+                    break;
+                case "salesrep":
+                    if($location == "D1")
+                    {
+                        $_SESSION['salesrep1'] = $id;
+                    } else 
+                    {
+                        $_SESSION['salesrep2'] = $id;
+                    }                    
+                    break;
+            }
         
         if(is_array($row))
         {
@@ -72,7 +79,8 @@ if (isset($_POST['email']) and isset($_POST['password']))
 }
 
 //If the user is logged in go to account dashboard
-if (isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager']) || isset($_SESSION['salesrep']) || isset($_SESSION['employee']))
+if (isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) 
+    || isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep1']))
 {
     header("Location: empaccount.html");
 }
