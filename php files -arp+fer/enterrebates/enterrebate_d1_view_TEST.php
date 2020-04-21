@@ -84,15 +84,23 @@
             $query = "SELECT * FROM rebate1 ";
                                 
              $output = $dbconnect->query($query);
-            $sql3 = "UPDATE rebate1 SET rebate_no='expired' WHERE ('$end_date' < CURRENT_DATE  )";
-
-    
+               $current_date = date('Y-m-d');
+                                echo $current_date;
+            //$query = "SELECT * FROM rebate1 where end_date <= $current_date ";
+           
+            // $output = $dbconnect->query($query);
+                           
+          $sql3 = "UPDATE rebate1 SET rebate_amt = 0 WHERE end_date < $current_date";  
+         $sql4 = "UPDATE rebate1 SET rebate_amt = 1000 WHERE end_date > $current_date";  
+              
+                           
+       
 
       
 
         
         // Query specified database for value
-        if(($output->num_rows != 0)&& ($dbconnect->query($sql3) === TRUE)){
+        if(($output->num_rows != 0)&& ($dbconnect->query($sql3) === TRUE)&& ($dbconnect->query($sql4) === TRUE)){
             
             while($result = mysqli_fetch_assoc($output)) {
 
