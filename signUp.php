@@ -9,18 +9,31 @@
     $email = filter_input(INPUT_POST, 'email');
     $username = filter_input(INPUT_POST, 'username');
     $password = filter_input(INPUT_POST, 'password');
+    $location = filter_input(INPUT_POST, 'location');
 
-    $query = "SELECT * FROM customer WHERE cust_no = '$code'";
-    $output = $dbconnect->query($query);
+    $name = $fname . " " . $lname;
+
+    if($location == "D1")
+    {
+        $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
+        $sql = "SELECT * FROM customer_d1 WHERE customer_no = '$code'";
+    } else if($location == "D2")
+    {
+        $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
+        $sql = "SELECT * FROM customer_d2 WHERE customer_no = '$code'";
+    }
+
+    $output = $connection->query($sql);
 
     if($output->num_rows != 0)
     {
         while($result = mysqli_fetch_assoc($output)) 
         {
-            $id = $result['cust_no'];
+            $id = $result['customer_no'];
+            $fullName = $result['name'];
         }
         
-        if(isset($id) && $id == $code)
+        if((isset($id) && $id == $code) && (isset($fullName) && $fullName == $name))
         {
             $sql = "INSERT INTO customeracc (fname, lname, email, username, password)
             VALUES ('$fname', '$lname', '$email', '$username', '$password')";
@@ -46,6 +59,6 @@
     {
         //echo "Wrong Code" . "<br>" . $dbconnect->error;
         //header('Location: register.html');
-        echo "<script>alert('Incorrect Customer ID'); window.location.href='registerPage.html';</script>";
+        echo "<script>alert('Incorrect Customer ID or Name'); window.location.href='registerPage.html';</script>";
     }  
 ?>
