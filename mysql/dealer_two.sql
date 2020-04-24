@@ -5,7 +5,7 @@ create table sales_person
 (	
 	sale_no             varchar(10) NOT NULL, #unique id for salesperson
     name                varchar(20) NOT NULL, #name of the salesperson
-    address             varchar(20) NOT NULL, #address of salesperson
+    address             varchar(50) NOT NULL, #address of salesperson
     phone				varchar(15) NOT NULL, #phone number of salesperson
     comm				decimal(15) NOT NULL, # commission for the salesperson
     base_salary			decimal(15) NOT NULL, # base salary for the salesperson

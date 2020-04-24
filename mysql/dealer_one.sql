@@ -5,7 +5,7 @@ create table representative
 (	
 	rep_no              varchar(10) NOT NULL, #unique id for representative 
     name                varchar(20) NOT NULL, #name of the representative
-    address             varchar(20) NOT NULL, #address of representative
+    address             varchar(50) NOT NULL, #address of representative
     phone				varchar(15) NOT NULL, #phone number of representative
     base_salary			decimal(15) NOT NULL, # base salary for the representative
     ytd_sales			decimal(15) NOT NULL, # year to date amount for the representative
