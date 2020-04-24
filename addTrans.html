@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <?php session_start(); ?>
+    <?php session_start(); include('dbconnect.php');?>
 
     <header>
         <div id="logo"><a><img src="images/logo.png"></a></div>
@@ -90,24 +90,6 @@
 
 <!-------------------------------------------------------Transaction Details----------------------------------------------------------->
                         <span class="login100-form-title p-b-33">Transaction Details</span>
-
-                        <?php
-                            // Create connection
-                            if(isset($_SESSION['salesrep1']))
-                            {
-                                $connect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
-                                $query1 = "SELECT rebate_no FROM rebate1";
-                                $query2 = "SELECT serial_no FROM cars";
-                            } else if(isset($_SESSION['salesrep2']))
-                            {
-                                $connect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
-                                $query1 = "SELECT rebate_no FROM rebate2";
-                                $query2 = "SELECT vehicle_no FROM autos";
-                            }
-
-                            $result1 = mysqli_query($connect, $query1);
-                            $result2 = mysqli_query($connect, $query2);
-                        ?>
 
                         <div class="wrap-input100 rs1 validate-input" data-validate="Date required">
                             <input class="input100" type="date" name="date" placeholder="Date" id="date" required>
