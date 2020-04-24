@@ -26,8 +26,6 @@ create table customer_d2
     PRIMARY KEY (buyer_no)
 );
 
-
-
 create table rebate2
 (
 	rebate_no			varchar(10) NOT NULL, #unique id for the rebate no 
@@ -61,7 +59,7 @@ create table finance
     months				int(20)	   NOT NULL, # how many months the loan is 
     balance 			decimal(15) NOT NULL, #how much the balance is 
     
-    FOREIGN KEY(vehicle_no) REFERENCES autos(vehicle_no),
+	PRIMARY KEY(vehicle_no),
     FOREIGN KEY(buyer_no) REFERENCES customer_d2(buyer_no)
 );
 
@@ -80,5 +78,5 @@ create table deal
     FOREIGN KEY(rebate_no) REFERENCES rebate2(rebate_no),
     FOREIGN KEY(sale_no) REFERENCES sales_person(sale_no),
     FOREIGN KEY(buyer_no) REFERENCES customer_d2(buyer_no),
-    FOREIGN KEY(vehicle_no) REFERENCES autos(vehicle_no)
-    );
+    FOREIGN KEY(vehicle_no) REFERENCES finance(vehicle_no)
+);

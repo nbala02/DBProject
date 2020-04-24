@@ -1,8 +1,6 @@
 create database dealer_one;
 use dealer_one;
 
-
-
 create table representative 
 (	
 	rep_no              varchar(10) NOT NULL, #unique id for representative 
@@ -16,6 +14,8 @@ create table representative
     
     PRIMARY KEY (rep_no)
 );
+
+select * from representative;
 
 create table customer_d1
 (	
@@ -62,7 +62,7 @@ create table loan
     months				int(20)	   NOT NULL, # how many months the loan is 
     balance 			decimal(15) NOT NULL, #how much the balance is 
     
-    FOREIGN KEY(serial_no) REFERENCES cars(serial_no),
+    PRIMARY KEY(serial_no),
     FOREIGN KEY(customer_no) REFERENCES customer_d1(customer_no)
 );
 
@@ -81,5 +81,5 @@ create table transaction
     FOREIGN KEY(rebate_no) REFERENCES rebate1(rebate_no),
     FOREIGN KEY(rep_no) REFERENCES representative(rep_no),
     FOREIGN KEY(customer_no) REFERENCES customer_d1(customer_no),
-    FOREIGN KEY(serial_no) REFERENCES cars(serial_no)
+    FOREIGN KEY(serial_no) REFERENCES loan(serial_no)
 );
