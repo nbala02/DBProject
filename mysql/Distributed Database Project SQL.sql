@@ -37,18 +37,7 @@ create table customeracc
     
     PRIMARY KEY	(username)
 );
-create table customer
-(
-	cust_no				varchar(6), #Unique id for product
-    fname				varchar(50) NOT NULL, #first name
-    lname				varchar(50) NOT NULL, #last name
-    email				varchar(100) NOT NULL, #email
-    
-    PRIMARY KEY	(cust_no)
-);
 
-drop table employee;
 SELECT * FROM employee;
-SELECT * FROM customer;
 SELECT * FROM customeracc;
 SELECT * FROM contactInfo;
