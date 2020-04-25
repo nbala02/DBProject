@@ -40,6 +40,5 @@ create table customeracc
 
 drop table employee;
 SELECT * FROM employee;
-SELECT * FROM customer;
 SELECT * FROM customeracc;
 SELECT * FROM contactInfo;
