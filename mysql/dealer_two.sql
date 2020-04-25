@@ -53,11 +53,11 @@ create table purchased_autos
 (
 	vehicle_no			varchar(10) NOT NULL, #Unique id for car
     model               varchar(10) NOT NULL, #unique model for car
-	color				varchar(10) NOT NULL, #color of the car
+	color				varchar(10) NOT NULL, #color of the car 
     autotrans			varchar(10)	NOT NUll, # yes or no if its autotransmission
     warehouse			varchar(20) NOT NULL, # warehouse city
     amount				decimal(15) NOT NULL, # warehouse city
-
+	
     PRIMARY KEY  (vehicle_no)
 
 );

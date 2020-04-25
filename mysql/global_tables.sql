@@ -10,7 +10,7 @@ create table model
     engine 		   DECIMAL(2,1) NOT Null, #engine number 
  
    PRIMARY KEY (model)
-) ;
+);
 
 create table add_on
 (
@@ -34,4 +34,3 @@ create table potential_buyer
     PRIMARY KEY (buyer_no)
 
 );
-

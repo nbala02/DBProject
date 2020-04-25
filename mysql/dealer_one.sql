@@ -27,8 +27,6 @@ create table customer_d1
     PRIMARY KEY (customer_no)
 );
 
-
-
 create table rebate1
 (
 	rebate_no			varchar(10) NOT NULL, #unique id for the rebate no 
@@ -56,11 +54,11 @@ create table purchased_cars
 (
 	serial_no			varchar(10) NOT NULL, #Unique id for car
     model               varchar(10) NOT NULL, #unique model for car
-	color				varchar(10) NOT NULL, #color of the car
+	color				varchar(10) NOT NULL, #color of the car 
     autotrans			varchar(10)	NOT NUll, # yes or no if its autotransmission
     warehouse			varchar(20) NOT NULL, # warehouse city
     amount				decimal(15) NOT NULL, # warehouse city
-
+	
     PRIMARY KEY  (serial_no)
 
 );
