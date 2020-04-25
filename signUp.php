@@ -23,7 +23,7 @@
         $sql = "SELECT * FROM customer_d2 WHERE customer_no = '$code'";
     }
 
-    $output = $connection->query($sql);
+    $output = $connection->query($sql);  
 
     if($output->num_rows != 0)
     {
@@ -33,7 +33,7 @@
             $fullName = $result['name'];
         }
         
-        if((isset($id) && $id == $code) && (isset($fullName) && $fullName == $name))
+        if((isset($id) && $id == $code) && (isset($fullName) && $fullName == $name)) 
         {
             $sql = "INSERT INTO customeracc (fname, lname, email, username, password)
             VALUES ('$fname', '$lname', '$email', '$username', '$password')";

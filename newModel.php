@@ -10,7 +10,7 @@
     $seat = filter_input(INPUT_POST, 'seat');
     $engine = filter_input(INPUT_POST, 'engine');
 
-    $connection = mysqli_connect("127.0.0.1", "root", "csci318project", "globalviews");
+    $connection = mysqli_connect("127.0.0.1", "root", "", "globalviews");
     $sql = "INSERT INTO model (model, price, type, gas_mileage, seat, engine)
             VALUES ('$model', '$price', '$type', '$mileage', '$seat', '$engine')";
 

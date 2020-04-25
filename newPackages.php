@@ -8,7 +8,7 @@
     $price = filter_input(INPUT_POST, 'price');
     $mode = filter_input(INPUT_POST, 'mode');
 
-    $connection = mysqli_connect("127.0.0.1", "root", "csci318project", "globalviews");
+    $connection = mysqli_connect("127.0.0.1", "root", "", "globalviews");
     $sql = "INSERT INTO add_on (package_no, package_description, price, mode_available)
             VALUES ('$package', '$description', '$price', '$mode')";
 

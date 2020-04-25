@@ -68,6 +68,7 @@ if (isset($_POST['email']) and isset($_POST['password']))
         if(is_array($row))
         {
             $_SESSION["fname"] = $row['fname'];
+            $_SESSION["emp_no"] = $row['emp_no'];
         } 
     } else
     {

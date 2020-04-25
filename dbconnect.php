@@ -19,16 +19,16 @@
 
         $result1 = mysqli_query($connect, $query1);
         $result2 = mysqli_query($connect, $query2);
-
+        
         //Check connection
-        if($connect->connect_error)
+        if($connect->connect_error) 
         {
             die("Connection failed: " . $connect->connect_error);
-        }
+        } 
     }
     
     //Check connection
-    if ($dbconnect->connect_error)
+    if ($dbconnect->connect_error) 
     {
         die("Connection failed: " . $dbconnect->connect_error);
     } 

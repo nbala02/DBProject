@@ -24,13 +24,13 @@
 
     if(isset($_SESSION['ldmanager1']))
     {
-        $connection = mysqli_connect("127.0.0.1", "root", "csci318project", "dealer_one");
+        $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
         $sql = "INSERT INTO representative (rep_no, name, address, phone, base_salary, ytd_sales, comm)
                     VALUES ('$pin', '$name', '$address', '$phone', '$salary', '$ytd', '$comm')";
         $location = "D1";
     } else if(isset($_SESSION['ldmanager2']))
     {
-        $connection = mysqli_connect("127.0.0.1", "root", "csci318project", "dealer_two");
+        $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
         $sql = "INSERT INTO sales_person (sale_no, name, address, phone, comm, base_salary, ytdsales)
                     VALUES ('$pin','$name', '$address', '$phone', '$comm', '$salary', '$ytd')";
         $location = "D2";

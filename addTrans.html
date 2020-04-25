@@ -49,7 +49,7 @@
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
-
+        
         <div class="services">
             <div class="container">
                 <div class="row">
@@ -61,7 +61,7 @@
             </div>
         </div>
     </header>
-
+    
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
@@ -87,7 +87,7 @@
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
-
+                        
 <!-------------------------------------------------------Transaction Details----------------------------------------------------------->
                         <span class="login100-form-title p-b-33">Transaction Details</span>
 
@@ -99,12 +99,12 @@
 
                         <select class="wrap-input100 rs1 validate-input" name="serial" required>
                             <option value="" selected>Vehicle Serial Number</option>
-                            <?php
-                                while($row = mysqli_fetch_assoc($result2)) {
+                            <?php 
+                                while($row = mysqli_fetch_assoc($result2)) { 
                             ?>
                             <?php if(isset($_SESSION['salesrep1'])){?>
                             <option value="<?php echo $row['serial_no'];?>"><?php echo $row['serial_no'];?></option>
-
+                            
                             <?php } else if(isset($_SESSION['salesrep2'])){?>
                             <option value="<?php echo $row['vehicle_no'];?>"><?php echo $row['vehicle_no'];?></option>
                             <?php } } ?>
@@ -117,18 +117,18 @@
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
-
+                                
                         <select class="wrap-input100 rs1 validate-input" name="rebate">
                             <option value="" selected>Select Rebate</option>
-                            <?php
-                                while($row = mysqli_fetch_assoc($result1)) {
+                            <?php 
+                                while($row = mysqli_fetch_assoc($result1)) { 
                             ?>
                             <option value="<?php echo $row['rebate_no'];?>"><?php echo $row['rebate_no'];?></option>
                             <?php } ?>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </select>
-
+                        
 <!-------------------------------------------------------Loan Information----------------------------------------------------------->
                         <span class="login100-form-title p-b-33">Loan Information</span>
 
@@ -137,19 +137,19 @@
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
-
+                        
                         <div class="wrap-input100 rs1 validate-input" data-validate="Start Date required">
                             <input class="input100" type="text" onfocus="(this.type='date')" name="start" placeholder="Start Date" id="start" required>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
-                        </div>
-
+                        </div>   
+                        
                         <div class="wrap-input100 rs1 validate-input" data-validate="End Date required">
                             <input class="input100" type="text" onfocus="(this.type='date')" name="end" placeholder="End Date" id="end" required>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
-
+                        
                         <div class="wrap-input100 rs1 validate-input" data-validate="Months required">
                             <input class="input100" type="text" name="months" placeholder="Months" id="months" required>
                             <span class="focus-input100-1"></span>
@@ -170,7 +170,7 @@
             </div>
         </div>
     </div>
-
+    
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>

@@ -11,12 +11,12 @@
 
     if(isset($_SESSION['ldmanager1']))
     {
-        $connection = mysqli_connect("127.0.0.1", "root", "csci318project", "dealer_one");
+        $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
         $sql = "INSERT INTO cars (serial_no, model, color, autotrans, warehouse)
                     VALUES ('$serial', '$model', '$color', '$autotrans', '$warehouse')";
     } else if(isset($_SESSION['ldmanager2']))
     {
-        $connection = mysqli_connect("127.0.0.1", "root", "csci318project", "dealer_two");
+        $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
         $sql = "INSERT INTO autos (vehicle_no, model, color, autotrans, warehouse)
                     VALUES ('$serial', '$model', '$color', '$autotrans', '$warehouse')";
     }
