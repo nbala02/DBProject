@@ -49,6 +49,19 @@ create table autos
 
 );
 
+create table purchased_autos
+(
+	vehicle_no			varchar(10) NOT NULL, #Unique id for car
+    model               varchar(10) NOT NULL, #unique model for car
+	color				varchar(10) NOT NULL, #color of the car
+    autotrans			varchar(10)	NOT NUll, # yes or no if its autotransmission
+    warehouse			varchar(20) NOT NULL, # warehouse city
+    amount				decimal(15) NOT NULL, # warehouse city
+
+    PRIMARY KEY  (vehicle_no)
+
+);
+
 create table finance
 (
 	vehicle_no			varchar(10) NOT NULL, #Unique id for car
@@ -59,7 +72,7 @@ create table finance
     months				int(20)	   NOT NULL, # how many months the loan is 
     balance 			decimal(15) NOT NULL, #how much the balance is 
     
-	PRIMARY KEY(vehicle_no),
+	FOREIGN KEY(vehicle_no) REFERENCES purchased_autos(vehicle_no),
     FOREIGN KEY(buyer_no) REFERENCES customer_d2(buyer_no)
 );
 
@@ -75,8 +88,7 @@ create table deal
     date                DATE 	    NOT NULL, #Date of transaction
     
     PRIMARY KEY(deal_no),
-    FOREIGN KEY(rebate_no) REFERENCES rebate2(rebate_no),
     FOREIGN KEY(sale_no) REFERENCES sales_person(sale_no),
     FOREIGN KEY(buyer_no) REFERENCES customer_d2(buyer_no),
-    FOREIGN KEY(vehicle_no) REFERENCES finance(vehicle_no)
+    FOREIGN KEY(vehicle_no) REFERENCES purchased_autos(vehicle_no)
 );

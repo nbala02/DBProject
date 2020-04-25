@@ -57,6 +57,11 @@ AS
 	FROM	
 		salesperson;
 
+CREATE VIEW purchased AS
+	SELECT purchased_cars.serial_no,purchased_cars.model,purchased_cars.color,purchased_cars.amount FROM dealer_one.purchased_cars
+   UNION ALL
+	SELECT purchased_autos.vehicle_no,purchased_autos.model,purchased_autos.color,purchased_autos.amount FROM dealer_two.purchased_autos;
+
 	
 
  

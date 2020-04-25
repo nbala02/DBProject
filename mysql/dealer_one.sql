@@ -52,6 +52,19 @@ create table cars
 
 );
 
+create table purchased_cars
+(
+	serial_no			varchar(10) NOT NULL, #Unique id for car
+    model               varchar(10) NOT NULL, #unique model for car
+	color				varchar(10) NOT NULL, #color of the car
+    autotrans			varchar(10)	NOT NUll, # yes or no if its autotransmission
+    warehouse			varchar(20) NOT NULL, # warehouse city
+    amount				decimal(15) NOT NULL, # warehouse city
+
+    PRIMARY KEY  (serial_no)
+
+);
+
 create table loan
 (
 	serial_no			varchar(10) NOT NULL, #Unique id for car
@@ -62,7 +75,7 @@ create table loan
     months				int(20)	   NOT NULL, # how many months the loan is 
     balance 			decimal(15) NOT NULL, #how much the balance is 
     
-    PRIMARY KEY(serial_no),
+    FOREIGN KEY(serial_no) REFERENCES purchased_cars(serial_no),
     FOREIGN KEY(customer_no) REFERENCES customer_d1(customer_no)
 );
 
@@ -78,8 +91,7 @@ create table transaction
     date                DATE 	    NOT NULL, #Date of transaction
     
     PRIMARY KEY(deal_no),
-    FOREIGN KEY(rebate_no) REFERENCES rebate1(rebate_no),
     FOREIGN KEY(rep_no) REFERENCES representative(rep_no),
     FOREIGN KEY(customer_no) REFERENCES customer_d1(customer_no),
-    FOREIGN KEY(serial_no) REFERENCES loan(serial_no)
+    FOREIGN KEY(serial_no) REFERENCES purchased_cars(serial_no)
 );
