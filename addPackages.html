@@ -69,26 +69,26 @@
                     <form method="POST" class="register-form" id="register-form" action="newPackages.php">
                         <span class="login100-form-title p-b-33">Add New Packages:</span>
 
-                        <div class="wrap-input100 validate-input" data-validate="Package NO required">
-                            <input class="input100" type="text" name="package" placeholder="Package NO" id="package" required>
+                        <div class="wrap-input100 validate-input" data-validate="Package Number required">
+                            <input class="input100" type="text" name="package" maxlength="2" placeholder="Package Number" id="package" required>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
                         
                         <div class="wrap-input100 validate-input" data-validate="Description required">
-                            <input class="input100" type="text" name="description" placeholder="Description" id="description" required>
+                            <input class="input100" type="text" name="description" maxlength="20" placeholder="Description" id="description" required>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="Price required">
-                            <input class="input100" type="text" maxlength="13" name="price" placeholder="Price" id="price" required>
+                            <input class="input100" type="text" maxlength="11" name="price" placeholder="Price" id="price" required>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
                         
                         <div class="wrap-input100 validate-input" data-validate="Mode Available required">
-                            <input class="input100" type="text" name="mode" placeholder="Mode Available" id="mode" required>
+                            <input class="input100" type="text" maxlength="20" name="mode" placeholder="Mode Available" id="mode" required>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>

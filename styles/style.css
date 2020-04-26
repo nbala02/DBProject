@@ -110,6 +110,18 @@ button:hover {
     line-height: 1.2;
 }
 
+select {
+    height: 68px;
+    padding: 0 25px 0 25px;
+    display: block;
+    width: 100%;
+    background: transparent;
+    font-family: OpenSans-Regular;
+    font-size: 15px;
+    color: #666666;
+    line-height: 1.2;
+}
+
 /*---------------------------------------------*/
 input.input100 {
     height: 68px;

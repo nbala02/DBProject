@@ -1,6 +1,6 @@
 <?php
     // Create connection
-    $dbconnect = mysqli_connect("127.0.0.1", "root", "csci318project", "testingDB");
+    $dbconnect = mysqli_connect("127.0.0.1", "root", "", "testingDB");
 
     //Check if connection worked
     /*if($dbconnect){
