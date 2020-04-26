@@ -90,11 +90,11 @@
                             <tbody>
 
                                 <?php
-                                    if(isset($_SESSION['salesrep1']))
+                                    if(isset($_SESSION['ldmanager1']))
                                     {
                                         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
                                     }
-                                    else if(isset($_SESSION['salesrep2']))
+                                    else if(isset($_SESSION['ldmanager2']))
                                     {
                                         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
                                     }
