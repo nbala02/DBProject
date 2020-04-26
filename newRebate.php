@@ -18,7 +18,7 @@
     {
         $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
         $sql = "INSERT INTO rebate2 (rebate_no, model, rebate_amt, start_date, end_date)
-                    VALUES ('$rebate', '$model', '$amount', '$start', '$end)";
+                    VALUES ('$rebate', '$model', '$amount', '$start', '$end')";
     }
 
     if ($connection->query($sql) === TRUE) 

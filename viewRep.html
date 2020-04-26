@@ -88,19 +88,19 @@
                     <div class="table100-body js-pscroll">
                         <table>
                             <tbody>
-                                
+
                                 <?php
                                     if(isset($_SESSION['ldmanager1']))
                                     {
-                                        $dbconnect = mysqli_connect("127.0.0.1", "root", "csci318project", "dealer_one");
+                                        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
                                     }
-                                    else if(isset($_SESSION['ldmanager2']))       
+                                    else if(isset($_SESSION['ldmanager2']))
                                     {
-                                        $dbconnect = mysqli_connect("127.0.0.1", "root", "csci318project", "dealer_two");
+                                        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
                                     }
                                     $query1 = "SELECT * FROM representative ";
                                     $output1 = $dbconnect->query($query1);
-                                
+
                                     $query2 = "SELECT * FROM sales_person ";
                                     $output2 = $dbconnect->query($query2);
                                 ?>
@@ -130,7 +130,7 @@
                                             </tr>
                                         </form>
 
-                                <?php  } } else if(($output2)){ 
+                                <?php  } } else if(($output2)){
                                         while($result = mysqli_fetch_assoc($output2)) {?>
                                         <form method=POST>
                                             <tr class="row100 body">
@@ -157,7 +157,7 @@
                                 <?php } } else{ echo '<span class="login100-form-title p-b-33">No cars</span>';}?>
                             </tbody>
                         </table>
-                    </div>     
+                    </div>
                 </div>
             </div>
         </div>

@@ -55,28 +55,28 @@
             </div>
         </section>
     </header>
-    
+
     <?php
-        if(isset($_SESSION['salesrep1'])) 
+        if(isset($_SESSION['salesrep1']))
         {
-            $dbconnect = mysqli_connect("127.0.0.1", "root", "csci318project", "dealer_one");
+            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
             #$name = $_SESSION['fname'];
             $repPin = $_SESSION['emp_no'];
-            
-        } 
+
+        }
         else if (isset($_SESSION['salesrep2']))
         {
-            $dbconnect = mysqli_connect("127.0.0.1", "root", "csci318project", "dealer_two");
+            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
             #$name = $_SESSION['fname'];
             $repPin = $_SESSION['emp_no'];
         }
             $query1 = "SELECT * FROM representative WHERE rep_no = '$repPin'";
             $output1 = $dbconnect->query($query1);
-    
+
             $query2 = "SELECT * FROM sales_person WHERE sale_no = '$repPin'";
-            $output2 = $dbconnect->query($query2);  
+            $output2 = $dbconnect->query($query2);
     ?>
-    
+
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
@@ -87,7 +87,7 @@
 
                                 <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Your ID: <?php echo $result['rep_no']?></div>
                                 <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Name: <?php echo $result['name']?> </div> 
+                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Name: <?php echo $result['name']?> </div>
                                 <span class="login100-form-title p-b-33"> </span>
                                 <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Address: <?php echo $result['address']?> </div>
                                 <span class="login100-form-title p-b-33"> </span>
@@ -98,14 +98,14 @@
                                 <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Year To Date Sales: <?php echo $result['ytd_sales']?> years</div>
                                 <span class="login100-form-title p-b-33"> </span>
                                 <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Commissions: <?php echo $result['comm']?></div>
-                    
-                    <?php  } } else if(($output2)){ 
+
+                    <?php  } } else if(($output2)){
                             while($result = mysqli_fetch_assoc($output2)) {?>
                                 <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
 
                                 <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Your ID: <?php echo $result['sale_no']?></div>
                                 <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Name: <?php echo $result['name']?> </div> 
+                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Name: <?php echo $result['name']?> </div>
                                 <span class="login100-form-title p-b-33"> </span>
                                 <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Address: <?php echo $result['address']?> </div>
                                 <span class="login100-form-title p-b-33"> </span>
@@ -119,10 +119,10 @@
 
                     <?php } } else { echo '<span class=login100-form-title p-b-33>Record Not Available </span><br><br>'; }?>
                 </form>
-                
+
             </div>
         </div>
     </div>
-    
+
     </body>
 </html>
