@@ -65,27 +65,30 @@
         </div>
     </header>
 
-    <!-- Cars in the database for dealer -->
+    <!-- Representative in the database for dealer -->
     <div class="limiter">
-        <div class="container">
-            <div class="wrap">
-                <div class="table100 ver1 m-b-110">
-                    <div class="table100-body js-pscroll">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table100 ver2 m-b-110">
+                    <div class="table100-head">
                         <table>
-                            <thead class="table100-head">
+                            <thead>
                                 <tr class="row100 head">
                                     <th class="cell100 column1">Representative No.</th>
                                     <th class="cell100 column2">Name</th>
-                                    <th class="cell100 column2">Address</th>
-                                    <th class="cell100 column2">Phone</th>
-                                    <th class="cell100 column2">Base salary</th>
-                                    <th class="cell100 column2">Year-to-date sales</th>
-                                    <th class="cell100 column2">Commission</th>
-
+                                    <th class="cell100 column3">Address</th>
+                                    <th class="cell100 column4">Phone</th>
+                                    <th class="cell100 column5">Base salary</th>
+                                    <th class="cell100 column6">Year-to-date sales</th>
+                                    <th class="cell100 column7">Commission</th>
                                 </tr>
                             </thead>
+                        </table>
+                    </div>
+                    <div class="table100-body js-pscroll">
+                        <table>
                             <tbody>
-
+                                
                                 <?php
                                     if(isset($_SESSION['ldmanager1']))
                                     {
@@ -111,18 +114,18 @@
                                                 <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=name
                                                 value='".$result['name']."'>"?></td>
 
-                                                <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=address
+                                                <td class="cell100 column3"><?php echo "<input style=text-align:center;type=text name=address
                                                 value='".$result['address']."'>"?></td>
 
-                                                <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?></td>
+                                                <td class="cell100 column4"><?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?></td>
 
-                                                <td class="cell100 column2"><?php echo "<input style=text-align:center; type=text name=base_salary
+                                                <td class="cell100 column5"><?php echo "<input style=text-align:center; type=text name=base_salary
                                                 value='".$result['base_salary']."'>"?>\</td>
 
-                                                <td class="cell100 column2"><?php echo "<input style=text-align:center; type=text name=ytd_sales
+                                                <td class="cell100 column6"><?php echo "<input style=text-align:center; type=text name=ytd_sales
                                                 value='".$result['ytd_sales']."'>"?>\</td>
 
-                                                <td class="cell100 column2"><?php echo "<input style=text-align:center; type=text name=comm
+                                                <td class="cell100 column7"><?php echo "<input style=text-align:center; type=text name=comm
                                                 value='".$result['comm']."'>"?>\</td>
                                             </tr>
                                         </form>
@@ -136,25 +139,25 @@
                                                 <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=name
                                                 value='".$result['name']."'>"?></td>
 
-                                                <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=address
+                                                <td class="cell100 column3"><?php echo "<input style=text-align:center;type=text name=address
                                                 value='".$result['address']."'>"?></td>
 
-                                                <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?></td>
+                                                <td class="cell100 column4"><?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?></td>
 
-                                                <td class="cell100 column2"><?php echo "<input style=text-align:center; type=text name=comm
+                                                <td class="cell100 column5"><?php echo "<input style=text-align:center; type=text name=comm
                                                 value='".$result['comm']."'>"?>\</td>
 
-                                                <td class="cell100 column2"><?php echo "<input style=text-align:center; type=text name=base_salary
+                                                <td class="cell100 column6"><?php echo "<input style=text-align:center; type=text name=base_salary
                                                 value='".$result['base_salary']."'>"?>\</td>
 
-                                                <td class="cell100 column2"><?php echo "<input style=text-align:center; type=text name=ytdsales
+                                                <td class="cell100 column7"><?php echo "<input style=text-align:center; type=text name=ytdsales
                                                 value='".$result['ytdsales']."'>"?>\</td>
                                             </tr>
                                         </form>
                                 <?php } } else{ echo '<span class="login100-form-title p-b-33">No cars</span>';}?>
                             </tbody>
                         </table>
-                    </div>
+                    </div>     
                 </div>
             </div>
         </div>
@@ -163,5 +166,5 @@
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>
 </body>
-
 </html>
+
