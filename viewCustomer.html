@@ -74,14 +74,11 @@
                         <table>
                             <thead>
                                 <tr class="row100 head">
-                                    <th class="cell100 column1">Representative No.</th>
+                                    <th class="cell100 column1">Customer No.</th>
                                     <th class="cell100 column2">Name</th>
                                     <th class="cell100 column3">Address</th>
                                     <th class="cell100 column4">Phone</th>
-                                    <th class="cell100 column5">Base salary</th>
-                                    <th class="cell100 column6">Year-to-date sales</th>
-                                    <th class="cell100 column7">Commission</th>
-                                    <th class="cell100 column8">Edit</th>
+                                    <th class="cell100 column5">Edit</th>
                                 </tr>
                             </thead>
                         </table>
@@ -99,10 +96,10 @@
                                     {
                                         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
                                     }
-                                    $query1 = "SELECT * FROM representative ";
+                                    $query1 = "SELECT * FROM customer_d1 ";
                                     $output1 = $dbconnect->query($query1);
 
-                                    $query2 = "SELECT * FROM sales_person ";
+                                    $query2 = "SELECT * FROM customer_d2 ";
                                     $output2 = $dbconnect->query($query2);
                                 ?>
 
@@ -111,7 +108,7 @@
                                         while($result = mysqli_fetch_assoc($output1)) {?>
                                 <form method=POST>
                                     <tr class="row100 body">
-                                        <td class="cell100 column1"><?php echo "<input style=text-align:center; type=text name=rep_no value='".$result['rep_no']."'>"?></td>
+                                        <td class="cell100 column1"><?php echo "<input style=text-align:center; type=text name=customer_no value='".$result['customer_no']."'>"?></td>
 
                                         <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=name
                                                 value='".$result['name']."'>"?></td>
@@ -121,16 +118,8 @@
 
                                         <td class="cell100 column4"><?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?></td>
 
-                                        <td class="cell100 column5"><?php echo "<input style=text-align:center; type=text name=base_salary
-                                                value='".$result['base_salary']."'>"?>\</td>
 
-                                        <td class="cell100 column6"><?php echo "<input style=text-align:center; type=text name=ytd_sales
-                                                value='".$result['ytd_sales']."'>"?>\</td>
-
-                                        <td class="cell100 column7"><?php echo "<input style=text-align:center; type=text name=comm
-                                                value='".$result['comm']."'>"?>\</td>
-
-                                        <td class="cell100 column8"><a href="editRecord.html?rep_no=<?php echo $result['rep_no'];?>">Edit Profile Details</a> </td>
+                                        <td class="cell100 column5"><a href="editCustomer.html?customer_no=<?php echo $result['customer_no'];?>">Edit Customer Details</a> </td>
 
                                     </tr>
 
@@ -140,7 +129,7 @@
                                         while($result = mysqli_fetch_assoc($output2)) {?>
                                 <form method=POST>
                                     <tr class="row100 body">
-                                        <td class="cell100 column1"><?php echo "<input style=text-align:center; type=text name=sale_no value='".$result['sale_no']."'>"?></td>
+                                        <td class="cell100 column1"><?php echo "<input style=text-align:center; type=text name=buyer_no value='".$result['buyer_no']."'>"?></td>
 
                                         <td class="cell100 column2"><?php echo "<input style=text-align:center;type=text name=name
                                                 value='".$result['name']."'>"?></td>
@@ -150,21 +139,13 @@
 
                                         <td class="cell100 column4"><?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?></td>
 
-                                        <td class="cell100 column5"><?php echo "<input style=text-align:center; type=text name=comm
-                                                value='".$result['comm']."'>"?>\</td>
-
-                                        <td class="cell100 column6"><?php echo "<input style=text-align:center; type=text name=base_salary
-                                                value='".$result['base_salary']."'>"?>\</td>
-
-                                        <td class="cell100 column7"><?php echo "<input style=text-align:center; type=text name=ytdsales
-                                                value='".$result['ytdsales']."'>"?>\</td>
 
 
-                                       <td class="cell100 column8"><a href="editRecord.html?sale_no=<?php echo $result['sale_no'];?>">Edit Profile Details</a> </td>
+                                       <td class="cell100 column8"><a href="editCustomer.html?buyer_no=<?php echo $result['buyer_no'];?>">Edit Profile Details</a> </td>
                                     </tr>
 
                                 </form>
-                                <?php } } else{ echo '<span class="login100-form-title p-b-33">No reps</span>';}?>
+                                <?php } } else{ echo '<span class="login100-form-title p-b-33">No customers</span>';}?>
                             </tbody>
                         </table>
                     </div>
