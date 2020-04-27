@@ -271,8 +271,8 @@ input.input100 {
 	padding-bottom: 42px;
 	z-index: 2;
     background: url(../images/showroom.jpeg); 
-    background-position:bottom; 
-    background-size: cover
+    background-position: bottom;
+    background-size: cover;
 }
 .info_form_container
 {

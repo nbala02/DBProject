@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
 </head>
 
 <body>
@@ -49,22 +50,24 @@
             </ul>
         </nav>
 
-        <section>
-            <div>
-                <img class="center-top" src="images/dealership2.jpg" style="display: block; width: 100%; height: 500px; border-top: red 6px solid;">
+        <div class="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="section_title">Your Profile</div>
+                        <div class="section_subtitle">Make sure everything is correct</div>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
     </header>
 
     <?php
         if(isset($_SESSION['salesrep1']))
         {
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
-            #$name = $_SESSION['fname'];
             $repPin = $_SESSION['emp_no'];
-
-        }
-        else if (isset($_SESSION['salesrep2']))
+        } else if (isset($_SESSION['salesrep2']))
         {
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
             #$name = $_SESSION['fname'];
@@ -80,49 +83,49 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                <form class="login100-form validate-form">
-                    <?php if(($output1)){
-                            while($result = mysqli_fetch_assoc($output1)) { ?>
-                                <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
+                <?php if(($output1)){
+                        while($result = mysqli_fetch_assoc($output1)) { ?>
+                <span class="login100-form-title" style="text-align:center; font-size:30px;">My Information</span>
 
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Your ID: <?php echo $result['rep_no']?></div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Name: <?php echo $result['name']?> </div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Address: <?php echo $result['address']?> </div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Phone Number: <?php echo $result['phone']?> </div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Base Salary: <?php echo $result['base_salary']?> </div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Year To Date Sales: <?php echo $result['ytd_sales']?> years</div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Commissions: <?php echo $result['comm']?></div>
+                <div class="wrap-input100" style="text-align:center"> Your ID: <?php echo $result['rep_no']?></div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;"> Name: <?php echo $result['name']?> </div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Address: <?php echo $result['address']?> </div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Phone Number: <?php echo $result['phone']?> </div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Base Salary: <?php echo $result['base_salary']?> </div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Year To Date Sales: <?php echo $result['ytd_sales']?> years</div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Commissions: <?php echo $result['comm']?></div>
 
-                    <?php  } } else if(($output2)){
-                            while($result = mysqli_fetch_assoc($output2)) {?>
-                                <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
+                <?php  } } else if(($output2)){
+                        while($result = mysqli_fetch_assoc($output2)) {?>
+                <span class="login100-form-title" style="text-decoration:underline">My Information</span>
 
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Your ID: <?php echo $result['sale_no']?></div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Name: <?php echo $result['name']?> </div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Address: <?php echo $result['address']?> </div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Phone Number: <?php echo $result['phone']?> </div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Base Salary: <?php echo $result['base_salary']?> </div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Year To Date Sales: <?php echo $result['ytdsales']?> years</div>
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Commissions: <?php echo $result['comm']?></div>
+                <div class="wrap-input100" style="text-align:center;"> Your ID: <?php echo $result['sale_no']?></div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;"> Name: <?php echo $result['name']?> </div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Address: <?php echo $result['address']?> </div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Phone Number: <?php echo $result['phone']?> </div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Base Salary: <?php echo $result['base_salary']?> </div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Year To Date Sales: <?php echo $result['ytdsales']?> years</div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Commissions: <?php echo $result['comm']?></div>
 
-                    <?php } } else { echo '<span class=login100-form-title p-b-33>Record Not Available </span><br><br>'; }?>
-                </form>
-
+                <?php } } else { echo '<span class=login100-form-title>No Profile</span><br><br>'; }?>
             </div>
         </div>
     </div>
 
-    </body>
+    <footer>
+        <h3>All Rights Reserved, Copyright &copy; 2020</h3>
+    </footer>
+</body>
 </html>
