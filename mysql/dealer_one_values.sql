@@ -20,6 +20,9 @@ values ( 'S11111','Rav4','Blue','yes','Bridgeport');
 Insert INTO cars (serial_no,model,color,autotrans,warehouse)
 values ( 'S13313','Camry','Red','no','st.Charles');
 
+INSERT INTO purchased_cars (serial_no, model, color, autotrans, warehouse, amount)
+values('S13313','Camry','Red','no','st.Charles', '5000');
+
 Insert INTO loan (serial_no,customer_no, amount, start_date,end_date,months,balance)
 values('S13313','C1234','10000','2014/02/10','2019/02/20','4','5000');
 
