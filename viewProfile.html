@@ -69,6 +69,10 @@
     </header>
 
     <?php
+
+
+
+
         if(isset($_SESSION['salesrep1']))
         {
 
@@ -90,9 +94,8 @@
 
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
             $code= $_SESSION['customer_no'];
-
-              $query3 = "SELECT * FROM customer_d1 WHERE customer_no = '$code'";
-              $output3 = $dbconnect->query($query3);
+            $query3 = "SELECT * FROM customer_d1 WHERE customer_no = '$code'";
+            $output3 = $dbconnect->query($query3);
 
         }
         else if(isset($_SESSION['customer2']))
@@ -114,7 +117,6 @@
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
                 <?php if(($output1)){
-                        $cnt=1;
                         while($result = mysqli_fetch_assoc($output1)) { ?>
                 <form method=POST>
                 <span class="login100-form-title" style="text-align:center; font-size:30px;">My Information</span>
@@ -164,10 +166,29 @@
                 <span class="login100-form-title"> </span>
                 <div class="wrap-input100" style="text-align:center;">Phone Number: <?php echo $result['phone']?> </div>
 
-                <td class="cell100 column8"><a href="editProfile.html?customer_no=<?php echo $result['customer_no'];?>">Edit Profile Details</a> </td>
-                </form>
+                 <td class="cell100 column8"><a href="editProfile.html?customer_no=<?php echo $result['customer_no'];?>">Edit Profile Details</a> </td>
 
-                <?php } } else { echo '<span class=login100-form-title>No Profile</span><br><br>'; }?>
+
+                <?php } }
+
+                else if(($output4)){
+                            while($result = mysqli_fetch_assoc($output4)){
+                ?>
+                <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
+                <div class="wrap-input100" style="text-align:center;"> Your ID: <?php echo $result['buyer_no']?></div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;"> Name: <?php echo $result['name']?> </div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Address: <?php echo $result['address']?> </div>
+                <span class="login100-form-title"> </span>
+                <div class="wrap-input100" style="text-align:center;">Phone Number: <?php echo $result['phone']?> </div>
+
+                 <td class="cell100 column8"><a href="editProfile.html?buyer_no=<?php echo $result['buyer_no'];?>">Edit Profile Details</a> </td>
+                </form>
+                <?php }}
+
+
+                    else { echo '<span class=login100-form-title>No Profile</span><br><br>'; }?>
             </div>
         </div>
         </div>

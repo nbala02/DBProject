@@ -16,18 +16,20 @@
     if($location == "D1")
     {
         $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
-        $sql = "SELECT * FROM customer_d1 WHERE customer_no = '$code'";
+        $sql1 = "SELECT * FROM customer_d1 WHERE customer_no = '$code'";
+        $output1 = $connection->query($sql1);
     } else if($location == "D2")
     {
         $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
-        $sql = "SELECT * FROM customer_d2 WHERE customer_no = '$code'";
+        $sql2 = "SELECT * FROM customer_d2 WHERE buyer_no = '$code'";
+        $output2 = $connection->query($sql2);
     }
 
-    $output = $connection->query($sql);  
 
-    if($output->num_rows != 0)
+
+    if($output1->num_rows != 0)
     {
-        while($result = mysqli_fetch_assoc($output)) 
+        while($result = mysqli_fetch_assoc($output1))
         {
             $id = $result['customer_no'];
             $fullName = $result['name'];
@@ -51,17 +53,56 @@
                 header('Location: custAccount.html');
             } else 
             {
-                //echo "Something went wrong" . "<br>" . $dbconnect->error;
+                echo "Something went wrong" . "<br>" . $dbconnect->error;
                 //header('Location: registerPage.html');
-                echo "<script>alert('Something went wrong'); window.location.href='registerPage.html';</script>";
+                //echo "<script>alert('Something went wrong'); window.location.href='registerPage.html';</script>";
             }
             
             $dbconnect->close();  
         }
-    } else
+    }
+
+
+else if($output2->num_rows != 0)
     {
-        //echo "Wrong Code" . "<br>" . $dbconnect->error;
+        while($result = mysqli_fetch_assoc($output2))
+        {
+            $id = $result['buyer_no'];
+            $fullName = $result['name'];
+        }
+
+        if((isset($id) && $id == $code) && (isset($fullName) && $fullName == $name))
+        {
+            $sql = "INSERT INTO customeracc (customer_no,fname, lname, email, username, password,location)
+            VALUES ('$code','$fname', '$lname', '$email', '$username', '$password','$location')";
+
+            $email = $_POST['email'];
+            $name = $_POST['fname'];
+
+
+
+
+            if ($dbconnect->query($sql) === TRUE)
+            {
+                $_SESSION['name'] = $email;
+                $_SESSION['fname'] = $name;
+                header('Location: custAccount.html');
+            } else
+            {
+                echo "Something went wrong" . "<br>" . $dbconnect->error;
+                //header('Location: registerPage.html');
+               // echo "<script>alert('Something went wrong'); window.location.href='registerPage.html';</script>";
+            }
+
+            $dbconnect->close();
+        }
+    }
+
+
+        else
+    {
+        echo "Wrong Code" . "<br>" . $dbconnect->error;
         //header('Location: register.html');
-        echo "<script>alert('Incorrect Customer ID or Name'); window.location.href='registerPage.html';</script>";
+        //echo "<script>alert('Incorrect Customer ID or Name'); window.location.href='registerPage.html';</script>";
     }  
 ?>
