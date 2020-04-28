@@ -29,13 +29,15 @@ create table employee
 
 create table customeracc
 (
-    fname			varchar(50) NOT NULL, #first name
+	customer_no		varchar(6), #Unique id
+	fname			varchar(50) NOT NULL, #first name
     lname			varchar(50) NOT NULL, #last name
     email			varchar(100) NOT NULL, #email
     username		varchar(50) NOT NULL, #username used for login
     password		varchar(20) NOT NULL, #password
+    location		varchar(2) NOT NULL, #which dealer
     
-    PRIMARY KEY	(username)
+    PRIMARY KEY	(customer_no)
 );
 
 drop table employee;

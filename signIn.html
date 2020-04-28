@@ -22,11 +22,17 @@
         <nav>
             <ul>
                 <?php
-                    if(isset($_SESSION['customer']) || isset($_SESSION['name']))
+                    if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                     isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    }
+                    else if(isset($_SESSION['customer2']) || isset($_SESSION['name']))
+                    {
+                        echo '<li><a href="logout.php">Logout</a></li>';
+                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
+                    }
+                    else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -77,6 +83,22 @@
 
                         <div class="wrap-input100 rs1 validate-input" data-validate="Password required">
                             <input class="input100" type="password" name="password" placeholder="Password" id="password" required>
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                        </div>
+
+                         <span class="login100-form-title p-b-33">Your Location:</span>
+
+                        <div>
+                            <input type="radio" name="radio" value="D1" id="D1" required>
+                            <label for="D1">St.Louis</label>
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                        </div>
+
+                       <div>
+                            <input type="radio" name="radio" value="D2" id="D2" required>
+                            <label for="D2">Kansas City</label>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>

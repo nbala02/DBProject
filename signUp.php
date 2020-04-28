@@ -35,11 +35,14 @@
         
         if((isset($id) && $id == $code) && (isset($fullName) && $fullName == $name)) 
         {
-            $sql = "INSERT INTO customeracc (fname, lname, email, username, password)
-            VALUES ('$fname', '$lname', '$email', '$username', '$password')";
+            $sql = "INSERT INTO customeracc (customer_no,fname, lname, email, username, password,location)
+            VALUES ('$code','$fname', '$lname', '$email', '$username', '$password','$location')";
 
             $email = $_POST['email'];
             $name = $_POST['fname'];
+
+
+
 
             if ($dbconnect->query($sql) === TRUE) 
             {

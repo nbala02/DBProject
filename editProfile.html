@@ -20,7 +20,7 @@
         <div id="logo"><a><img src="images/logo.png"></a></div>
         <nav>
             <ul>
-                <?php
+               <?php
                     if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
@@ -65,69 +65,54 @@
     <?php
 
 
-        if(isset($_SESSION['ldmanager1']))
+        if(isset($_SESSION['customer1']))
         {
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
-            #$name = $_SESSION['fname'];
-            $repno1 = $_GET['rep_no'];
-            $repPin = $_SESSION['emp_no'];
-}
+            $code= $_SESSION['customer_no'];
 
-        else if (isset($_SESSION['ldmanager2']))
-        {
-            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
-            #$name = $_SESSION['fname'];
-            $repno2 = $_GET['sale_no'];
-            $repPin = $_SESSION['emp_no'];
+              $query1 = "SELECT * FROM customer_d1 WHERE customer_no = '$code'";
+              $output1 = $dbconnect->query($query1);
+
         }
-            $query1 = "SELECT * FROM representative WHERE rep_no = '$repno1'";
-            $output1 = $dbconnect->query($query1);
+        else if(isset($_SESSION['customer2']))
+        {
 
-            $query2 = "SELECT * FROM sales_person WHERE sale_no = '$repno2'";
-            $output2 = $dbconnect->query($query2);
+            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
+            $code= $_SESSION['buyer_no'];
+
+             $query2 = "SELECT * FROM customer_d2 WHERE buyer_no = '$code'";
+              $output2 = $dbconnect->query($query2);
+
+        }
+
     ?>
 
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
 
-                <form class="login100-form validate-form" action=updateRecord.php method=POST>
+                <form class="login100-form validate-form" action=updateProfile.php method=POST>
                     <?php if(($output1)){
-                            while($result = mysqli_fetch_assoc($output1)) { ?>
-                                <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
+                            while($result = mysqli_fetch_assoc($output1)) {
+                    ?>
 
 
 
-                <tr class="row100 body">
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Rep No:<?php echo "<input style=text-align:center; type=text name=rep_no value='".$result['rep_no']."'>"?></div>
+            <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
 
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Name: <?php echo "<input style=text-align:center;type=text name=name
-                                                value='".$result['name']."'>"?> </div>
+                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Your ID: <?php echo $result['customer_no']?></div>
 
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Address: <?php echo "<input style=text-align:center;type=text name=address
-                                                value='".$result['address']."'>"?> </div>
 
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Phone Number: <?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?> </div>
+                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Name: <?php echo "<input style=text-align:center;type=text name=name value='".$result['name']."'>"?> </div>
 
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Base Salary: <?php echo "<input style=text-align:center; type=text name=base_salary
-                                                value='".$result['base_salary']."'>"?> </div>
 
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Year To Date Sales: <?php echo "<input style=text-align:center; type=text name=ytd_sales
-                                                value='".$result['ytd_sales']."'>"?> </div>
+                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Address: <?php echo "<input style=text-align:center;type=text name=address value='".$result['address']."'>"?> </div>
 
-                                <span class="login100-form-title p-b-33"> </span>
-                                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Commissions: <?php echo "<input style=text-align:center; type=text name=comm
-                                                value='".$result['comm']."'>"?></div>
+
+                <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Phone Number: <?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?></div>
+
 
                     <td class="cell100 column9"><?php echo "<input type=submit name=submit value=Update>"?></td>
-
-
-                        </tr>
 
 
 

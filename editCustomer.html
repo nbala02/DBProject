@@ -21,11 +21,17 @@
         <nav>
             <ul>
                 <?php
-                    if(isset($_SESSION['customer']) || isset($_SESSION['name']))
+                    if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    }
+                    else if(isset($_SESSION['customer2']) || isset($_SESSION['name']))
+                    {
+                        echo '<li><a href="logout.php">Logout</a></li>';
+                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
+                    }
+                    else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -64,7 +70,7 @@
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
             #$name = $_SESSION['fname'];
             $custno1 = $_GET['customer_no'];
-            $repPin = $_SESSION['emp_no'];
+
 }
 
         else if (isset($_SESSION['ldmanager2']))
@@ -79,13 +85,20 @@
 
             $query2 = "SELECT * FROM customer_d2 WHERE buyer_no = '$custno2'";
             $output2 = $dbconnect->query($query2);
+
+        else if(isset($_SESSION[']))
+
+
+
+
+
     ?>
 
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
 
-                <form class="login100-form validate-form" action=update_record.php method=POST>
+                <form class="login100-form validate-form" action=updateCustomer.php method=POST>
                     <?php if(($output1)){
                             while($result = mysqli_fetch_assoc($output1)) { ?>
                                 <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
