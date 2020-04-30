@@ -9,14 +9,14 @@ if (isset($_POST['username']) and isset($_POST['password']))
     $id = $_POST['username'];
     $password = $_POST['password'];
     $position = $_POST['radio'];
-    
+
     //Checking if the values exist in the database or not
     $query = "SELECT * FROM customeracc WHERE username='$id' and password='$password'";
 
     $result = mysqli_query($dbconnect, $query) or die(mysqli_error($dbconnect));
     $count = mysqli_num_rows($result);
     $row  = mysqli_fetch_array($result);
-    
+
 
      //Make sure position selected matches actual position
     if(is_array($row))
@@ -48,7 +48,17 @@ if (isset($_POST['username']) and isset($_POST['password']))
         {
             $_SESSION["fname"] = $row['fname'];
            // $_SESSION["customer_no"] = $row['customer_no'];
-        } 
+            if($location == "D1")
+                    {
+
+                        $_SESSION['customer_no'] = $row['customer_no'];
+                    }
+                    else
+                    {
+
+                        $_SESSION['buyer_no'] = $row['customer_no'];
+                    }
+        }
     }
 
     else
