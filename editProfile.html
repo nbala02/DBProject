@@ -79,6 +79,7 @@
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
             $code= $_SESSION['buyer_no'];
             $query2 = "SELECT * FROM customer_d2 WHERE buyer_no = '$code'";
+            echo "$code";
             $output2 = $dbconnect->query($query2);
 
         }
@@ -90,7 +91,7 @@
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
 
                 <form class="login100-form validate-form" action=updateProfile.php method=POST>
-                    <?php if(($output1 === TRUE)){
+                    <?php if($output1){
                             while($result = mysqli_fetch_assoc($output1)) {
                     ?>
 
@@ -112,9 +113,11 @@
 
 
 
-                    <?php  } } else if(($output2 === TRUE)){
+                    <?php  } } else if($output2){
+                            echo "test2";
                             while($result = mysqli_fetch_assoc($output2)) {?>
                     <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
+
                     <div class="wrap-input100" style="text-align:center;"> Your ID: <?php echo "<input style=text-align:center; type=text name=buyer_no value='".$result['buyer_no']."'>"?></div>
                     <span class="login100-form-title"> </span>
                     <div class="wrap-input100" style="text-align:center;"> Name: <?php echo "<input style=text-align:center;type=text name=name
@@ -124,7 +127,7 @@
                                                 value='".$result['address']."'>"?> </div>
                     <span class="login100-form-title"> </span>
                     <div class="wrap-input100" style="text-align:center;">Phone Number: <?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?> </div>
-                    echo "test2";
+
 
                     <td class="cell100 column9"><?php echo "<input type=submit name=submit value=Update>"?></td>
 

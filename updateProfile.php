@@ -24,7 +24,7 @@
 if ($output1 === TRUE)
     {
        //echo "wtf";
-       echo "<script>alert('Updated Info1'); //window.location.href='viewProfile.html';</script>";
+       echo "<script>alert('Updated Info1'); window.location.href='viewProfile.html';</script>";
     }
     else
     {
@@ -41,8 +41,8 @@ if ($output2 === TRUE)
     else
     {
         //echo "Error";
-        echo "Wrong Code" . "<br>" . $dbconnect->error;
-        echo "Wrong Code" . "<br>" . $connection->error;
+        //echo "Wrong Code" . "<br>" . $dbconnect->error;
+      //  echo "Wrong Code" . "<br>" . $connection->error;
         //echo "<script>alert('You already filled one'); //window.location.href='addRep.html';</script>";
     }
 
