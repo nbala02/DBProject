@@ -78,7 +78,7 @@
 
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
             $code= $_SESSION['buyer_no'];
-            $query2 = "SELECT * FROM customer_d2 WHERE buyer_no = 'buyer_no'";
+            $query2 = "SELECT * FROM customer_d2 WHERE buyer_no = '$code'";
             $output2 = $dbconnect->query($query2);
 
         }
