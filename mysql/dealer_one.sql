@@ -15,8 +15,6 @@ create table representative
     PRIMARY KEY (rep_no)
 );
 
-select * from representative;
-
 create table customer_d1
 (	
 	customer_no         varchar(10) NOT NULL, #unique id for the customer 
@@ -34,6 +32,7 @@ create table rebate1
     rebate_amt			decimal(15) NOT NULL, #how much the rebate1 is
     start_date 			DATE	   NOT NULL, # start date of rebate1
     end_date 			DATE	   NOT NULL, # end date of the rebate1
+    expired				int			NOT NULL,
     
     PRIMARY KEY(rebate_no)
 );

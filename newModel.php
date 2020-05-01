@@ -17,10 +17,9 @@
     if ($connection->query($sql) === TRUE) 
     {
         echo "<script>alert('New Model Added'); window.location.href='empAccount.html';</script>";
-    }
-    else 
+    } else
     {
         //echo "Wrong Code" . "<br>" . $connection->error;
-        echo "<script>alert('You already filled one'); window.location.href='addModel.html';</script>";
+        echo "<script>alert('Model already exists'); window.location.href='addModel.html';</script>";
     } 
 ?>

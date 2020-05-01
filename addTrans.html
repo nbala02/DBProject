@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Wholesale Manager Account">
-    <title>My Account</title>
+    <meta name="description" content="Sales Personnel Account">
+    <title>Make a Transaction</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
@@ -22,17 +21,11 @@
         <nav>
             <ul>
                 <?php
-                    if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
+                    if(isset($_SESSION['customer']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['customer2']) || isset($_SESSION['name']))
-                    {
-                        echo '<li><a href="logout.php">Logout</a></li>';
-                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -60,7 +53,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="section_title">Add New Transaction</div>
+                        <div class="section_title">Make a New Transaction</div>
                         <div class="section_subtitle">Use the form</div>
                     </div>
                 </div>
@@ -127,10 +120,11 @@
                         <select class="wrap-input100 rs1 validate-input" name="rebate">
                             <option value="" selected>Select Rebate</option>
                             <?php 
-                                while($row = mysqli_fetch_assoc($result1)) { 
+                                while($row = mysqli_fetch_assoc($result1)) {
+                                    if($row['expired'] != 1) {
                             ?>
                             <option value="<?php echo $row['rebate_no'];?>"><?php echo $row['rebate_no'];?></option>
-                            <?php } ?>
+                            <?php } } ?>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </select>

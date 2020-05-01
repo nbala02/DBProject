@@ -34,3 +34,17 @@ create table potential_buyer
     PRIMARY KEY (buyer_no)
 
 );
+
+SET GLOBAL event_scheduler = ON; -- enable event scheduler.
+SELECT @@event_scheduler;  -- check whether event scheduler is ON/OFF
+CREATE EVENT rebate1Expired  -- create your event
+    ON SCHEDULE
+      EVERY 24 HOUR  -- run every 24 hours
+    DO
+      UPDATE dealer_one.rebate1 set expired='1' WHERE end_date = current_date();
+
+CREATE EVENT rebate2Expired  -- create your event
+    ON SCHEDULE
+      EVERY 24 HOUR  -- run every 24 hours
+    DO
+      UPDATE dealer_two.rebate2 set expired='1' WHERE end_date = current_date();

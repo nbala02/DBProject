@@ -10,9 +10,7 @@ create table sales_person
     comm				decimal(15) NOT NULL, # commission for the salesperson
     base_salary			decimal(15) NOT NULL, # base salary for the salesperson
     ytdsales			decimal(15) NOT NULL, # year to date amount for the salesperson
-   
-    
-    
+
     PRIMARY KEY (sale_no)
 );
 
@@ -33,6 +31,7 @@ create table rebate2
     rebate_amt			decimal(15) NOT NULL, #how much the rebate1 is
     start_date 			DATE	   NOT NULL, # start date of rebate1
     end_date 			DATE	   NOT NULL, # end date of the rebate1
+    expired				int			NOT NULL,
     
     PRIMARY KEY(rebate_no)
 );

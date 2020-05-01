@@ -24,10 +24,9 @@
     if ($connection->query($sql) === TRUE) 
     {
         echo "<script>alert('New Vehicle Added'); window.location.href='empAccount.html';</script>";
-    }
-    else 
+    } else
     {
         //echo "Wrong Code" . "<br>" . $connection->error;
-        echo "<script>alert('You already filled one'); window.location.href='addVehicle.html';</script>";
+        echo "<script>alert('Vehicle already exists'); window.location.href='addVehicle.html';</script>";
     } 
 ?>

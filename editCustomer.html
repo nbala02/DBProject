@@ -1,11 +1,11 @@
+<!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Wholesale Manager Account">
-    <title>My Account</title>
+    <meta name="description" content="Local Manager Account">
+    <title>Edit Customer Info</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
@@ -21,17 +21,11 @@
         <nav>
             <ul>
                 <?php
-                    if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
+                    if(isset($_SESSION['customer']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['customer2']) || isset($_SESSION['name']))
-                    {
-                        echo '<li><a href="logout.php">Logout</a></li>';
-                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -55,57 +49,45 @@
             </ul>
         </nav>
 
-        <section>
-            <div>
-                <img class="center-top" src="images/dealership2.jpg" style="display: block; width: 100%; height: 500px; border-top: red 6px solid;">
+        <div class="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="section_title">Edit Customer Info</div>
+                        <div class="section_subtitle">Make sure everything is correct</div>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
     </header>
 
     <?php
-
-
         if(isset($_SESSION['ldmanager1']))
         {
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
-            #$name = $_SESSION['fname'];
-            $custno1 = $_GET['customer_no'];
-
-}
-
-        else if (isset($_SESSION['ldmanager2']))
+            $cust_no = $_GET['customer_no'];
+        } else if (isset($_SESSION['ldmanager2']))
         {
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
-            #$name = $_SESSION['fname'];
-            $custno2 = $_GET['buyer_no'];
-            $repPin = $_SESSION['emp_no'];
+            $cust_no = $_GET['buyer_no'];
         }
-            $query1 = "SELECT * FROM customer_d1 WHERE customer_no = '$custno1'";
-            $output1 = $dbconnect->query($query1);
 
-            $query2 = "SELECT * FROM customer_d2 WHERE buyer_no = '$custno2'";
-            $output2 = $dbconnect->query($query2);
+        $query1 = "SELECT * FROM customer_d1 WHERE customer_no = '$cust_no'";
+        $output1 = $dbconnect->query($query1);
 
-
-
-
-
-
-
+        $query2 = "SELECT * FROM customer_d2 WHERE buyer_no = '$cust_no'";
+        $output2 = $dbconnect->query($query2);
     ?>
 
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-
                 <form class="login100-form validate-form" action=updateCustomer.php method=POST>
                     <?php if(($output1)){
-                            while($result = mysqli_fetch_assoc($output1)) { ?>
-                                <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
+                            while($result = mysqli_fetch_assoc($output1)){ ?>
+                            <span class="login100-form-title p-b-33" style="text-align:center; font-size:25px;">My Information</span>
 
-
-
-                <tr class="row100 body">
+                            <tr class="row100 body">
                                 <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Customer No:<?php echo "<input style=text-align:center; type=text name=customer_no value='".$result['customer_no']."'>"?></div>
 
                                 <span class="login100-form-title p-b-33"> </span>
@@ -119,18 +101,15 @@
                                 <span class="login100-form-title p-b-33"> </span>
                                 <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Phone Number: <?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?> </div>
 
-
-                    <td class="cell100 column9"><?php echo "<input type=submit name=submit value=Update>"?></td>
-
-
-                        </tr>
-
-
+                                <span class="login100-form-title p-b-33"> </span>
+                                <td><?php echo "<input class=info_form_button type=submit name=submit value=Update>"?></td>
+                            </tr>
 
                     <?php  } } else if(($output2)){
-                            while($result = mysqli_fetch_assoc($output2)) {?>
-                                <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
+                            while($result = mysqli_fetch_assoc($output2)){ ?>
+                            <span class="login100-form-title p-b-33" style="text-align:center; font-size:25px;">My Information</span>
 
+                            <tr class="row100 body">
                                 <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;"> Buyer No: <?php echo "<input style=text-align:center; type=text name=buyer_no value='".$result['buyer_no']."'>"?></div>
 
                                 <span class="login100-form-title p-b-33"> </span>
@@ -143,16 +122,13 @@
                                 <span class="login100-form-title p-b-33"> </span>
                                 <div class="wrap-input100" style="text-align:center;font-family:Montserrat;font-size:18px;font-weight:500;">Phone Number: <?php echo "<input style=text-align:center;type=text name=phone value='".$result['phone']."'>"?> </div>
 
-
-
-                                <td class="cell100 column9"><?php echo "<input type=submit name=submit value=Update>"?></td>
-
-                    <?php } } else { echo '<span class=login100-form-title p-b-33>Record Not Available </span><br><br>'; }?>
+                                <span class="login100-form-title p-b-33"> </span>
+                                <td><?php echo "<input class=info_form_button type=submit name=submit value=Update>"?></td>
+                            </tr>
+                    <?php } } else{ echo '<span class=login100-form-title p-b-33>Record Not Available </span><br><br>'; } ?>
                 </form>
-
             </div>
         </div>
     </div>
-
-    </body>
+</body>
 </html>

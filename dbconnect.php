@@ -8,12 +8,12 @@
         if(isset($_SESSION['salesrep1']))
         {
             $connect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
-            $query1 = "SELECT rebate_no FROM rebate1";
+            $query1 = "SELECT rebate_no, expired FROM rebate1";
             $query2 = "SELECT serial_no FROM cars";
         } else if(isset($_SESSION['salesrep2']))
         {
             $connect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
-            $query1 = "SELECT rebate_no FROM rebate2";
+            $query1 = "SELECT rebate_no, expired FROM rebate2";
             $query2 = "SELECT vehicle_no FROM autos";
         }
 

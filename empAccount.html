@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
@@ -22,17 +21,11 @@
         <nav>
             <ul>
                 <?php
-                    if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
+                    if(isset($_SESSION['customer']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['customer2']) || isset($_SESSION['name']))
-                    {
-                        echo '<li><a href="logout.php">Logout</a></li>';
-                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -69,7 +62,7 @@
     </header>
     
     <!--------------------------------------------- Wholesale Manager ------------------------------------------------->
-    <?php if(isset($_SESSION['wsmanager'])) { ?>
+    <?php if(isset($_SESSION['wsmanager'])){ ?>
     <div class="contact">
         <div class="container">
             <div class="row">
@@ -117,7 +110,7 @@
     <?php } ?>
     
     <!--------------------------------------------- Local Manager ------------------------------------------------->
-    <?php if(isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2'])) { ?>
+    <?php if(isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2'])){ ?>
     <div class="contact">
         <div class="container">
             <div class="row">
@@ -127,9 +120,8 @@
                         <div class="info_form_title">Vehicles</div>
                         <div class="info_form" id="info_form">
                             <button class="info_form_button" onclick="window.location.href='addVehicle.html'">Add Vehicle</button>
-                            <button class="info_form_button" onclick="window.location.href='viewVehicle.html'">View Cars</button>
+                            <button class="info_form_button" onclick="window.location.href='allVehicles.html'">View Cars</button>
                             <button class="info_form_button" onclick="window.location.href='addRebate.html'">Add Rebates</button>
-                            <button class="info_form_button" onclick="window.location.href='#'">Sales Information</button>
                         </div>
                     </div>
                 </div>
@@ -139,9 +131,9 @@
                     <div class="info_form_container">
                         <div class="info_form_title">Customers</div>
                         <div class="info_form" id="info_form">
-                            <button class="info_form_button" onclick="window.location.href='viewCustomer.html'">View Customers</button>
-                            <button class="info_form_button" onclick="window.location.href='viewTrans.html'">View Transactions</button>
-                            <button class="info_form_button" onclick="window.location.href='viewLoans.html'">View Loan and Finance Info</button>
+                            <button class="info_form_button" onclick="window.location.href='allCustomers.html'">View Customers</button>
+                            <button class="info_form_button" onclick="window.location.href='allTrans.html'">View Transactions</button>
+                            <button class="info_form_button" onclick="window.location.href='allLoans.html'">View Loan and Finance Info</button>
                         </div>
                     </div>
                 </div>
@@ -152,7 +144,7 @@
                         <div class="info_form_title">Personnel Management</div>
                         <div class="info_form" id="info_form">
                             <button class="info_form_button" onclick="window.location.href='addRep.html'">Add Salesperson</button>
-                            <button class="info_form_button" onclick="window.location.href='viewRep.html'">View Salesperson Information</button>
+                            <button class="info_form_button" onclick="window.location.href='allReps.html'">View Salesperson Information</button>
                         </div>
                     </div>
                 </div>
@@ -162,7 +154,7 @@
     <?php } ?>
     
         <!--------------------------------------------- Sales Representative ------------------------------------------------->
-    <?php if(isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2'])) { ?>
+    <?php if(isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2'])){ ?>
         <div class="contact">
         <div class="container">
             <div class="row">
@@ -172,7 +164,7 @@
                         <div class="info_form_title">Customers</div>
                         <div class="info_form" id="info_form">
                             <button class="info_form_button" onclick="window.location.href='addTrans.html'">New Transaction</button>
-                            <button class="info_form_button" onclick="window.location.href='#'">Schedule Maintenance</button>
+                            <button class="info_form_button" onclick="window.location.href='allTrans.html'">Transactions Made</button>
                         </div>
                     </div>
                 </div>
@@ -195,5 +187,4 @@
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>
 </body>
-
 </html>

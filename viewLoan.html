@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Local Manager Account">
-    <title>Add a Vehicle</title>
+    <meta name="description" content="Customer Account">
+    <title>My Loan</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
 </head>
 
 <body>
@@ -48,65 +49,65 @@
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
-        
+
         <div class="services">
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="section_title">Add New Vehicle</div>
-                        <div class="section_subtitle">Use the form</div>
+                        <div class="section_title">Your Loan Information</div>
+                        <div class="section_subtitle">Make your payments on time</div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    
+
+    <?php
+        if(isset($_SESSION['customer_no']))
+        {
+            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
+            $code = $_SESSION['customer_no'];
+            $query = "SELECT * FROM loan WHERE customer_no = '$code'";
+        } else if(isset($_SESSION['buyer_no']))
+        {
+            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
+            $code = $_SESSION['buyer_no'];
+            $query = "SELECT * FROM finance WHERE buyer_no = '$code'";
+        }
+
+        $output = $dbconnect->query($query);
+    ?>
+
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                <div class="signup-form">
-                    <form method="POST" class="register-form" id="register-form" action="newVehicle.php">
-                        <span class="login100-form-title p-b-33">Vehicle Information:</span>
+                <?php if($output->num_rows != 0){
+                        while($result = mysqli_fetch_assoc($output)){ ?>
+                <span class="login100-form-title" style="text-align:center; font-size:30px;">Loan Information</span>
 
-                        <div class="wrap-input100 validate-input" data-validate="Serial Number required">
-                            <input class="input100" type="text" name="serial" maxlength="10" placeholder="Serial Number" id="serial" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
+                <?php if(isset($_SESSION['customer_no'])){ ?>
+                <div class="wrap-input100" style="text-align:center">Car Serial Number: <?php echo $result['serial_no']?></div>
+                <span class="login100-form-title"></span>
+                <?php } else if(isset($_SESSION['buyer_no'])){ ?>
+                <div class="wrap-input100" style="text-align:center">Car Serial Number: <?php echo $result['vehicle_no']?></div>
+                <span class="login100-form-title"></span>
+                <?php } ?>
 
-                        <div class="wrap-input100 validate-input" data-validate="Model required">
-                            <input class="input100" type="text" name="model" maxlength="10" placeholder="Model" id="model" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
+                <div class="wrap-input100" style="text-align:center;">Loan Amount: <?php echo "$" . $result['amount']?></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center;">Start Date: <?php echo $result['start_date']?></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center">End Date: <?php echo $result['end_date']?></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center;">Months: <?php echo $result['months']?></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center;">Balance: <?php echo "$" . $result['balance']?></div>
 
-                        <div class="wrap-input100 validate-input" data-validate="Color required">
-                            <input class="input100" type="text" maxlength="10" name="color" placeholder="Color" id="color" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-                        
-                        <div class="wrap-input100 validate-input" data-validate="Autotrans required">
-                            <input class="input100" type="text" name="autotrans" maxlength="10" placeholder="Autotrans" id="autotrans" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-                        
-                        <div class="wrap-input100 validate-input" data-validate="Warehouse required">
-                            <input class="input100" type="text" name="warehouse" maxlength="20" placeholder="Warehouse" id="warehouse" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-
-                        <div class="container-login100-form-btn m-t-20">
-                            <button class="login100-form-btn">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                <?php } } else{ echo '<span class=login100-form-title>No Transaction Made</span><br><br>'; } ?>
             </div>
         </div>
     </div>
-    
+
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>

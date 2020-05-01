@@ -14,6 +14,7 @@
     $password = filter_input(INPUT_POST, 'password');
     $pin = "S";
     
+    //Assign random pin to new sales representative
     $i = 0; $digits = 5;
     while($i < $digits)
     {
@@ -42,11 +43,10 @@
     if ($connection->query($sql) === TRUE && $dbconnect->query($query) === TRUE) 
     {
         echo "<script>alert('New Person Added'); window.location.href='empAccount.html';</script>";
-    }
-    else 
+    } else
     {
         //echo "Wrong Code" . "<br>" . $dbconnect->error;
         //echo "Wrong Code" . "<br>" . $connection->error;
-        echo "<script>alert('You already filled one'); window.location.href='addRep.html';</script>";
+        echo "<script>alert('Salesperson already exists'); window.location.href='addRep.html';</script>";
     } 
 ?>

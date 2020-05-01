@@ -1,31 +1,33 @@
 <?php
-session_start();
+    session_start();
 
-$email = filter_input(INPUT_POST, 'email');
-$fname = filter_input(INPUT_POST, 'fname');
-$lname = filter_input(INPUT_POST, 'lname');
-$phone = filter_input(INPUT_POST, 'phone');
-$streetaddress = filter_input(INPUT_POST, 'streetaddress');
-$city = filter_input(INPUT_POST, 'city');
-$state = filter_input(INPUT_POST, 'state');
-$zipcode = filter_input(INPUT_POST, 'zipcode');
+    include('dbconnect.php');
 
-// Create connection
-$dbconnect = mysqli_connect("127.0.0.1", "root", "", "testingDB");
-// Check connection
-if ($dbconnect->connect_error) {
-    die("Connection failed: " . $dbconnect->connect_error);
-} 
+    $email = filter_input(INPUT_POST, 'email');
+    $fname = filter_input(INPUT_POST, 'fname');
+    $lname = filter_input(INPUT_POST, 'lname');
+    $phone = filter_input(INPUT_POST, 'phone');
+    $streetaddress = filter_input(INPUT_POST, 'streetaddress');
+    $city = filter_input(INPUT_POST, 'city');
+    $state = filter_input(INPUT_POST, 'state');
+    $zipcode = filter_input(INPUT_POST, 'zipcode');
 
-$sql = "INSERT INTO contactInfo (email, fname, lname, phone, streetaddress, city, state, zipcode)
-VALUES ('$email', '$fname', '$lname', '$phone', '$streetaddress', '$city', '$state', '$zipcode')";
+    // Check connection
+    if ($dbconnect->connect_error)
+    {
+        die("Connection failed: " . $dbconnect->connect_error);
+    }
 
-if ($dbconnect->query($sql) === TRUE) {
+    $sql = "INSERT INTO contactInfo (email, fname, lname, phone, streetaddress, city, state, zipcode)
+    VALUES ('$email', '$fname', '$lname', '$phone', '$streetaddress', '$city', '$state', '$zipcode')";
+
+    if ($dbconnect->query($sql) === TRUE)
+    {
         echo "<script>alert('Thank you!'); window.location.href='index.html';</script>";
-}
-else {
-    echo "<script>alert('You already filled one'); window.location.href='contactUs.html';</script>";
-}
+    } else
+    {
+        echo "<script>alert('You already filled one'); window.location.href='contactUs.html';</script>";
+    }
 
-$dbconnect->close();
+    $dbconnect->close();
 ?>
