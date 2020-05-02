@@ -121,7 +121,7 @@
                             <option value="" selected>Select Rebate</option>
                             <?php 
                                 while($row = mysqli_fetch_assoc($result1)) {
-                                    if($row['expired'] != 1) {
+                                    if($row['expired'] == 0) {
                             ?>
                             <option value="<?php echo $row['rebate_no'];?>"><?php echo $row['rebate_no'];?></option>
                             <?php } } ?>
