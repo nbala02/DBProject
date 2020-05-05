@@ -19,6 +19,7 @@ create table add_on
     price                varchar(11) NOT NULL, # price of the package
     mode_available       varchar(20) NOT NULL, # modes available 
     
+
     PRIMARY KEY (package_no)
 
 );

@@ -42,9 +42,9 @@ CREATE  VIEW sales(
 
 
 CREATE VIEW rebate_Global AS
-	SELECT rebate1.rebate_no, rebate1.model,rebate1.rebate_amt,rebate1.start_date,rebate1.end_date from dealer_one.rebate1
+	SELECT rebate1.rebate_no, rebate1.model,rebate1.rebate_amt,rebate1.start_date,rebate1.end_date, rebate1.expired from dealer_one.rebate1
     UNION ALL
-    SELECT rebate2.rebate_no,rebate2.model,rebate2.rebate_amt,rebate2.start_date,rebate2.end_date from dealer_two.rebate2;
+    SELECT rebate2.rebate_no,rebate2.model,rebate2.rebate_amt,rebate2.start_date,rebate2.end_date, rebate2.expired from dealer_two.rebate2;
     
 CREATE  VIEW employee(
 	emp_no,

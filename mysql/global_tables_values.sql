@@ -25,6 +25,9 @@ VALUES('P1','Naviagation','2000', 'SE,XE,XLE');
 INSERT INTO add_on(package_no, package_description,price,mode_available) 
 VALUES('P2','security','2000', 'SE,XE,XLE');
 
+INSERT INTO add_on(package_no, package_description,price,mode_available)
+VALUES('P3','security','2000', 'SE,XE,XLE');
+
 INSERT INTO potential_buyer(buyer_no,name,address, phone, email) 
 VALUES('B023','John Smith','123 MAIN','573-555-1212','JSMITH@email.com');
 

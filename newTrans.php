@@ -11,6 +11,7 @@
     $rebate = filter_input(INPUT_POST, 'rebate');
     $serial = filter_input(INPUT_POST, 'serial');
     $amount = filter_input(INPUT_POST, 'amount');
+    $package_no = filter_input(INPUT_POST, 'package_no');
 
     //Loan Information
     $loan = filter_input(INPUT_POST, 'loan');
@@ -24,6 +25,7 @@
     $custNo = "C";
     $dealNo = "D";
     $empNo = $_SESSION["emp_no"];
+    echo($dealNo);
 
     //Assign random pin number to customer number and deal number
     $i = 0; $digits = 5;
@@ -72,8 +74,8 @@
         $sql3 = "INSERT INTO loan (serial_no, customer_no, amount, start_date, end_date, months, balance)
                     VALUES ('$serial', '$custNo', '$amount', '$start', '$end', '$months', '$balance')";
 
-        $sql4 = "INSERT INTO transaction (deal_no, rebate_no, rep_no, customer_no, serial_no, amount, fin_amt, date)
-                    VALUES ('$dealNo', '$rebate', '$empNo', '$custNo', '$serial', '$amount', '$loan', '$date')";
+        $sql4 = "INSERT INTO transaction (deal_no, rebate_no, package_no, rep_no, customer_no, serial_no, amount, fin_amt, date)
+                    VALUES ('$dealNo', '$rebate', '$package_no', '$empNo', '$custNo', '$serial', '$amount', '$loan', '$date')";
 
         $sql5 = "DELETE FROM cars where serial_no = '$serial'";
 
@@ -91,8 +93,8 @@
         $sql3 = "INSERT INTO finance (vehicle_no, buyer_no, amount, start_date, end_date, months, balance)
                     VALUES ('$serial', '$custNo', '$amount', '$start', '$end', '$months', '$balance')";
 
-        $sql4 = "INSERT INTO deal (deal_no, rebate_no, sale_no, buyer_no, vehicle_no, amount, fin_amt, date)
-                    VALUES ('$dealNo', '$rebate', '$empNo', '$custNo', '$serial', '$amount', '$loan', '$date')";
+        $sql4 = "INSERT INTO deal (deal_no, rebate_no, package_no, sale_no, buyer_no, vehicle_no, amount, fin_amt, date)
+                    VALUES ('$dealNo', '$rebate', '$package_no', '$empNo', '$custNo', '$serial', '$amount', '$loan', '$date')";
 
         $sql5 = "DELETE FROM autos where vehicle_no = '$serial'";
 
@@ -105,7 +107,8 @@
         echo "<script>alert('Transaction Successfully Made'); window.location.href='empAccount.html';</script>";
     } else
     {
-        //echo "Wrong Code" . "<br>" . $connection->error;
-        echo "<script>alert('Something went wrong'); window.location.href='addTrans.html';</script>";
+        echo "Wrong Code" . "<br>" . $connection->error;
+        //echo "<script>alert('Something went wrong'); window.location.href='addTrans.html';</script>";
+
     }
 ?>

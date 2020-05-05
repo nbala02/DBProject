@@ -44,6 +44,8 @@
                 <li><a>|</a></li>
                 <li><a href="contactUs.html">Contact Us</a></li>
                 <li><a href="findDealer.html">Find Dealer</a></li>
+                <li><a href="viewRebate.html">View Rebate</a></li>
+                <li><a href="viewAddon.html">View Add-Ons</a></li>
                 <li><a href="vehicles.html">Vehicles</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
@@ -60,7 +62,7 @@
             </div>
         </div>
     </header>
-    
+
     <!--------------------------------------------- Wholesale Manager ------------------------------------------------->
     <?php if(isset($_SESSION['wsmanager'])){ ?>
     <div class="contact">
@@ -90,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Section 3 -->
                 <div class="col-lg-6 contact_col">
                     <div class="info_form_container">
@@ -108,7 +110,7 @@
         </div>
     </div>
     <?php } ?>
-    
+
     <!--------------------------------------------- Local Manager ------------------------------------------------->
     <?php if(isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2'])){ ?>
     <div class="contact">
@@ -152,7 +154,7 @@
         </div>
     </div>
     <?php } ?>
-    
+
         <!--------------------------------------------- Sales Representative ------------------------------------------------->
     <?php if(isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2'])){ ?>
         <div class="contact">
@@ -182,7 +184,7 @@
         </div>
     </div>
     <?php } ?>
-    
+
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>

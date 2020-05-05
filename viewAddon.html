@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Local Manager Account">
-    <title>Add New Rebate</title>
+    <meta name="description" content="Customer Account">
+    <title>My Transactions</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
 </head>
 
 <body>
@@ -50,65 +51,51 @@
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
-        
+
         <div class="services">
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="section_title">Add a Rebate</div>
-                        <div class="section_subtitle">Use the form</div>
+                        <div class="section_title">All Avaliable Rebates</div>
+                        <div class="section_subtitle"></div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    
+
+    <?php
+        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
+        $query = "SELECT * FROM add_on";
+        $output = $dbconnect->query($query);
+    ?>
+
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                <div class="signup-form">
-                    <form method="POST" class="register-form" id="register-form" action="newRebate.php">
-                        <span class="login100-form-title p-b-33">Rebate Information:</span>
+                <?php if($output->num_rows != 0){
+                        while($result = mysqli_fetch_assoc($output)){ ?>
+                <span class="login100-form-title" style="text-align:center; font-size:30px;">Package No: <?php echo $result['package_no']?></span>
 
-                        <div class="wrap-input100 validate-input" data-validate="Rebate Number required">
-                            <input class="input100" type="text" name="rebate" maxlength="10" placeholder="Rebate Number" id="rebate" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
+                <div class="wrap-input100" style="text-align:center;"></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center">Package Description: <?php echo $result['package_description']?></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center">Price: <?php echo $result['price']?></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center">Mode Available: <?php echo $result['mode_available']?></div>
+                <span class="login100-form-title"></span>
 
-                        <div class="wrap-input100 validate-input" data-validate="Model required">
-                            <input class="input100" type="text" name="model" maxlength="10" placeholder="Model" id="model" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
 
-                        <div class="wrap-input100 validate-input" data-validate="Amount required">
-                            <input class="input100" type="text" maxlength="10" name="amount" placeholder="Rebate Amount" id="amount" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-                        
-                        <div class="wrap-input100 rs1 validate-input" data-validate="Start Date required">
-                            <input class="input100" type="text" onfocus="(this.type='date')" name="start" placeholder="Start Date" id="start" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>   
-                        
-                        <div class="wrap-input100 rs1 validate-input" data-validate="End Date required">
-                            <input class="input100" type="text" onfocus="(this.type='date')" name="end" placeholder="End Date" id="end" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
 
-                        <div class="container-login100-form-btn m-t-20">
-                            <button class="login100-form-btn">Submit</button>
-                        </div>
-                    </form>
-                </div>
+
+
+
+                <?php } } else{ echo '<span class=login100-form-title>No Transaction Made</span><br><br>'; } ?>
             </div>
         </div>
     </div>
-    
+
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>
