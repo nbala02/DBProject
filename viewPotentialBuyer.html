@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Contact Us">
-    <title>Contact Us</title>
+    <meta name="description" content="Local Manager Account">
+    <title>All Vehicles</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
 </head>
 
 <body>
@@ -42,7 +43,7 @@
                     }
                 ?>
                 <li><a>|</a></li>
-                <li id="current-page"><a href="contactUs.html">Contact Us</a></li>
+                <li><a href="contactUs.html">Contact Us</a></li>
                 <li><a href="vehicles.html">Vehicles</a></li>
                 <li><a href="viewAddon.html">Packages</a></li>
                 <li><a href="viewRebate.html">Rebates</a></li>
@@ -54,49 +55,58 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="section_title">Contact Us</div>
-                        <div class="section_subtitle">Just fill the form below</div>
+                        <div class="section_title">View All Vehicles</div>
+                        <div class="section_subtitle">It's all in the tables</div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Cars in the database for dealer -->
     <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                <div class="signup-form">
-                    <form method="POST" class="register-form" id="register-form" action="storeContactInfo.php">
-                        <span class="login100-form-title p-b-33">Basic Info:</span>
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <?php
+                    if(isset($_SESSION['wsmanager']))
+                    {
+                        $dbconnect = mysqli_connect("127.0.0.1", "root", "csci318project", "globalviews");
+                    }
+                    $query = "SELECT * FROM potential_buyer";
+                    $output = $dbconnect->query($query);
+                ?>
+                <div class="table100 ver2 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                    <tr class="row100 head">
+                                        <th class="cell100 column1">Buyer ID</th>
+                                        <th class="cell100 column2">Name</th>
+                                        <th class="cell100 column3">Address</th>
+                                        <th class="cell100 column4">Phone</th>
+                                        <th class="cell100 column5">Email</th>
+                                    </tr>
+                            </thead>
+                        </table>
+                    </div>
 
-                        <div class="wrap-input100 validate-input" data-validate="Name required">
-                            <input class="input100" type="text" name="name" maxlength="20" placeholder="Name" id="name" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
+                    <div class="table100-body js-pscroll ps ps--active-y">
+                        <table>
+                            <tbody>
+                                <?php if(($output)){
+                                    while($result = mysqli_fetch_assoc($output)){ ?>
+                                        <tr class="row100 body">
+                                            <td class="cell100 column1"><?php echo $result['buyer_no']?></td>
+                                            <td class="cell100 column2"><?php echo $result['name']?></td>
+                                            <td class="cell100 column3"><?php echo $result['address']?></td>
+                                            <td class="cell100 column4"><?php echo $result['phone']?></td>
+                                            <td class="cell100 column5"><?php echo $result['email']?></td>
+                                        </tr>
 
-                        <div class="wrap-input100 validate-input" data-validate="Address required">
-                            <input class="input100" type="text" name="address" maxlength="50" placeholder="Address" id="address" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input" data-validate="Phone Number required">
-                            <input class="input100" type="text" name="phone" maxlength="10" placeholder="Phone Number" id="phone" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input" data-validate="Email required">
-                            <input class="input100" type="text" name="email" maxlength="100" placeholder="Email " id="email" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-
-                        <div class="container-login100-form-btn m-t-20">
-                            <button class="login100-form-btn">Submit</button>
-                        </div>
-                    </form>
+                                <?php  } } else{ echo '<span class="login100-form-title p-b-33">No Potential Buyers</span>';} ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
