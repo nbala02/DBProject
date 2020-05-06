@@ -27,7 +27,7 @@ create table potential_buyer
 (
 	buyer_no            varchar(10) NOT NULL, # unique id for buyer
     name                varchar(20) NOT NULL, #name of the buyer
-    address             varchar(20) NOT NULL, #address of buyer
+    address             varchar(50) NOT NULL, #address of buyer
     phone				varchar(15) NOT NULL, #phone number of the buyer
     email               varchar(20) NOT NULL, #email of the buyer
     

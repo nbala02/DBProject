@@ -4,14 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Customer Account">
-    <title>My Transactions</title>
+    <meta name="description" content="Local Manager Account">
+    <title>All Vehicles</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <link rel="stylesheet" type="text/css" href="styles/table.css">
+    <link rel="stylesheet" type="text/css" href="styles/tablesort.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="styles/tablesort.js"></script>
 </head>
 
 <body>
@@ -46,7 +48,7 @@
                 <li><a href="contactUs.html">Contact Us</a></li>
                 <li><a href="vehicles.html">Vehicles</a></li>
                 <li><a href="viewAddon.html">Packages</a></li>
-                <li id="current-page"><a href="viewRebate.html">Rebates</a></li>
+                <li><a href="viewRebate.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -55,53 +57,72 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="section_title">All Avaliable Rebates</div>
-                        <div class="section_subtitle"></div>
+                        <div class="section_title">View All Vehicles</div>
+                        <div class="section_subtitle">It's all in the tables</div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
+    <script type="text/javascript">
+        $(function () {
+        $('table.table-sort').tablesort();
+        });
+    </script>
+
+
+
+    <!-- Cars in the database for dealer -->
     <?php
+
         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
-        $query = "SELECT * FROM rebate_global WHERE expired = '0'";
-        $output = $dbconnect->query($query);
+
+
+        $query1 = "SELECT * FROM available_auto" ;
+        $query2 = "SELECT * FROM rebate_Global WHERE expired = '0'";
+
+
+        $output1 = $dbconnect->query($query1);
+        $output2 = $dbconnect->query($query2);
+
+
     ?>
 
-    <div class="table100 ver2 m-b-110">
-                    <div class="table100-head">
-                        <table>
-                            <thead>
-                                <tr class="row100 head">
-                                    <th class="cell100 column1">Rebate No.</th>
-                                    <th class="cell100 column2">Model</th>
-                                    <th class="cell100 column3">Rebate Amount</th>
-                                    <th class="cell100 column4">Start Date: </th>
-                                    <th class="cell100 column5">End Date: </th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
 
-                    <div class="table100-body js-pscroll ps ps--active-y">
-                        <table>
-                            <tbody>
-                                <?php if($output){
-                                    while($result = mysqli_fetch_assoc($output)){ ?>
-                                    <tr class="row100 body">
-                                        <td class="cell100 column1"><?php echo $result['rebate_no'];?></td>
-                                        <td class="cell100 column2"><?php echo $result['model'];?></td>
-                                        <td class="cell100 column3"><?php echo $result['rebate_amt'];?></td>
-                                        <td class="cell100 column4"><?php echo $result['start_date'];?></td>
-                                        <td class="cell100 column4"><?php echo $result['end_date'];?></td>
-                                    </tr>
 
-                                <?php } } else{ echo '<span class="login100-form-title p-b-33">No Rebates</span>';} ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
+
+    <table class="table-sort table-sort-search">
+        <thead>
+            <tr class="row100 head">
+                <th class="table-sort">Serial No.</th>
+                <th class="table-sort">Model</th>
+                <th class="table-sort">Color</th>
+                <th class="table-sort">Warehouse</th>
+                <th class="table-sort">Dealership</th>
+                <th class="table-sort">Rebate</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php if(($output1)){
+                while($result = mysqli_fetch_assoc($output1)){ ?>
+                    <tr class="row100 body">
+                        <td><?php echo $result['serial_no']?></td>
+                        <td><?php echo $result['model']?></td>
+                        <td><?php echo $result['color']?></td>
+                        <td><?php echo $result['warehouse']?></td>
+                        <td><?php echo $result['dealer']?></td>
+
+
+                        <td><?php while($checkRebate = mysqli_fetch_assoc($output2)){ echo $checkRebate['rebate_no']   ?></td>
+                       <? } ?>
+                    </tr>
+            <?php } } else{ echo '<span class="login100-form-title p-b-33">No Cars</span>';} ?>
+        </tbody>
+    </table>
+
 
 
 

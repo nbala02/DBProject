@@ -69,23 +69,40 @@
         $output = $dbconnect->query($query);
     ?>
 
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                <?php if($output->num_rows != 0){
-                        while($result = mysqli_fetch_assoc($output)){ ?>
-                <span class="login100-form-title" style="text-align:center; font-size:30px;">Package No: <?php echo $result['package_no']?></span>
+    <div class="table100 ver2 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column1">Package No.</th>
+                                    <th class="cell100 column2">Package Description:</th>
+                                    <th class="cell100 column3">Price:</th>
+                                    <th class="cell100 column4">Mode Available:</th>
 
-                <div class="wrap-input100" style="text-align:center">Package Description: <?php echo $result['package_description']?></div>
-                <span class="login100-form-title"></span>
-                <div class="wrap-input100" style="text-align:center">Price: <?php echo $result['price']?></div>
-                <span class="login100-form-title"></span>
-                <div class="wrap-input100" style="text-align:center">Mode Available: <?php echo $result['mode_available']?></div>
-                <span class="login100-form-title"></span>
-                <?php } } else{ echo '<span class=login100-form-title>No Transaction Made</span><br><br>'; } ?>
-            </div>
-        </div>
-    </div>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="table100-body js-pscroll ps ps--active-y">
+                        <table>
+                            <tbody>
+                                <?php if($output){
+                                    while($result = mysqli_fetch_assoc($output)){ ?>
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1"><?php echo $result['package_no'];?></td>
+                                        <td class="cell100 column2"><?php echo $result['package_description'];?></td>
+                                        <td class="cell100 column3"><?php echo $result['price'];?></td>
+                                        <td class="cell100 column4"><?php echo $result['mode_available'];?></td>
+                                    </tr>
+
+                                <?php } } else{ echo '<span class="login100-form-title p-b-33">No Add-ons</span>';} ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
 
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
