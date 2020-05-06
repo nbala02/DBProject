@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $dbconnect = mysqli_connect("127.0.0.1", "root", "csci318project", "globalviews");
+    $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
 
     $name = filter_input(INPUT_POST, 'name');
     $address = filter_input(INPUT_POST, 'address');

@@ -75,7 +75,7 @@
     <?php
         if(isset($_SESSION['wsmanager']))
         {
-            $dbconnect = mysqli_connect("127.0.0.1", "root", "csci318project", "globalviews");
+            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
         }
 
         $query = "SELECT * FROM available_auto";
