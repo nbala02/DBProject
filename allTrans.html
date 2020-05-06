@@ -84,9 +84,9 @@
 
                 <?php if($output->num_rows != 0){ ?>
 				<div class="table100 ver2 m-b-110">
-					<div class="table100-body js-pscroll">
+					<div class="table100-head">
                         <table>
-                            <thead class="table100-head">
+                            <thead>
                                 <tr class="row100 head">
                                     <th class="cell100 column1">Date</th>
                                     <th class="cell100 column2">Deal No.</th>
@@ -98,35 +98,39 @@
                                     <th class="cell100 column8">Loan Amount</th>
                                 </tr>
                             </thead>
+                        </table>
+                    </div>
 
+                    <div class="table100-body js-pscroll ps ps--active-y">
+                        <table>
                             <tbody>
-                                    <?php while($result = mysqli_fetch_assoc($output)){ ?>
-                                        <tr class="row100 body">
-                                            <td class="cell100 column2"><?php echo $result['date']?></td>
-                                            <td class="cell100 column3"><?php echo $result['deal_no']?></td>
-                                            <td class="cell100 column3"><?php echo $result['rebate_no']?></td>
+                                <?php while($result = mysqli_fetch_assoc($output)){ ?>
+                                    <tr class="row100 body">
+                                        <td class="cell100 column2"><?php echo $result['date']?></td>
+                                        <td class="cell100 column3"><?php echo $result['deal_no']?></td>
+                                        <td class="cell100 column3"><?php echo $result['rebate_no']?></td>
 
-                                            <?php if(isset($_SESSION['ldmanager1']) || isset($_SESSION['salesrep1'])){?>
-                                            <td class="cell100 column1"><?php echo $result['rep_no']?></td>
-                                            <?php } else if(isset($_SESSION['ldmanager2']) || isset($_SESSION['salesrep2'])){?>
-                                            <td class="cell100 column1"><?php echo $result['sale_no']?></td>
-                                            <?php } ?>
+                                        <?php if(isset($_SESSION['ldmanager1']) || isset($_SESSION['salesrep1'])){?>
+                                        <td class="cell100 column1"><?php echo $result['rep_no']?></td>
+                                        <?php } else if(isset($_SESSION['ldmanager2']) || isset($_SESSION['salesrep2'])){?>
+                                        <td class="cell100 column1"><?php echo $result['sale_no']?></td>
+                                        <?php } ?>
 
-                                            <?php if(isset($_SESSION['ldmanager1']) || isset($_SESSION['salesrep1'])){?>
-                                            <td class="cell100 column1"><?php echo $result['customer_no']?></td>
-                                            <?php } else if(isset($_SESSION['ldmanager2']) || isset($_SESSION['salesrep2'])){?>
-                                            <td class="cell100 column1"><?php echo $result['buyer_no']?></td>
-                                            <?php } ?>
+                                        <?php if(isset($_SESSION['ldmanager1']) || isset($_SESSION['salesrep1'])){?>
+                                        <td class="cell100 column1"><?php echo $result['customer_no']?></td>
+                                        <?php } else if(isset($_SESSION['ldmanager2']) || isset($_SESSION['salesrep2'])){?>
+                                        <td class="cell100 column1"><?php echo $result['buyer_no']?></td>
+                                        <?php } ?>
 
-                                            <?php if(isset($_SESSION['ldmanager1'])  || isset($_SESSION['salesrep1'])){?>
-                                            <td class="cell100 column1"><?php echo $result['serial_no']?></td>
-                                            <?php } else if(isset($_SESSION['ldmanager2']) || isset($_SESSION['salesrep2'])){?>
-                                            <td class="cell100 column1"><?php echo $result['vehicle_no']?></td>
-                                            <?php } ?>
+                                        <?php if(isset($_SESSION['ldmanager1'])  || isset($_SESSION['salesrep1'])){?>
+                                        <td class="cell100 column1"><?php echo $result['serial_no']?></td>
+                                        <?php } else if(isset($_SESSION['ldmanager2']) || isset($_SESSION['salesrep2'])){?>
+                                        <td class="cell100 column1"><?php echo $result['vehicle_no']?></td>
+                                        <?php } ?>
 
-                                            <td class="cell100 column5"><?php echo $result['amount']?></td>
-                                            <td class="cell100 column7"><?php echo $result['fin_amt']?></td>
-                                        </tr>
+                                        <td class="cell100 column5"><?php echo $result['amount']?></td>
+                                        <td class="cell100 column7"><?php echo $result['fin_amt']?></td>
+                                    </tr>
                                 <?php } ?>
                             </tbody>
                         </table>

@@ -23,6 +23,6 @@
     } else
     {
         //echo "Something went wrong" . "<br>" . $dbconnect->error;
-        echo "<script>alert('Information has been updated'); window.location.href='viewProfile.html';</script>";
+        echo "<script>alert('SOmething went wrong'); window.location.href='viewProfile.html';</script>";
     }
 ?>

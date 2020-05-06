@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Wholesale Manager Account">
-    <title>My Account</title>
+    <meta name="description" content="Local Manager Account">
+    <title>All Representatives</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/table.css">
-
-    <!-------- dowload table's pretty design here https://colorlib.com/wp/template/fixed-header-table/-->
-
 </head>
 
 <body>
@@ -87,9 +83,9 @@
                     $output = $dbconnect->query($query);
                 ?>
 				<div class="table100 ver2 m-b-110">
-					<div class="table100-body js-pscroll">
+					<div class="table100-head">
                         <table>
-                            <thead class="table100-head">
+                            <thead>
                                 <tr class="row100 head">
                                     <th class="cell100 column1">Representative No.</th>
                                     <th class="cell100 column2">Name</th>
@@ -101,37 +97,41 @@
                                     <th class="cell100 column8"></th>
                                 </tr>
                             </thead>
+                        </table>
+                    </div>
 
+                    <div class="table100-body js-pscroll ps ps--active-y">
+                        <table>
                             <tbody>
                                 <?php if($output->num_rows != 0){
-                                    while($result = mysqli_fetch_assoc($output)) {?>
+                                    while($result = mysqli_fetch_assoc($output)){ ?>
                                         <tr class="row100 body">
-                                            <?php if(isset($_SESSION['ldmanager1'])){?>
+                                            <?php if(isset($_SESSION['ldmanager1'])){ ?>
                                             <td class="cell100 column1"><?php echo $result['rep_no']?></td>
                                             <?php } else if(isset($_SESSION['ldmanager2'])) {?>
                                             <td class="cell100 column1"><?php echo $result['sale_no']?></td>
-                                            <?php };?>
+                                            <?php } ?>
 
                                             <td class="cell100 column2"><?php echo $result['name']?></td>
                                             <td class="cell100 column3"><?php echo $result['address']?></td>
                                             <td class="cell100 column4"><?php echo $result['phone']?></td>
                                             <td class="cell100 column5"><?php echo $result['base_salary']?></td>
 
-                                            <?php if(isset($_SESSION['ldmanager1'])){?>
+                                            <?php if(isset($_SESSION['ldmanager1'])){ ?>
                                             <td class="cell100 column6"><?php echo $result['ytd_sales']?></td>
                                             <?php } else if(isset($_SESSION['ldmanager2'])) {?>
                                             <td class="cell100 column6"><?php echo $result['ytdsales']?></td>
-                                            <?php };?>
+                                            <?php } ?>
 
                                             <td class="cell100 column7"><?php echo $result['comm']?></td>
 
-                                            <?php if(isset($_SESSION['ldmanager1'])){?>
+                                            <?php if(isset($_SESSION['ldmanager1'])){ ?>
                                             <td class="cell100 column8"><?php echo "<a href = 'editRecord.html?rep_no=$result[rep_no]&name=$result[name]&address=$result[address]&phone=$result[phone]&comm=$result[comm]&base_salary=$result[base_salary]&ytd_sales=$result[ytd_sales]'>edit</a>"?></td>
-                                            <?php } else if(isset($_SESSION['ldmanager2'])) {?>
+                                            <?php } else if(isset($_SESSION['ldmanager2'])){ ?>
                                             <td class="cell100 column8"><?php echo "<a href = 'editRecord.html?sale_no=$result[sale_no]&name=$result[name]&address=$result[address]&phone=$result[phone]&comm=$result[comm]&base_salary=$result[base_salary]&ytdsales=$result[ytdsales]'>edit</a>"?></td>
-                                            <?php }; ?>
+                                            <?php } ?>
                                         </tr>
-                                <?php } } else{ echo '<span class="login100-form-title p-b-33">No cars</span>';}?>
+                                <?php } } else{ echo '<span class="login100-form-title p-b-33">No cars</span>';} ?>
                             </tbody>
                         </table>
 				    </div>
@@ -145,4 +145,3 @@
     </footer>
 </body>
 </html>
-

@@ -44,10 +44,9 @@
                 ?>
                 <li><a>|</a></li>
                 <li><a href="contactUs.html">Contact Us</a></li>
-                <li><a href="findDealer.html">Find Dealer</a></li>
-                <li><a href="viewRebate.html">View Rebate</a></li>
-                <li><a href="viewAddon.html">View Add-Ons</a></li>
                 <li><a href="vehicles.html">Vehicles</a></li>
+                <li id="current-page"><a href="viewAddon.html">Packages</a></li>
+                <li><a href="viewRebate.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -77,20 +76,12 @@
                         while($result = mysqli_fetch_assoc($output)){ ?>
                 <span class="login100-form-title" style="text-align:center; font-size:30px;">Package No: <?php echo $result['package_no']?></span>
 
-                <div class="wrap-input100" style="text-align:center;"></div>
-                <span class="login100-form-title"></span>
                 <div class="wrap-input100" style="text-align:center">Package Description: <?php echo $result['package_description']?></div>
                 <span class="login100-form-title"></span>
                 <div class="wrap-input100" style="text-align:center">Price: <?php echo $result['price']?></div>
                 <span class="login100-form-title"></span>
                 <div class="wrap-input100" style="text-align:center">Mode Available: <?php echo $result['mode_available']?></div>
                 <span class="login100-form-title"></span>
-
-
-
-
-
-
                 <?php } } else{ echo '<span class=login100-form-title>No Transaction Made</span><br><br>'; } ?>
             </div>
         </div>

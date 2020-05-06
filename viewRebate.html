@@ -44,10 +44,9 @@
                 ?>
                 <li><a>|</a></li>
                 <li><a href="contactUs.html">Contact Us</a></li>
-                <li><a href="findDealer.html">Find Dealer</a></li>
-                <li><a href="viewRebate.html">View Rebate</a></li>
-                <li><a href="viewAddon.html">View Add-Ons</a></li>
                 <li><a href="vehicles.html">Vehicles</a></li>
+                <li><a href="viewAddon.html">Packages</a></li>
+                <li id="current-page"><a href="viewRebate.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -76,9 +75,6 @@
                 <?php if($output->num_rows != 0){
                         while($result = mysqli_fetch_assoc($output)){ ?>
                 <span class="login100-form-title" style="text-align:center; font-size:30px;">Rebate No: <?php echo $result['rebate_no']?></span>
-
-                <div class="wrap-input100" style="text-align:center;"></div>
-                <span class="login100-form-title"></span>
                 <div class="wrap-input100" style="text-align:center">Model: <?php echo $result['model']?></div>
                 <span class="login100-form-title"></span>
                 <div class="wrap-input100" style="text-align:center">Rebate Amount: <?php echo $result['rebate_amt']?></div>
@@ -87,11 +83,6 @@
                 <span class="login100-form-title"></span>
                 <div class="wrap-input100" style="text-align:center">End Date: <?php echo $result['end_date']?></div>
                 <span class="login100-form-title"></span>
-
-
-
-
-
                 <?php } } else{ echo '<span class=login100-form-title>No Transaction Made</span><br><br>'; } ?>
             </div>
         </div>

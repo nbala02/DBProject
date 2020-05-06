@@ -132,13 +132,13 @@
                         </select>
 
                         <select class="wrap-input100 rs1 validate-input" name="package_no">
-                            <option value="" selected>Select Add on</option>
+                            <option value="" selected>Select Add On</option>
                             <?php
                                 while($row = mysqli_fetch_assoc($result3)) {
 
                             ?>
                             <option value="<?php echo $row['package_no'];?>"><?php echo $row['package_no'];?></option>
-                            <?php }  ?>
+                            <?php } ?>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </select>
