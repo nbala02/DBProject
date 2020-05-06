@@ -78,9 +78,8 @@ create table finance
 create table deal
 (
 	deal_no	            varchar(10) NOT NULL, #Unique id for transaction
-    rebate_no			varchar(10) NULL, #unique id for the rebate no
-    package_no          varchar(2)  NULL, #unique id for the package for the add on
-    sale_no             varchar(10) NOT NULL, #unique id for representative
+    rebate_no			 varchar(10) NULL, #unique id for the rebate no
+    sale_no              varchar(10) NOT NULL, #unique id for representative
     buyer_no		    varchar(10) NOT NULL, #unique id for the customer
     vehicle_no			varchar(10) NOT NULL, #Unique id for car
 	amount				decimal(15) NOT NULL, #how much the transaction is
@@ -90,6 +89,5 @@ create table deal
     PRIMARY KEY(deal_no),
     FOREIGN KEY(sale_no) REFERENCES sales_person(sale_no),
     FOREIGN KEY(buyer_no) REFERENCES customer_d2(buyer_no),
-    FOREIGN KEY(vehicle_no) REFERENCES purchased_autos(vehicle_no),
-    FOREIGN KEY(package_no) REFERENCES globalviews.add_on(package_no)
+    FOREIGN KEY(vehicle_no) REFERENCES purchased_autos(vehicle_no)
 );

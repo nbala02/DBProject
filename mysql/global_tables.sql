@@ -18,7 +18,6 @@ create table add_on
     package_description  varchar(20) NOT NULL, #package description like navigation or security
     price                varchar(11) NOT NULL, # price of the package
     mode_available       varchar(20) NOT NULL, # modes available 
-    
 
     PRIMARY KEY (package_no)
 
@@ -26,7 +25,7 @@ create table add_on
 
 create table potential_buyer
 (
-	buyer_no            varchar(4) NOT NULL, # unique id for buyer 
+	buyer_no            varchar(10) NOT NULL, # unique id for buyer
     name                varchar(20) NOT NULL, #name of the buyer
     address             varchar(20) NOT NULL, #address of buyer
     phone				varchar(15) NOT NULL, #phone number of the buyer

@@ -79,8 +79,7 @@ create table loan
 create table transaction
 (
 	deal_no	            varchar(10) NOT NULL, #Unique id for transaction
-    rebate_no			varchar(10) NULL, #unique id for the rebate no 
-    package_no          varchar(2)  NULL, #unique id for the package for the add on
+    rebate_no			varchar(10) NULL, #unique id for the rebate no
     rep_no              varchar(10) NOT NULL, #unique id for representative 
     customer_no		    varchar(10) NOT NULL, #unique id for the customer
     serial_no			varchar(10) NOT NULL, #Unique id for car
@@ -92,6 +91,5 @@ create table transaction
     FOREIGN KEY(rep_no) REFERENCES representative(rep_no),
     FOREIGN KEY(customer_no) REFERENCES customer_d1(customer_no),
     FOREIGN KEY(serial_no) REFERENCES purchased_cars(serial_no),
-    FOREIGN KEY(package_no) REFERENCES globalviews.add_on(package_no)
+	FOREIGN KEY(package_no) REFERENCES globalviews.add_on(package_no)
 );
-
