@@ -1,51 +1,79 @@
+/*------Font------*/
+@font-face {
+    font-family: OpenSans-Regular;
+    src: url('../styles/fonts/OpenSans/OpenSans-Regular.ttf');
+}
+
+.limiter {
+  width: 1366px;
+  margin: 0 auto;
+}
+
+.container-table100 {
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 33px 30px;
+}
+
+.wrap-table100 {
+  width: 1170px;
+}
+
 table {
   width           : 100%;
   margin-bottom   : 10px;
   border-collapse : collapse;
   background      : #fff;
   box-shadow      : 0 2px 6px rgba(0,0,0,0.1);
+
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 th {
-  font-weight        : 300;
-  color              : #fff;
-  background-image   : -webkit-linear-gradient(bottom,rgb(202,0,89), rgb(243,0,107) );
-  background-image   :    -moz-linear-gradient(bottom,rgb(202,0,89), rgb(243,0,107) );
-  background-image   :     -ms-linear-gradient(bottom,rgb(202,0,89), rgb(243,0,107) );
-  background-image   :         linear-gradient(bottom,rgb(202,0,89), rgb(243,0,107) );
-  -webkit-transition : all 0.3s;
-  -moz-transition    : all 0.3s;
-  -ms-transition     : all 0.3s;
-  -o-transition      : all 0.3s;
-  transition         : all 0.3s;
+  font-family: OpenSans-Regular;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.4;
+  font-weight: 100;
+
+  background-color: #fa4251;
 }
 
 td {
-  font-weight: 300;
+  font-family: OpenSans-Regular;
+  font-size: 15px;
+  color: #000;
+  line-height: 1.4;
 }
 
 td,th {
-  padding     : 0 10px;
-  font-size   : 13px;
-  line-height : 32px;
-}
-
-tbody tr:nth-child(even) {
-  background: rgb(240, 240, 240);
-}
-
-/* Table Sorting */
-th.table-sort {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  text-align: center;
   padding-right : 36px;
-  text-align    : left;
-  cursor        : pointer;
+}
+
+tr {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+/* Table Sorting  Arrow*/
+th.table-sort {
+  cursor: pointer;
 }
 
 th.table-sort:hover {
-  background-image : -webkit-linear-gradient(bottom,rgb(216,0,95), rgb(252,29,127) );
-  background-image :    -moz-linear-gradient(bottom,rgb(216,0,95), rgb(252,29,127) );
-  background-image :     -ms-linear-gradient(bottom,rgb(216,0,95), rgb(252,29,127) );
-  background-image :         linear-gradient(bottom,rgb(216,0,95), rgb(252,29,127) );
+  background-image : -webkit-linear-gradient(bottom,rgb(251, 106, 118), rgb(252, 131, 141) );
+  background-image :    -moz-linear-gradient(bottom,rgb(251, 106, 118), rgb(252, 131, 141) );
+  background-image :     -ms-linear-gradient(bottom,rgb(251, 106, 118), rgb(252, 131, 141) );
+  background-image :         linear-gradient(bottom,rgb(251, 106, 118), rgb(252, 131, 141) );
 }
 
 .table-sort-field {
@@ -95,6 +123,7 @@ th.table-sort:hover {
   background-image : linear-gradient(bottom,rgb(63, 63, 63),rgb(73, 73, 73));
   padding          : 3px 8px;
   position         : relative;
+  width              : 100%;
 }
 
 .table-sort-search-input {
@@ -120,7 +149,7 @@ th.table-sort:hover {
 
 .table-sort-highlight {
   color      : #fff;
-  background : rgb(255,86,174);
+  background : rgb(252, 131, 141);
 }
 
 .table-sort-search-count {
