@@ -33,7 +33,8 @@ create table rebate2
     end_date 			DATE	   NOT NULL, # end date of the rebate1
     expired				int			NOT NULL,
     
-    PRIMARY KEY(rebate_no)
+    PRIMARY KEY(rebate_no),
+    FOREIGN KEY(model) REFERENCES globalviews.model(model)
 );
 
 create table autos
@@ -43,8 +44,10 @@ create table autos
 	color				varchar(10) NOT NULL, #color of the car 
     autotrans			varchar(10)	NOT NUll, # yes or no if its autotransmission
     warehouse			varchar(20) NOT NULL, # warehouse city
+    rebate				varchar(3) NOT NULL, #Yes or not to if the rebate exists or not
 	
-    PRIMARY KEY  (vehicle_no)
+    PRIMARY KEY  (vehicle_no),
+    FOREIGN KEY(model) REFERENCES globalviews.model(model)
 
 );
 

@@ -17,8 +17,8 @@ values ('R1234','Rav4','1000','2014/02/01','2014/04/30', '0');
 Insert INTO rebate1 (rebate_no,model,rebate_amt,start_date,end_date, expired)
 values ('R1235','porche','2000','2014/02/01','2014/04/30', '0');
 
-Insert INTO cars (serial_no,model,color,autotrans,warehouse)
-values ( 'S11111','Rav4','Blue','yes','Bridgeport');
+Insert INTO cars (serial_no,model,color,autotrans,warehouse, rebate )
+values ( 'S11111','Rav4','Blue','yes','Bridgeport', 'No');
 
 Insert INTO cars (serial_no,model,color,autotrans,warehouse)
 values ( 'S13313','Camry','Red','no','st.Charles');

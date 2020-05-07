@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <?php session_start(); ?>
+    <?php session_start(); include('dbconnect.php');?>
 
     <header>
         <div id="logo"><a><img src="images/logo.png"></a></div>
@@ -43,9 +43,9 @@
                 ?>
                 <li><a>|</a></li>
                 <li><a href="contactUs.html">Contact Us</a></li>
-                <li><a href="vehicles.html">Vehicles</a></li>
-                <li><a href="viewAddon.html">Packages</a></li>
-                <li><a href="viewRebate.html">Rebates</a></li>
+                <li><a href="tabVehicles.html">Vehicles</a></li>
+                <li><a href="tabPackages.html">Packages</a></li>
+                <li><a href="tabRebates.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -75,11 +75,19 @@
                             <span class="focus-input100-2"></span>
                         </div>
 
-                        <div class="wrap-input100 validate-input" data-validate="Model required">
-                            <input class="input100" type="text" name="model" maxlength="10" placeholder="Model" id="model" required>
+
+
+                        <select class="wrap-input100 rs1 validate-input" name="model">
+                            <option value="" selected>Select Model</option>
+                            <?php
+                                while($row = mysqli_fetch_assoc($result4)) {
+
+                            ?>
+                            <option value="<?php echo $row['model'];?>"><?php echo $row['model'];?></option>
+                            <?php } ?>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
-                        </div>
+                        </select>
 
                         <div class="wrap-input100 validate-input" data-validate="Color required">
                             <input class="input100" type="text" maxlength="10" name="color" placeholder="Color" id="color" required>
@@ -98,6 +106,8 @@
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
+
+
 
                         <div class="container-login100-form-btn m-t-20">
                             <button class="login100-form-btn">Submit</button>

@@ -2,9 +2,9 @@ create database globalviews;
 use globalviews;
 
 CREATE VIEW available_auto AS
-	SELECT cars.serial_no,cars.model,cars.color, cars.warehouse, 'D1' dealer FROM dealer_one.cars
+	SELECT cars.serial_no,cars.model,cars.color, cars.warehouse, cars.rebate ,'D1' dealer FROM dealer_one.cars
    UNION ALL
-	SELECT autos.vehicle_no,autos.model,autos.color, autos.warehouse, 'D2' dealer FROM dealer_two.autos;
+	SELECT autos.vehicle_no,autos.model,autos.color, autos.warehouse, autos.rebate, 'D2' dealer FROM dealer_two.autos;
 
 CREATE VIEW salesperson(
 	rep_no,
@@ -41,9 +41,9 @@ CREATE  VIEW sales(
 
 
 CREATE VIEW rebate_Global AS
-	SELECT rebate1.rebate_no, rebate1.model,rebate1.rebate_amt,rebate1.start_date,rebate1.end_date, rebate1.expired ,'D1' dealer from dealer_one.rebate1
+	SELECT rebate1.rebate_no, rebate1.model,rebate1.rebate_amt,rebate1.start_date,rebate1.end_date,'D1' dealer from dealer_one.rebate1 WHERE rebate1.expired = '0'
     UNION ALL
-    SELECT rebate2.rebate_no,rebate2.model,rebate2.rebate_amt,rebate2.start_date,rebate2.end_date, rebate2.expired, 'D2' dealer from dealer_two.rebate2;
+    SELECT rebate2.rebate_no,rebate2.model,rebate2.rebate_amt,rebate2.start_date,rebate2.end_date, 'D2' dealer from dealer_two.rebate2 WHERE rebate2.expired = '0';
 
 CREATE  VIEW employee(
 	emp_no,

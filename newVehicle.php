@@ -8,17 +8,18 @@
     $color = filter_input(INPUT_POST, 'color');
     $autotrans = filter_input(INPUT_POST, 'autotrans');
     $warehouse = filter_input(INPUT_POST, 'warehouse');
+    $no = 'No';
 
     if(isset($_SESSION['ldmanager1']))
     {
         $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
-        $sql = "INSERT INTO cars (serial_no, model, color, autotrans, warehouse)
-                    VALUES ('$serial', '$model', '$color', '$autotrans', '$warehouse')";
+        $sql = "INSERT INTO cars (serial_no, model, color, autotrans, warehouse, rebate)
+                    VALUES ('$serial', '$model', '$color', '$autotrans', '$warehouse', '$no')";
     } else if(isset($_SESSION['ldmanager2']))
     {
         $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
-        $sql = "INSERT INTO autos (vehicle_no, model, color, autotrans, warehouse)
-                    VALUES ('$serial', '$model', '$color', '$autotrans', '$warehouse')";
+        $sql = "INSERT INTO autos (vehicle_no, model, color, autotrans, warehouse, rebate)
+                    VALUES ('$serial', '$model', '$color', '$autotrans', '$warehouse', '$no')";
     }
 
     if ($connection->query($sql) === TRUE) 
