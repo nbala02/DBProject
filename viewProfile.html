@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Salesperson and Customer Account">
-    <title>My Profile</title>
+    <title>Personal Profile</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
@@ -43,7 +43,6 @@
                     }
                 ?>
                 <li><a>|</a></li>
-                <li><a href="contactUs.html">Contact Us</a></li>
                 <li><a href="tabVehicles.html">Vehicles</a></li>
                 <li><a href="tabPackages.html">Packages</a></li>
                 <li><a href="tabRebates.html">Rebates</a></li>
@@ -55,7 +54,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="section_title">Your Profile</div>
+                        <div class="section_title">Personal Profile</div>
                         <div class="section_subtitle">Make sure everything is correct</div>
                     </div>
                 </div>
@@ -92,6 +91,14 @@
 
             $query4 = "SELECT * FROM customer_d2 WHERE buyer_no = '$code'";
             $output4 = $dbconnect->query($query4);
+        } else if(isset($_SESSION['wsmanager']))
+        {
+            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
+            $code = $_GET['cust_no'];
+            $amount = $_GET['amount'];
+
+            $query5 = "SELECT * FROM customer_global WHERE customer_no = '$code'";
+            $output5 = $dbconnect->query($query5);
         }
     ?>
 
@@ -100,6 +107,7 @@
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
                 <?php if(isset($output1)){
                         while($result = mysqli_fetch_assoc($output1)){ ?>
+
                 <span class="login100-form-title" style="text-align:center; font-size:30px;">My Information</span>
 
                 <div class="wrap-input100" style="text-align:center"> Your ID: <?php echo $result['rep_no']?></div>
@@ -118,6 +126,7 @@
 
                 <?php  } } else if(isset($output2)){
                         while($result = mysqli_fetch_assoc($output2)){ ?>
+
                 <span class="login100-form-title" style="text-align:center; font-size:30px;">My Information</span>
 
                 <div class="wrap-input100" style="text-align:center;"> Your ID: <?php echo $result['sale_no']?></div>
@@ -136,9 +145,9 @@
 
                 <?php } } else if(isset($output3)){
                         while($result = mysqli_fetch_assoc($output3)){ ?>
+
                 <span class="login100-form-title" style="text-align:center; font-size:30px;">My Information</span>
 
-                <span class="login100-form-title p-b-33" style="text-decoration:underline">My Information</span>
                 <div class="wrap-input100" style="text-align:center;"> Your ID: <?php echo $result['customer_no']?></div>
                 <span class="login100-form-title"></span>
                 <div class="wrap-input100" style="text-align:center;"> Name: <?php echo $result['name']?></div>
@@ -152,6 +161,7 @@
 
                 <?php } } else if(isset($output4)){
                         while($result = mysqli_fetch_assoc($output4)){ ?>
+
                 <span class="login100-form-title" style="text-align:center; font-size:30px;">My Information</span>
 
                 <div class="wrap-input100" style="text-align:center;"> Your ID: <?php echo $result['buyer_no']?></div>
@@ -164,6 +174,21 @@
 
                 <span class="login100-form-title p-b-33"></span>
                 <a style="color:#FFF;" href="editProfile.html?buyer_no=<?php echo $result['buyer_no'];?>"><button class="info_form_button">Edit Profile Details</button></a>
+
+                <?php } } else if(isset($output5)){
+                        while($result = mysqli_fetch_assoc($output5)){ ?>
+
+                <span class="login100-form-title" style="text-align:center; font-size:30px;">Customer Information</span>
+
+                <div class="wrap-input100" style="text-align:center;">Customer ID: <?php echo $result['customer_no']?></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center;">Name: <?php echo $result['name']?></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center;">Address: <?php echo $result['address']?></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center;">Phone Number: <?php echo $result['phone']?></div>
+                <span class="login100-form-title"></span>
+                <div class="wrap-input100" style="text-align:center;">Loan Amount: <?php echo "$" . $amount?></div>
 
                 <?php } } else{ echo '<span class=login100-form-title>No Profile</span><br><br>'; } ?>
             </div>

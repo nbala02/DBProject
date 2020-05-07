@@ -45,8 +45,8 @@
         echo "<script>alert('New Person Added'); window.location.href='empAccount.html';</script>";
     } else
     {
-        //echo "Wrong Code" . "<br>" . $dbconnect->error;
-        //echo "Wrong Code" . "<br>" . $connection->error;
+        //echo "Something went wrong" . "<br>" . $dbconnect->error;
+        //echo "Something went wrong" . "<br>" . $connection->error;
         echo "<script>alert('Salesperson already exists'); window.location.href='addRep.html';</script>";
     } 
 ?>

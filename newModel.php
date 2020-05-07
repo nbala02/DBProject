@@ -19,7 +19,7 @@
         echo "<script>alert('New Model Added'); window.location.href='empAccount.html';</script>";
     } else
     {
-        //echo "Wrong Code" . "<br>" . $connection->error;
+        //echo "Something went wrong" . "<br>" . $connection->error;
         echo "<script>alert('Model already exists'); window.location.href='addModel.html';</script>";
     } 
 ?>

@@ -17,7 +17,7 @@
         echo "<script>alert('New Package Added'); window.location.href='empAccount.html';</script>";
     } else
     {
-        //echo "Wrong Code" . "<br>" . $connection->error;
+        //echo "Something went wrong" . "<br>" . $connection->error;
         echo "<script>alert('Package already exists'); window.location.href='addPackages.html';</script>";
     } 
 ?>

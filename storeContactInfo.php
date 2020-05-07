@@ -8,7 +8,7 @@
     $phone = filter_input(INPUT_POST, 'phone');
     $email = filter_input(INPUT_POST, 'email');
 
-    $pin = "C";
+    $pin = "B";
 
     //Assign random pin to new sales representative
     $i = 0; $digits = 5;

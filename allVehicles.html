@@ -43,7 +43,6 @@
                     }
                 ?>
                 <li><a>|</a></li>
-                <li><a href="contactUs.html">Contact Us</a></li>
                 <li><a href="tabVehicles.html">Vehicles</a></li>
                 <li><a href="tabPackages.html">Packages</a></li>
                 <li><a href="tabRebates.html">Rebates</a></li>
@@ -82,6 +81,8 @@
                     $query2 = "SELECT * FROM autos";
                     $output2 = $dbconnect->query($query2);
                 ?>
+
+                <?php if((!empty($output1)) || (!empty($output2))) { ?>
                 <div class="table100 ver2 m-b-110">
                     <div class="table100-head">
                         <table>
@@ -127,11 +128,16 @@
                                             <td class="cell100 column4"><?php echo $result['autotrans']?></td>
                                             <td class="cell100 column5"><?php echo $result['warehouse']?></td>
                                         </tr>
-                                <?php } } else{ echo '<span class="login100-form-title p-b-33">No Cars</span>';} ?>
+                                <?php } } ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <?php } else { ?>
+                    <section>
+                        <h1 id="page_title">No Cars Available</h1>
+                    </section>
+                <?php } ?>
             </div>
         </div>
     </div>

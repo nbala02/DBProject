@@ -22,7 +22,7 @@
         echo "<script>alert('Information has been updated'); window.location.href='allReps.html';</script>";
     } else
     {
-        //echo "Wrong Code" . "<br>" . $dbconnect->error;
+        //echo "Something went wrong" . "<br>" . $dbconnect->error;
         echo "<script>alert('Something went wrong'); window.location.href='empAccount.html';</script>";
     }
 ?>

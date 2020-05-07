@@ -4,13 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Customer Account">
-    <title>My Account</title>
+    <meta name="description" content="Local Manager Account">
+    <title>All Vehicles</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/tablesort.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="styles/tablesort.js"></script>
 </head>
 
 <body>
@@ -53,40 +56,67 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="section_title">My Account</div>
-                        <div class="section_subtitle">Choose what to do</div>
+                        <div class="section_title">View all Loans</div>
+                        <div class="section_subtitle">It's all in the tables</div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="contact">
-        <div class="container">
-            <div class="row">
-                <!-- Section 1 -->
-                <div class="col-lg-6 contact_col">
-                    <div class="info_form_container">
-                        <div class="info_form_title">Purchase Information</div>
-                        <div class="info_form" id="info_form">
-                            <button class="info_form_button" onclick="window.location.href='viewTrans.html'">Transaction History</button>
-                            <button class="info_form_button" onclick="window.location.href='viewLoan.html'">Loan Information</button>
-                        </div>
-                    </div>
-                </div>
+    <!-- Cars in the database for dealer -->
+    <?php
+        if(isset($_SESSION['wsmanager']))
+        {
+            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
+        }
 
-                <!-- Section 2 -->
-                <div class="col-lg-6 contact_col">
-                    <div class="info_form_container">
-                        <div class="info_form_title">Profile Information</div>
-                        <div class="info_form" id="info_form">
-                            <button class="info_form_button" onclick="window.location.href='viewProfile.html'">Edit Profile</button>
-                        </div>
-                    </div>
-                </div>
+        $query = "SELECT * FROM loans";
+        $output = $dbconnect->query($query);
+
+    ?>
+
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <?php if($output->num_rows != 0){ ?>
+                <table class="table-sort">
+                    <thead>
+                        <tr>
+                            <th class="table-sort">Serial No</th>
+                            <th class="table-sort">Customer No</th>
+                            <th class="table-sort">Amount</th>
+                            <th class="table-sort">Model</th>
+                            <th class="table-sort"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                       <?php while($result = mysqli_fetch_assoc($output)){ ?>
+                            <tr>
+                                <td><?php echo $result['vehicle_no']?></td>
+                                <td><?php echo $result['customer_no']?></td>
+                                <td><?php echo $result['amount']?></td>
+                                <td><?php echo $result['model']?></td>
+                                <td><?php echo "<a href = 'viewProfile.html?cust_no=$result[customer_no]&amount=$result[amount]'>View</a>"?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <?php } else { ?>
+                    <section>
+                        <h1 id="page_title">No Vehicles Available</h1>
+                    </section>
+                <?php } ?>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('table.table-sort').tablesort();
+        });
+    </script>
 
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>

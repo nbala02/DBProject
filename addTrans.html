@@ -42,11 +42,9 @@
                     }
                 ?>
                 <li><a>|</a></li>
-                <li><a href="contactUs.html">Contact Us</a></li>
-                <li><a href="findDealer.html">Find Dealer</a></li>
-                <li><a href="tabRebates.html">View Rebate</a></li>
-                <li><a href="tabPackages.html">View Add-Ons</a></li>
                 <li><a href="tabVehicles.html">Vehicles</a></li>
+                <li><a href="tabPackages.html">Packages</a></li>
+                <li><a href="tabRebates.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -70,6 +68,21 @@
                     <form method="POST" class="register-form" id="register-form" action="newTrans.php">
 <!-------------------------------------------------------Customer Basic Info----------------------------------------------------------->
                         <span class="login100-form-title p-b-33">Customer's Basic Info:</span>
+
+                        <select class="wrap-input100 rs1 validate-input" name="cust_no" required>
+                            <option value="new">New Customer</option>
+                            <?php
+                                while($row = mysqli_fetch_assoc($result4)) {
+                            ?>
+                            <?php if(isset($_SESSION['salesrep1'])){ ?>
+                            <option value="<?php echo $row['customer_no'];?>"><?php echo $row['customer_no'];?></option>
+
+                            <?php } else if(isset($_SESSION['salesrep2'])){ ?>
+                            <option value="<?php echo $row['buyer_no'];?>"><?php echo $row['buyer_no'];?></option>
+                            <?php } } ?>
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                        </select>
 
                         <div class="wrap-input100 validate-input" data-validate="Name required">
                             <input class="input100" type="text" name="name" maxlength="20" placeholder="Name" id="name" required>
@@ -103,10 +116,10 @@
                             <?php
                                 while($row = mysqli_fetch_assoc($result2)) {
                             ?>
-                            <?php if(isset($_SESSION['salesrep1'])){?>
+                            <?php if(isset($_SESSION['salesrep1'])){ ?>
                             <option value="<?php echo $row['serial_no'];?>"><?php echo $row['serial_no'];?></option>
 
-                            <?php } else if(isset($_SESSION['salesrep2'])){?>
+                            <?php } else if(isset($_SESSION['salesrep2'])){ ?>
                             <option value="<?php echo $row['vehicle_no'];?>"><?php echo $row['vehicle_no'];?></option>
                             <?php } } ?>
                             <span class="focus-input100-1"></span>
@@ -120,12 +133,12 @@
                         </div>
 
                         <select class="wrap-input100 rs1 validate-input" name="rebate">
-                            <option value="" selected>Select Rebate</option>
+                            <option value="" selected>Select Model for Rebate</option>
                             <?php
                                 while($row = mysqli_fetch_assoc($result1)) {
                                     if($row['expired'] == 0) {
                             ?>
-                            <option value="<?php echo $row['rebate_no'];?>"><?php echo $row['rebate_no'];?></option>
+                            <option value="<?php echo $row['rebate_no'];?>"><?php echo $row['model'];?></option>
                             <?php } } ?>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
@@ -135,7 +148,6 @@
                             <option value="" selected>Select Add On</option>
                             <?php
                                 while($row = mysqli_fetch_assoc($result3)) {
-
                             ?>
                             <option value="<?php echo $row['package_no'];?>"><?php echo $row['package_no'];?></option>
                             <?php } ?>
