@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
@@ -16,7 +15,6 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="styles/tablesort.js"></script>
 </head>
-
 
 <body>
     <?php session_start(); ?>
@@ -80,39 +78,42 @@
         $output = $dbconnect->query($query);
     ?>
 
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <?php if($output->num_rows != 0){ ?>
+                <table class="table-sort table-sort-search">
+                    <thead>
+                        <tr>
+                            <th class="table-sort">Package No.</th>
+                            <th class="table-sort">Package Description:</th>
+                            <th class="table-sort">Price:</th>
+                            <th class="table-sort">Mode Available:</th>
+                        </tr>
+                    </thead>
 
-    <table class="table-sort table-sort-search">
-        <thead>
-            <tr class="row100 head">
-                <th class="table-sort">Package No.</th>
-                <th class="table-sort">Package Description:</th>
-                <th class="table-sort">Price:</th>
-                <th class="table-sort">Mode Available:</th>
-
-            </tr>
-        </thead>
-
-
-
-        <tbody>
-            <?php if($output){
-                                    while($result = mysqli_fetch_assoc($output)){ ?>
-            <tr class="row100 body">
-                <td><?php echo $result['package_no'];?></td>
-                <td><?php echo $result['package_description'];?></td>
-                <td><?php echo $result['price'];?></td>
-                <td><?php echo $result['mode_available'];?></td>
-            </tr>
-
-            <?php } } else{ echo '<span class="login100-form-title p-b-33">No Add-ons</span>';} ?>
-        </tbody>
-    </table>
-
-
+                    <tbody>
+                        <?php while($result = mysqli_fetch_assoc($output)){ ?>
+                            <tr>
+                                <td><?php echo $result['package_no'];?></td>
+                                <td><?php echo $result['package_description'];?></td>
+                                <td><?php echo $result['price'];?></td>
+                                <td><?php echo $result['mode_available'];?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <?php } else { ?>
+                    <section>
+                        <h1 id="page_title">No Packages Available</h1>
+                    </section>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>
 </body>
-
 </html>

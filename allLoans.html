@@ -43,7 +43,6 @@
                     }
                 ?>
                 <li><a>|</a></li>
-                <li><a href="contactUs.html">Contact Us</a></li>
                 <li><a href="tabVehicles.html">Vehicles</a></li>
                 <li><a href="tabPackages.html">Packages</a></li>
                 <li><a href="tabRebates.html">Rebates</a></li>
@@ -112,7 +111,7 @@
 
                                         <?php if(isset($_SESSION['ldmanager1'])){ ?>
                                         <td class="cell100 column1"><?php echo $result['customer_no']?></td>
-                                        <?php } else if(isset($_SESSION['ldmanager2'])){?>
+                                        <?php } else if(isset($_SESSION['ldmanager2'])){ ?>
                                         <td class="cell100 column1"><?php echo $result['buyer_no']?></td>
                                         <?php } ?>
 
@@ -127,7 +126,7 @@
                         </table>
 				    </div>
 				</div>
-                <?php } else{ ?>
+                <?php } else { ?>
                     <section>
                         <h1 id="page_title">No Loans Available</h1>
                     </section>

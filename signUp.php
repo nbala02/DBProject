@@ -66,7 +66,7 @@
 
     } else
     {
-        //echo "Wrong Code" . "<br>" . $dbconnect->error;
+        //echo "Something went wrong" . "<br>" . $dbconnect->error;
         //header('Location: register.html');
         echo "<script>alert('Incorrect Customer ID or Location'); window.location.href='registerPage.html';</script>";
     }  

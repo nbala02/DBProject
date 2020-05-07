@@ -43,11 +43,9 @@
                     }
                 ?>
                 <li><a>|</a></li>
-                <li><a href="contactUs.html">Contact Us</a></li>
-                <li><a href="findDealer.html">Find Dealer</a></li>
-                <li><a href="tabRebates.html">View Rebate</a></li>
-                <li><a href="tabPackages.html">View Add-Ons</a></li>
                 <li><a href="tabVehicles.html">Vehicles</a></li>
+                <li><a href="tabPackages.html">Packages</a></li>
+                <li><a href="tabRebates.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -82,6 +80,8 @@
 
                     $output = $dbconnect->query($query);
                 ?>
+
+                <?php if($output->num_rows != 0){ ?>
 				<div class="table100 ver2 m-b-110">
 					<div class="table100-head">
                         <table>
@@ -103,39 +103,43 @@
                     <div class="table100-body js-pscroll ps ps--active-y">
                         <table>
                             <tbody>
-                                <?php if($output->num_rows != 0){
-                                    while($result = mysqli_fetch_assoc($output)){ ?>
-                                        <tr class="row100 body">
-                                            <?php if(isset($_SESSION['ldmanager1'])){ ?>
-                                            <td class="cell100 column1"><?php echo $result['rep_no']?></td>
-                                            <?php } else if(isset($_SESSION['ldmanager2'])) {?>
-                                            <td class="cell100 column1"><?php echo $result['sale_no']?></td>
-                                            <?php } ?>
+                                <?php while($result = mysqli_fetch_assoc($output)){ ?>
+                                    <tr class="row100 body">
+                                        <?php if(isset($_SESSION['ldmanager1'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['rep_no']?></td>
+                                        <?php } else if(isset($_SESSION['ldmanager2'])) {?>
+                                        <td class="cell100 column1"><?php echo $result['sale_no']?></td>
+                                        <?php } ?>
 
-                                            <td class="cell100 column2"><?php echo $result['name']?></td>
-                                            <td class="cell100 column3"><?php echo $result['address']?></td>
-                                            <td class="cell100 column4"><?php echo $result['phone']?></td>
-                                            <td class="cell100 column5"><?php echo $result['base_salary']?></td>
+                                        <td class="cell100 column2"><?php echo $result['name']?></td>
+                                        <td class="cell100 column3"><?php echo $result['address']?></td>
+                                        <td class="cell100 column4"><?php echo $result['phone']?></td>
+                                        <td class="cell100 column5"><?php echo $result['base_salary']?></td>
 
-                                            <?php if(isset($_SESSION['ldmanager1'])){ ?>
-                                            <td class="cell100 column6"><?php echo $result['ytd_sales']?></td>
-                                            <?php } else if(isset($_SESSION['ldmanager2'])) {?>
-                                            <td class="cell100 column6"><?php echo $result['ytdsales']?></td>
-                                            <?php } ?>
+                                        <?php if(isset($_SESSION['ldmanager1'])){ ?>
+                                        <td class="cell100 column6"><?php echo $result['ytd_sales']?></td>
+                                        <?php } else if(isset($_SESSION['ldmanager2'])) {?>
+                                        <td class="cell100 column6"><?php echo $result['ytdsales']?></td>
+                                        <?php } ?>
 
-                                            <td class="cell100 column7"><?php echo $result['comm']?></td>
+                                        <td class="cell100 column7"><?php echo $result['comm']?></td>
 
-                                            <?php if(isset($_SESSION['ldmanager1'])){ ?>
-                                            <td class="cell100 column8"><?php echo "<a href = 'editRecord.html?rep_no=$result[rep_no]&name=$result[name]&address=$result[address]&phone=$result[phone]&comm=$result[comm]&base_salary=$result[base_salary]&ytd_sales=$result[ytd_sales]'>edit</a>"?></td>
-                                            <?php } else if(isset($_SESSION['ldmanager2'])){ ?>
-                                            <td class="cell100 column8"><?php echo "<a href = 'editRecord.html?sale_no=$result[sale_no]&name=$result[name]&address=$result[address]&phone=$result[phone]&comm=$result[comm]&base_salary=$result[base_salary]&ytdsales=$result[ytdsales]'>edit</a>"?></td>
-                                            <?php } ?>
-                                        </tr>
-                                <?php } } else{ echo '<span class="login100-form-title p-b-33">No cars</span>';} ?>
+                                        <?php if(isset($_SESSION['ldmanager1'])){ ?>
+                                        <td class="cell100 column8"><?php echo "<a href = 'editRecord.html?rep_no=$result[rep_no]&name=$result[name]&address=$result[address]&phone=$result[phone]&comm=$result[comm]&base_salary=$result[base_salary]&ytd_sales=$result[ytd_sales]'>edit</a>"?></td>
+                                        <?php } else if(isset($_SESSION['ldmanager2'])){ ?>
+                                        <td class="cell100 column8"><?php echo "<a href = 'editRecord.html?sale_no=$result[sale_no]&name=$result[name]&address=$result[address]&phone=$result[phone]&comm=$result[comm]&base_salary=$result[base_salary]&ytdsales=$result[ytdsales]'>edit</a>"?></td>
+                                        <?php } ?>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
 				    </div>
 				</div>
+                <?php } else { ?>
+                    <section>
+                        <h1 id="page_title">No Representatives Available</h1>
+                    </section>
+                <?php } ?>
 			</div>
 		</div>
 	</div>

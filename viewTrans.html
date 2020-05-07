@@ -43,7 +43,6 @@
                     }
                 ?>
                 <li><a>|</a></li>
-                <li><a href="contactUs.html">Contact Us</a></li>
                 <li><a href="tabVehicles.html">Vehicles</a></li>
                 <li><a href="tabPackages.html">Packages</a></li>
                 <li><a href="tabRebates.html">Rebates</a></li>
@@ -56,70 +55,136 @@
                 <div class="row">
                     <div class="col text-center">
                         <div class="section_title">Your Transaction History</div>
-                        <div class="section_subtitle"></div>
+                        <div class="section_subtitle">Take a look at your purchases</div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <?php
-        if(isset($_SESSION['customer_no']))
-        {
-            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
-            $code = $_SESSION['customer_no'];
-            $query = "SELECT * FROM transaction WHERE customer_no = '$code'";
-        } else if(isset($_SESSION['buyer_no']))
-        {
-            $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
-            $code = $_SESSION['buyer_no'];
-            $query = "SELECT * FROM deal WHERE buyer_no = '$code'";
-        }
-
-        $output = $dbconnect->query($query);
-    ?>
-
     <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                <?php if($output->num_rows != 0){
-                        while($result = mysqli_fetch_assoc($output)){ ?>
-                <span class="login100-form-title" style="text-align:center; font-size:30px;">Transaction Information</span>
+        <div class="container-table100">
+			<div class="wrap-table100">
+                <?php
+                    if(isset($_SESSION['customer_no']))
+                    {
+                        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
+                        $code = $_SESSION['customer_no'];
 
-                <div class="wrap-input100" style="text-align:center;">Date: <?php echo $result['date']?></div>
-                <span class="login100-form-title"></span>
-                <div class="wrap-input100" style="text-align:center">Deal Number: <?php echo $result['deal_no']?></div>
-                <span class="login100-form-title"></span>
+                        $query = "SELECT * FROM transaction WHERE customer_no = '$code'";
+                        $output = $dbconnect->query($query);
+                    } else if(isset($_SESSION['buyer_no']))
+                    {
+                        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
+                        $code = $_SESSION['buyer_no'];
 
-                <?php if($result['rebate_no'] != ""){ ?>
-                <div class="wrap-input100" style="text-align:center;">Rebate Number: <?php echo $result['rebate_no']?></div>
-                <span class="login100-form-title"></span>
-                <?php } ?>
+                        $query = "SELECT * FROM deal WHERE buyer_no = '$code'";
+                        $output = $dbconnect->query($query);
+                    } else if(isset($_SESSION['wsmanager']))
+                    {
+                        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
+                        $code = $_GET['cust_no'];
 
-                <?php if(isset($_SESSION['customer_no'])){ ?>
-                <div class="wrap-input100" style="text-align:center">Reprensentative Number: <?php echo $result['rep_no']?></div>
-                <span class="login100-form-title"></span>
-                <?php } else if(isset($_SESSION['buyer_no'])){ ?>
-                <div class="wrap-input100" style="text-align:center">Representative Number: <?php echo $result['sale_no']?></div>
-                <span class="login100-form-title"></span>
-                <?php } ?>
+                        $query1 = "SELECT * FROM customer_global INNER JOIN sales ON customer_global.customer_no = sales.customer_no
+                                    WHERE customer_global.customer_no = '$code'";
+                        $output1 = $dbconnect->query($query1);
+                    }
+                ?>
 
-                <?php if(isset($_SESSION['customer_no'])){ ?>
-                <div class="wrap-input100" style="text-align:center">Car Serial Number: <?php echo $result['serial_no']?></div>
-                <span class="login100-form-title"></span>
-                <?php } else if(isset($_SESSION['buyer_no'])){ ?>
-                <div class="wrap-input100" style="text-align:center">Car Serial Number: <?php echo $result['vehicle_no']?></div>
-                <span class="login100-form-title"></span>
-                <?php } ?>
+				<div class="table100 ver2 m-b-110">
+					<div class="table100-head">
+                        <table>
+                            <thead>
+                                <?php if(isset($_SESSION['customer_no']) || isset($_SESSION['buyer_no'])){ ?>
+                                    <tr class="row100 head">
+                                        <th class="cell100 column1">Date</th>
+                                        <th class="cell100 column2">Transaction No</th>
+                                        <th class="cell100 column3">Rebate No</th>
+                                        <th class="cell100 column4">Representative No</th>
+                                        <th class="cell100 column5">Serial No</th>
+                                        <th class="cell100 column6">Sale Amount</th>
+                                        <th class="cell100 column6">Loan Amount</th>
+                                    </tr>
 
-                <div class="wrap-input100" style="text-align:center;">Sale Amount: <?php echo "$" . $result['amount']?></div>
-                <span class="login100-form-title"></span>
-                <div class="wrap-input100" style="text-align:center;">Loan Amount: <?php echo "$" . $result['fin_amt']?> years</div>
+                                <?php } else if(isset($_SESSION['wsmanager'])){ ?>
+                                    <tr class="row100 head">
+                                        <th class="cell100 column1">Customer ID</th>
+                                        <th class="cell100 column2">Name</th>
+                                        <th class="cell100 column3">Address</th>
+                                        <th class="cell100 column4">Date</th>
+                                        <th class="cell100 column5">Transaction No</th>
+                                        <th class="cell100 column6">Representative No</th>
+                                        <th class="cell100 column6">Serial No</th>
+                                        <th class="cell100 column6">Sale Amount</th>
+                                    </tr>
+                                <?php } ?>
+                            </thead>
+                        </table>
+                    </div>
 
-                <?php } } else{ echo '<span class=login100-form-title>No Transaction Made</span><br><br>'; } ?>
+                    <div class="table100-body js-pscroll ps ps--active-y">
+                        <table>
+                            <tbody>
+                            <?php if(!empty($output)){
+                                while($result = mysqli_fetch_assoc($output)){ ?>
+                                    <tr class="row100 body">
+                                        <td class="cell100 column2"><?php echo $result['date']?></td>
+                                        <td class="cell100 column3"><?php echo $result['deal_no']?></td>
+                                        <td class="cell100 column4"><?php echo $result['rebate_no']?></td>
+
+                                        <?php if(isset($_SESSION['customer_no'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['rep_no']?></td>
+                                        <?php } else if(isset($_SESSION['buyer_no'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['sale_no']?></td>
+                                        <?php } ?>
+
+                                        <?php if(isset($_SESSION['customer_no'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['serial_no']?></td>
+                                        <?php } else if(isset($_SESSION['buyer_no'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['vehicle_no']?></td>
+                                        <?php } ?>
+
+                                        <td class="cell100 column2"><?php echo $result['amount']?></td>
+                                        <td class="cell100 column2"><?php echo $result['fin_amt']?></td>
+                                    </tr>
+
+                            <?php } } else if(!empty($output1)){
+                                while($result = mysqli_fetch_assoc($output1)){ ?>
+                                    <tr class="row100 body">
+                                        <?php if(isset($_SESSION['customer_no'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['customer_no']?></td>
+                                        <?php } else if(isset($_SESSION['buyer_no'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['buyer_no']?></td>
+                                        <?php } ?>
+
+                                        <td class="cell100 column2"><?php echo $result['name']?></td>
+                                        <td class="cell100 column3"><?php echo $result['address']?></td>
+                                        <td class="cell100 column4"><?php echo $result['phone']?></td>
+                                        <td class="cell100 column4"><?php echo $result['date']?></td>
+                                        <td class="cell100 column4"><?php echo $result['deal_no']?></td>
+
+                                        <?php if(isset($_SESSION['customer_no'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['rep_no']?></td>
+                                        <?php } else if(isset($_SESSION['buyer_no'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['sale_no']?></td>
+                                        <?php } ?>
+
+                                        <?php if(isset($_SESSION['customer_no'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['serial_no']?></td>
+                                        <?php } else if(isset($_SESSION['buyer_no'])){ ?>
+                                        <td class="cell100 column1"><?php echo $result['vehicle_no']?></td>
+                                        <?php } ?>
+
+                                        <td class="cell100 column2"><?php echo $result['amount']?></td>
+                                    </tr>
+                            <?php } } else{ echo '<span class=login100-form-title>No Transactions</span><br><br>'; } ?>
+                            </tbody>
+                        </table>
+				    </div>
+				</div>
             </div>
-        </div>
-    </div>
+		</div>
+	</div>
 
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>

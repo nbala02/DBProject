@@ -2,6 +2,7 @@
     session_start();
 
     //Basic Info
+    $cust_no = filter_input(INPUT_POST, 'cust_no');
     $name = filter_input(INPUT_POST, 'name');
     $address = filter_input(INPUT_POST, 'address');
     $phone = filter_input(INPUT_POST, 'phone');
@@ -20,36 +21,51 @@
     $months = filter_input(INPUT_POST, 'months');
     $balance = filter_input(INPUT_POST, 'balance');
 
-
     //Generate a random pin for customer number and deal numbers
     $custNo = "C";
     $dealNo = "D";
     $empNo = $_SESSION["emp_no"];
-    echo($dealNo);
 
-    //Assign random pin number to customer number and deal number
-    $i = 0; $digits = 5;
-    while($i < $digits)
+    //Assign random pin number deal number to all transactions and customer number to all new customers
+    if($cust_no == "new")
     {
-        //generate a random number between 0 and 9.
-        $custNo .= mt_rand(1, 9);
-        $dealNo .= mt_rand(1, 9);
-        $i++;
+        $i = 0; $digits = 5;
+        while($i < $digits)
+        {
+            //generate a random number between 0 and 9.
+            $custNo .= mt_rand(1, 9);
+            $dealNo .= mt_rand(1, 9);
+            $i++;
+        }
+    } else
+    {
+        $custNo = $cust_no;
+
+        $i = 0; $digits = 5;
+        while($i < $digits)
+        {
+            $dealNo .= mt_rand(1, 9);
+            $i++;
+        }
     }
 
-    //Get model and color from the tables
+    //Get necessary information from multiple tables
     if(isset($_SESSION['salesrep1']))
     {
         $connect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
-        $query = "SELECT * FROM cars";
+        $query = "SELECT * FROM cars WHERE serial_no = '$serial'";
+        $query1 = "SELECT * FROM customer_d1 WHERE name='$name' AND address='$address' AND phone='$phone'";
+        $query2 = "SELECT model FROM rebate1 WHERE rebate_no = '$rebate'";
     } else if(isset($_SESSION['salesrep2']))
     {
         $connect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
-        $query = "SELECT * FROM autos";
+        $query = "SELECT * FROM autos WHERE vehicle_no = '$serial'";
+        $query1 = "SELECT * FROM customer_d2 WHERE name='$name' AND address='$address' AND phone='$phone'";
+        $query2 = "SELECT model FROM rebate2 WHERE rebate_no = '$rebate'";
     }
 
+    //Select from the vehicle tables and assign necessary values to variables
     $result = mysqli_query($connect, $query);
-
     while($row = mysqli_fetch_assoc($result))
     {
         $model = $row['model'];
@@ -58,6 +74,36 @@
         $warehouse = $row['warehouse'];
     }
 
+    //If the customer is not new check if inputed basic info matches the info of the selected $cust_no
+    if($cust_no != "new")
+    {
+        $result1 = mysqli_query($connect, $query1);  //Select from customer tables
+
+        if(($result1->num_rows == 0))
+        {
+            //echo "Something went wrong" . "<br>" . $connect->error;
+            echo "<script>alert('Name, address, or phone does not match existing record');
+                   window.location.href='addTrans.html';</script>";
+            exit();
+        }
+    }
+
+    //If a rebate has been selected Check to see if the model matches the model of the vehicle being bought
+    if($rebate != "")
+    {
+        $result2 = mysqli_query($connect, $query2);
+        while($row = mysqli_fetch_assoc($result2))
+        {
+            $rebateModel = $row['model'];
+        }
+
+        if($rebateModel != $model)
+        {
+            echo "<script>alert('Model of selected rebate does not match model of vehicle being purchased');
+                    window.location.href='addTrans.html';</script>";
+            exit();
+        }
+    }
 
     //Adding all of the posted information into the appropriate tables
     if(isset($_SESSION['salesrep1']))
@@ -65,8 +111,12 @@
         $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
 
         //Insert the information into the appropriate tables
-        $sql1 = "INSERT INTO customer_d1 (customer_no, name, address, phone)
-                    VALUES ('$custNo', '$name', '$address', '$phone')";
+        if($cust_no == "new")
+        {
+            //Only add to the customer table if the customer is new
+            $sql1 = "INSERT INTO customer_d1 (customer_no, name, address, phone)
+                        VALUES ('$custNo', '$name', '$address', '$phone')";
+        }
 
         $sql2 = "INSERT INTO purchased_cars (serial_no, model, color, autotrans, warehouse, amount)
                     VALUES ('$serial', '$model', '$color', '$autotrans', '$warehouse', '$amount')";
@@ -84,8 +134,12 @@
         $connection = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
 
         //Insert the information into the appropriate tables
-        $sql1 = "INSERT INTO customer_d2 (buyer_no, name, address, phone)
-                    VALUES ('$custNo', '$name', '$address', '$phone')";
+        if($cust_no == "new")
+        {
+            //Only add to the customer table if the customer is new
+            $sql1 = "INSERT INTO customer_d2 (buyer_no, name, address, phone)
+                        VALUES ('$custNo', '$name', '$address', '$phone')";
+        }
 
         $sql2 = "INSERT INTO purchased_autos (vehicle_no, model, color, autotrans, warehouse, amount)
                     VALUES ('$serial', '$model', '$color', '$autotrans', '$warehouse', '$amount')";
@@ -97,18 +151,30 @@
                     VALUES ('$dealNo', '$rebate', '$package_no', '$empNo', '$custNo', '$serial', '$amount', '$loan', '$date')";
 
         $sql5 = "DELETE FROM autos where vehicle_no = '$serial'";
-
     }
 
     //Redirect if successfully added or alert if something went wrong
-    if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE && $connection->query($sql3) === TRUE
-            && $connection->query($sql4) === TRUE && $connection->query($sql5) === TRUE)
+    if($cust_no == "new")
     {
-        echo "<script>alert('Transaction Successfully Made'); window.location.href='empAccount.html';</script>";
+        if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE && $connection->query($sql3) === TRUE
+                && $connection->query($sql4) === TRUE && $connection->query($sql5) === TRUE)
+        {
+            echo "<script>alert('Transaction Successfully Made'); window.location.href='empAccount.html';</script>";
+        } else
+        {
+            echo "Something went wrong" . "<br>" . $connection->error;
+            //echo "<script>alert('Something went wrong'); window.location.href='addTrans.html';</script>";
+        }
     } else
     {
-        echo "Wrong Code" . "<br>" . $connection->error;
-        //echo "<script>alert('Something went wrong'); window.location.href='addTrans.html';</script>";
-
+        if ($connection->query($sql2) === TRUE && $connection->query($sql3) === TRUE
+                && $connection->query($sql4) === TRUE && $connection->query($sql5) === TRUE)
+        {
+            echo "<script>alert('Transaction Successfully Made'); window.location.href='empAccount.html';</script>";
+        } else
+        {
+            echo "Something went wrong" . "<br>" . $connection->error;
+            //echo "<script>alert('Something went wrong'); window.location.href='addTrans.html';</script>";
+        }
     }
 ?>
