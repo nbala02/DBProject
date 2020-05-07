@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Wholesale Manager Account">
-    <title>Add New Package</title>
+    <meta name="description" content="Local Manager Account">
+    <title>All Packages</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/tablesort.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="styles/tablesort.js"></script>
 </head>
+
 
 <body>
     <?php session_start(); ?>
@@ -44,66 +49,70 @@
                 <li><a>|</a></li>
                 <li><a href="contactUs.html">Contact Us</a></li>
                 <li><a href="tabVehicles.html">Vehicles</a></li>
-                <li><a href="tabPackages.html">Packages</a></li>
+                <li id="current-page"><a href="tabPackages.html">Packages</a></li>
                 <li><a href="tabRebates.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
-        
+
         <div class="services">
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="section_title">Add a New Package</div>
-                        <div class="section_subtitle">Use the form</div>
+                        <div class="section_title">All Avaliable Rebates</div>
+                        <div class="section_subtitle"></div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                <div class="signup-form">
-                    <form method="POST" class="register-form" id="register-form" action="newPackages.php">
-                        <span class="login100-form-title p-b-33">Package Information:</span>
 
-                        <div class="wrap-input100 validate-input" data-validate="Package Number required">
-                            <input class="input100" type="text" name="package" maxlength="2" placeholder="Package Number" id="package" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-                        
-                        <div class="wrap-input100 validate-input" data-validate="Description required">
-                            <input class="input100" type="text" name="description" maxlength="20" placeholder="Description" id="description" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
+    <script type="text/javascript">
+        $(function() {
+            $('table.table-sort').tablesort();
+        });
 
-                        <div class="wrap-input100 validate-input" data-validate="Price required">
-                            <input class="input100" type="text" maxlength="11" name="price" placeholder="Price" id="price" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-                        
-                        <div class="wrap-input100 validate-input" data-validate="Mode Available required">
-                            <input class="input100" type="text" maxlength="20" name="mode" placeholder="Mode Available" id="mode" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
+    </script>
 
-                        <div class="container-login100-form-btn m-t-20">
-                            <button class="login100-form-btn">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+    <?php
+        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
+        $query = "SELECT * FROM add_on";
+        $output = $dbconnect->query($query);
+    ?>
+
+
+    <table class="table-sort table-sort-search">
+        <thead>
+            <tr class="row100 head">
+                <th class="table-sort">Package No.</th>
+                <th class="table-sort">Package Description:</th>
+                <th class="table-sort">Price:</th>
+                <th class="table-sort">Mode Available:</th>
+
+            </tr>
+        </thead>
+
+
+
+        <tbody>
+            <?php if($output){
+                                    while($result = mysqli_fetch_assoc($output)){ ?>
+            <tr class="row100 body">
+                <td><?php echo $result['package_no'];?></td>
+                <td><?php echo $result['package_description'];?></td>
+                <td><?php echo $result['price'];?></td>
+                <td><?php echo $result['mode_available'];?></td>
+            </tr>
+
+            <?php } } else{ echo '<span class="login100-form-title p-b-33">No Add-ons</span>';} ?>
+        </tbody>
+    </table>
+
+
+
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>
 </body>
+
 </html>

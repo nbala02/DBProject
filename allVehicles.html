@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Wholesale Manager Account">
-    <title>My Account</title>
+    <meta name="description" content="Local Manager Account">
+    <title>All Vehicles</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/table.css">
-
-    <!-------- dowload table's pretty design here https://colorlib.com/wp/template/fixed-header-table/-->
-
 </head>
 
 <body>
@@ -26,17 +22,11 @@
         <nav>
             <ul>
                 <?php
-                    if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
+                    if(isset($_SESSION['customer']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['customer2']) || isset($_SESSION['name']))
-                    {
-                        echo '<li><a href="logout.php">Logout</a></li>';
-                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -54,8 +44,9 @@
                 ?>
                 <li><a>|</a></li>
                 <li><a href="contactUs.html">Contact Us</a></li>
-                <li><a href="findDealer.html">Find Dealer</a></li>
-                <li><a href="vehicles.html">Vehicles</a></li>
+                <li><a href="tabVehicles.html">Vehicles</a></li>
+                <li><a href="tabPackages.html">Packages</a></li>
+                <li><a href="tabRebates.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -64,8 +55,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="section_title">View Vehicles</div>
-                        <div class="section_subtitle">Use the form</div>
+                        <div class="section_title">View All Vehicles</div>
+                        <div class="section_subtitle">It's all in the tables</div>
                     </div>
                 </div>
             </div>
@@ -80,14 +71,9 @@
                     if(isset($_SESSION['ldmanager1']))
                     {
                         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
-                    }
-                    else if(isset($_SESSION['ldmanager2']))
+                    } else if(isset($_SESSION['ldmanager2']))
                     {
                         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
-                    }
-                    else if(isset($_SESSION['wsmanager']))
-                    {
-                        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
                     }
 
                     $query1 = "SELECT * FROM cars";
@@ -95,15 +81,12 @@
 
                     $query2 = "SELECT * FROM autos";
                     $output2 = $dbconnect->query($query2);
-
-                    $query3 = "SELECT * FROM available_auto";
-                    $output3 = $dbconnect->query($query3);
                 ?>
                 <div class="table100 ver2 m-b-110">
-                    <div class="table100-body js-pscroll ps ps--active-y">
+                    <div class="table100-head">
                         <table>
-                            <thead class="table100-head">
-                                <?php if (isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2'])) { ?>
+                            <thead>
+                                <?php if (isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2'])){ ?>
                                     <tr class="row100 head">
                                         <th class="cell100 column1">Serial No.</th>
                                         <th class="cell100 column2">Model</th>
@@ -111,7 +94,7 @@
                                         <th class="cell100 column4">Autotrans</th>
                                         <th class="cell100 column5">Warehouse</th>
                                     </tr>
-                                <?php } else if(isset($_SESSION['wsmanager'])) { ?>
+                                <?php } else if(isset($_SESSION['wsmanager'])){ ?>
                                     <tr class="row100 head">
                                         <th class="cell100 column1">Serial No.</th>
                                         <th class="cell100 column2">Model</th>
@@ -119,10 +102,14 @@
                                     </tr>
                                 <?php } ?>
                             </thead>
+                        </table>
+                    </div>
 
+                    <div class="table100-body js-pscroll ps ps--active-y">
+                        <table>
                             <tbody>
                                 <?php if(($output1)){
-                                    while($result = mysqli_fetch_assoc($output1)) {?>
+                                    while($result = mysqli_fetch_assoc($output1)){ ?>
                                         <tr class="row100 body">
                                             <td class="cell100 column1"><?php echo $result['serial_no']?></td>
                                             <td class="cell100 column2"><?php echo $result['model']?></td>
@@ -132,7 +119,7 @@
                                         </tr>
 
                                 <?php  } } else if(($output2)){
-                                    while($result = mysqli_fetch_assoc($output2)) {?>
+                                    while($result = mysqli_fetch_assoc($output2)){ ?>
                                         <tr class="row100 body">
                                             <td class="cell100 column1"><?php echo $result['vehicle_no']?></td>
                                             <td class="cell100 column2"><?php echo $result['model']?></td>
@@ -140,15 +127,7 @@
                                             <td class="cell100 column4"><?php echo $result['autotrans']?></td>
                                             <td class="cell100 column5"><?php echo $result['warehouse']?></td>
                                         </tr>
-
-                                <?php  } } else if(($output3)){
-                                    while($result = mysqli_fetch_assoc($output3)) {?>
-                                        <tr class="row100 body">
-                                            <td class="cell100 column1"><?php echo $result['serial_no']?></td>
-                                            <td class="cell100 column2"><?php echo $result['model']?></td>
-                                            <td class="cell100 column3"><?php echo $result['color']?></td>
-                                        </tr>
-                                <?php } } else { echo '<span class="login100-form-title p-b-33">No cars</span>';}?>
+                                <?php } } else{ echo '<span class="login100-form-title p-b-33">No Cars</span>';} ?>
                             </tbody>
                         </table>
                     </div>
@@ -156,9 +135,9 @@
             </div>
         </div>
     </div>
+
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>
 </body>
-
 </html>

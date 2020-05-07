@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Register">
-    <title>Register</title>
+    <meta name="description" content="Employee Signin">
+    <title>Employee Signin</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
@@ -22,17 +21,11 @@
         <nav>
             <ul>
                 <?php
-                    if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
+                    if(isset($_SESSION['customer']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['customer2']) || isset($_SESSION['name']))
-                    {
-                        echo '<li><a href="logout.php">Logout</a></li>';
-                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -50,8 +43,9 @@
                 ?>
                 <li><a>|</a></li>
                 <li><a href="contactUs.html">Contact Us</a></li>
-                <li><a href="findDealer.html">Find Dealer</a></li>
-                <li><a href="vehicles.html">Vehicles</a></li>
+                <li><a href="tabVehicles.html">Vehicles</a></li>
+                <li><a href="tabPackages.html">Packages</a></li>
+                <li><a href="tabRebates.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -86,23 +80,23 @@
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
-                        
+
                         <span class="login100-form-title p-b-33">Your Positon:</span>
-                        
+
                         <div>
                             <input type="radio" name="radio" value="wsmanager" id="wsmanager" required>
                             <label for="wsmanager">Wholesale Manager</label>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
-                        
+
                         <div>
                             <input type="radio" name="radio" value="ldmanager" id="ldmanager">
                             <label for="ldmanager">Local Manager</label>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
-                        
+
                         <div>
                             <input type="radio" name="radio" value="salesrep" id="salesrep">
                             <label for="salesrep">Sales Representative</label>
@@ -111,9 +105,7 @@
                         </div>
 
                         <div class="container-login100-form-btn m-t-20">
-                            <button class="login100-form-btn">
-                                Sign In
-                            </button>
+                            <button class="login100-form-btn">Sign In</button>
                         </div>
                     </form>
                 </div>
@@ -125,5 +117,4 @@
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>
 </body>
-
 </html>

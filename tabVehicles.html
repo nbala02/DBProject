@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Local Manager Account">
+    <title>All Vehicles</title>
+    <link rel="icon" type="image/png" href="images/caricon.png">
+    <link rel="stylesheet" type=text/css href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/util.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/tablesort.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="styles/tablesort.js"></script>
+</head>
+
+<body>
+    <?php session_start(); ?>
+
+    <header>
+        <div id="logo"><a><img src="images/logo.png"></a></div>
+        <nav>
+            <ul>
+                <?php
+                    if(isset($_SESSION['customer']))
+                    {
+                        echo '<li><a href="logout.php">Logout</a></li>';
+                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    {
+                        echo '<li><a href="logout.php">Logout</a></li>';
+                        echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
+                    } else
+                    {
+                        echo '<li>';
+                            echo '<a style=color:red;>Sign In</a>';
+                                echo '<ul class="dropdown">';
+                                    echo '<li><a href="signIn.html">Customers</a></li>';
+                                    echo '<li><a href="empSignin.html">Employees</a></li>';
+                                echo '</ul>';
+                        echo '</li>';
+                        echo '<li><a href="registerPage.html">Register</a></li>';
+                    }
+                ?>
+                <li><a>|</a></li>
+                <li><a href="contactUs.html">Contact Us</a></li>
+                <li><a href="tabVehicles.html">Vehicles</a></li>
+                <li><a href="tabPackages.html">Packages</a></li>
+                <li><a href="tabRebates.html">Rebates</a></li>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+
+        <div class="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="section_title">View All Vehicles</div>
+                        <div class="section_subtitle">It's all in the tables</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script type="text/javascript">
+        $(function() {
+            $('table.table-sort').tablesort();
+        });
+
+    </script>
+
+
+
+    <!-- Cars in the database for dealer -->
+    <?php
+
+        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
+
+      // $query1 = "SELECT * FROM available_auto INNER JOIN rebate_Global ON available_auto.model = rebate_Global.model AND available_auto.dealer = rebate_Global.dealer";
+
+
+        $query2 = "SELECT * FROM available_auto INNER JOIN model ON globalviews.available_auto.model= globalviews.model.model";
+
+       // $output1 = $dbconnect->query($query1);
+       $output2 = $dbconnect->query($query2);
+
+
+
+
+    ?>
+
+    Rebate: <input type="checkbox" id="myCheck" onclick="myFunction()">
+
+
+    <!--https://www.w3schools.com/howto/howto_js_display_checkbox_text.asp -->
+    <!--- $query2 = "SELECT * FROM available_auto INNER JOIN rebate_Global ON available_auto.model = rebate_Global.model AND available_auto.dealer = rebate_Global.dealer" ;-->
+
+    <table class="table-sort table-sort-search">
+        <thead>
+            <tr class="row100 head">
+                <th class="table-sort">Serial No.</th>
+                <th class="table-sort">Model</th>
+                <th class="table-sort">Color</th>
+                <th class="table-sort">Warehouse</th>
+                <th class="table-sort">Dealership</th>
+                <th class="table-sort">Rebate</th>
+                <th class="table-sort">price</th>
+                <th class="table-sort">type</th>
+                <th class="table-sort">Gas Mileage</th>
+                <th class="table-sort">Seat</th>
+                <th class="table-sort">engine</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php if(($output2)){
+                while($result = mysqli_fetch_assoc($output2)){ ?>
+            <tr class="row100 body" >
+                <td><?php echo $result['serial_no']?></td>
+                <td><?php echo $result['model']?></td>
+                <td><?php echo $result['color']?></td>
+                <td><?php echo $result['warehouse']?></td>
+                <td><?php echo $result['dealer']?></td>
+                <td><?php echo $result['rebate']?></td>
+                <td><?php echo $result['price']?></td>
+                <td><?php echo $result['type']?></td>
+                <td><?php echo $result['gas_mileage']?></td>
+                <td><?php echo $result['seat']?></td>
+                <td><?php echo $result['engine']?></td>
+
+
+            </tr>
+
+            <?php } } else if(($output1)){
+                    while($result = mysqli_fetch_assoc($output1)){ ?>
+            <tr class="row100 body">
+                <td><?php echo $result['serial_no']?></td>
+                <td><?php echo $result['model']?></td>
+                <td><?php echo $result['color']?></td>
+                <td><?php echo $result['warehouse']?></td>
+                <td><?php echo $result['dealer']?></td>
+                <td><?php echo $result['rebate_no']?></td>
+
+            </tr>
+<?}} else{ echo '<span class="login100-form-title p-b-33">No Cars</span>';} ?>
+
+
+
+
+
+
+        </tbody>
+
+    </table>
+<script>
+            function myFunction() {
+
+
+
+
+
+                var text = document.getElementById("text");
+                if (checkBox.checked == true) {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+
+            }
+
+        </script>
+
+
+
+
+    <footer>
+        <h3>All Rights Reserved, Copyright &copy; 2020</h3>
+    </footer>
+</body>
+
+</html>

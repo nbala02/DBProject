@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Wholesale Manager Account">
-    <title>My Account</title>
+    <meta name="description" content="Local Manager Account">
+    <title>Add a Vehicle</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
@@ -15,24 +14,18 @@
 </head>
 
 <body>
-    <?php session_start(); ?>
+    <?php session_start(); include('dbconnect.php');?>
 
     <header>
         <div id="logo"><a><img src="images/logo.png"></a></div>
         <nav>
             <ul>
                 <?php
-                    if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
+                    if(isset($_SESSION['customer']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['customer2']) || isset($_SESSION['name']))
-                    {
-                        echo '<li><a href="logout.php">Logout</a></li>';
-                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -50,8 +43,9 @@
                 ?>
                 <li><a>|</a></li>
                 <li><a href="contactUs.html">Contact Us</a></li>
-                <li><a href="findDealer.html">Find Dealer</a></li>
-                <li><a href="vehicles.html">Vehicles</a></li>
+                <li><a href="tabVehicles.html">Vehicles</a></li>
+                <li><a href="tabPackages.html">Packages</a></li>
+                <li><a href="tabRebates.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -73,7 +67,7 @@
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
                 <div class="signup-form">
                     <form method="POST" class="register-form" id="register-form" action="newVehicle.php">
-                        <span class="login100-form-title p-b-33">Add Vehicle:</span>
+                        <span class="login100-form-title p-b-33">Vehicle Information:</span>
 
                         <div class="wrap-input100 validate-input" data-validate="Serial Number required">
                             <input class="input100" type="text" name="serial" maxlength="10" placeholder="Serial Number" id="serial" required>
@@ -81,11 +75,19 @@
                             <span class="focus-input100-2"></span>
                         </div>
 
-                        <div class="wrap-input100 validate-input" data-validate="Model required">
-                            <input class="input100" type="text" name="model" maxlength="10" placeholder="Model" id="model" required>
+
+
+                        <select class="wrap-input100 rs1 validate-input" name="model">
+                            <option value="" selected>Select Model</option>
+                            <?php
+                                while($row = mysqli_fetch_assoc($result4)) {
+
+                            ?>
+                            <option value="<?php echo $row['model'];?>"><?php echo $row['model'];?></option>
+                            <?php } ?>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
-                        </div>
+                        </select>
 
                         <div class="wrap-input100 validate-input" data-validate="Color required">
                             <input class="input100" type="text" maxlength="10" name="color" placeholder="Color" id="color" required>
@@ -104,6 +106,8 @@
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
+
+
 
                         <div class="container-login100-form-btn m-t-20">
                             <button class="login100-form-btn">Submit</button>

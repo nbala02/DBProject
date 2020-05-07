@@ -1,31 +1,40 @@
 <?php
-session_start();
+    session_start();
 
-$email = filter_input(INPUT_POST, 'email');
-$fname = filter_input(INPUT_POST, 'fname');
-$lname = filter_input(INPUT_POST, 'lname');
-$phone = filter_input(INPUT_POST, 'phone');
-$streetaddress = filter_input(INPUT_POST, 'streetaddress');
-$city = filter_input(INPUT_POST, 'city');
-$state = filter_input(INPUT_POST, 'state');
-$zipcode = filter_input(INPUT_POST, 'zipcode');
+    $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
 
-// Create connection
-$dbconnect = mysqli_connect("127.0.0.1", "root", "", "testingDB");
-// Check connection
-if ($dbconnect->connect_error) {
-    die("Connection failed: " . $dbconnect->connect_error);
-} 
+    $name = filter_input(INPUT_POST, 'name');
+    $address = filter_input(INPUT_POST, 'address');
+    $phone = filter_input(INPUT_POST, 'phone');
+    $email = filter_input(INPUT_POST, 'email');
 
-$sql = "INSERT INTO contactInfo (email, fname, lname, phone, streetaddress, city, state, zipcode)
-VALUES ('$email', '$fname', '$lname', '$phone', '$streetaddress', '$city', '$state', '$zipcode')";
+    $pin = "C";
 
-if ($dbconnect->query($sql) === TRUE) {
+    //Assign random pin to new sales representative
+    $i = 0; $digits = 5;
+    while($i < $digits)
+    {
+        //generate a random number between 0 and 9.
+        $pin .= mt_rand(1, 9);
+        $i++;
+    }
+
+    // Check connection
+    if ($dbconnect->connect_error)
+    {
+        die("Connection failed: " . $dbconnect->connect_error);
+    }
+
+    $sql = "INSERT INTO potential_buyer (buyer_no, name, address, phone, email)
+    VALUES ('$pin', '$name', '$address', '$phone', '$email')";
+
+    if ($dbconnect->query($sql) === TRUE)
+    {
         echo "<script>alert('Thank you!'); window.location.href='index.html';</script>";
-}
-else {
-    echo "<script>alert('You already filled one'); window.location.href='contactUs.html';</script>";
-}
+    } else
+    {
+        echo "<script>alert('You already filled one'); window.location.href='contactUs.html';</script>";
+    }
 
-$dbconnect->close();
+    $dbconnect->close();
 ?>

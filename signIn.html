@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
@@ -22,17 +21,11 @@
         <nav>
             <ul>
                 <?php
-                    if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
+                    if(isset($_SESSION['customer']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['customer2']) || isset($_SESSION['name']))
-                    {
-                        echo '<li><a href="logout.php">Logout</a></li>';
-                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -50,8 +43,9 @@
                 ?>
                 <li><a>|</a></li>
                 <li><a href="contactUs.html">Contact Us</a></li>
-                <li><a href="findDealer.html">Find Dealer</a></li>
-                <li><a href="vehicles.html">Vehicles</a></li>
+                <li><a href="tabVehicles.html">Vehicles</a></li>
+                <li><a href="tabPackages.html">Packages</a></li>
+                <li><a href="tabRebates.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -91,7 +85,7 @@
 
                         <div>
                             <input type="radio" name="radio" value="D1" id="D1" required>
-                            <label for="D1">St.Louis</label>
+                            <label for="D1">St. Louis</label>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
@@ -104,9 +98,7 @@
                         </div>
 
                         <div class="container-login100-form-btn m-t-20">
-                            <button class="login100-form-btn">
-                                Sign In
-                            </button>
+                            <button class="login100-form-btn">Sign In</button>
                         </div>
                     </form>
                 </div>
@@ -118,5 +110,4 @@
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>
 </body>
-
 </html>

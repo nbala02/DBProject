@@ -1,4 +1,3 @@
-
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
@@ -96,26 +95,7 @@ th, td {
   font-weight: unset;
   padding-right: 10px;
   text-align: center;
-}
-
-.column1 {
-  width: auto;
-}
-
-.column2 {
-  width: auto;
-}
-
-.column3 {
-  width: auto;
-}
-
-.column4 {
-  width: auto;
-}
-
-.column5 {
-  width: auto;
+  width: 10%;
 }
 
 .table100-head th {

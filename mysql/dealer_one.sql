@@ -15,8 +15,6 @@ create table representative
     PRIMARY KEY (rep_no)
 );
 
-select * from representative;
-
 create table customer_d1
 (	
 	customer_no         varchar(10) NOT NULL, #unique id for the customer 
@@ -34,8 +32,10 @@ create table rebate1
     rebate_amt			decimal(15) NOT NULL, #how much the rebate1 is
     start_date 			DATE	   NOT NULL, # start date of rebate1
     end_date 			DATE	   NOT NULL, # end date of the rebate1
+    expired				int			NOT NULL,
     
-    PRIMARY KEY(rebate_no)
+    PRIMARY KEY(rebate_no),
+    FOREIGN KEY(model) REFERENCES globalviews.model(model)
 );
 
 create table cars
@@ -45,8 +45,10 @@ create table cars
 	color				varchar(10) NOT NULL, #color of the car 
     autotrans			varchar(10)	NOT NUll, # yes or no if its autotransmission
     warehouse			varchar(20) NOT NULL, # warehouse city
+    rebate				varchar(3) NOT NULL, #Yes or not to if the rebate exists or not
 	
-    PRIMARY KEY  (serial_no)
+    PRIMARY KEY  (serial_no),
+	FOREIGN KEY(model) REFERENCES globalviews.model(model)
 
 );
 
@@ -80,7 +82,7 @@ create table loan
 create table transaction
 (
 	deal_no	            varchar(10) NOT NULL, #Unique id for transaction
-    rebate_no			varchar(10) NULL, #unique id for the rebate no 
+    rebate_no			varchar(10) NULL, #unique id for the rebate no
     rep_no              varchar(10) NOT NULL, #unique id for representative 
     customer_no		    varchar(10) NOT NULL, #unique id for the customer
     serial_no			varchar(10) NOT NULL, #Unique id for car
@@ -91,5 +93,6 @@ create table transaction
     PRIMARY KEY(deal_no),
     FOREIGN KEY(rep_no) REFERENCES representative(rep_no),
     FOREIGN KEY(customer_no) REFERENCES customer_d1(customer_no),
-    FOREIGN KEY(serial_no) REFERENCES purchased_cars(serial_no)
+    FOREIGN KEY(serial_no) REFERENCES purchased_cars(serial_no),
+	FOREIGN KEY(package_no) REFERENCES globalviews.add_on(package_no)
 );

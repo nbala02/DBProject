@@ -18,19 +18,33 @@ create table add_on
     package_description  varchar(20) NOT NULL, #package description like navigation or security
     price                varchar(11) NOT NULL, # price of the package
     mode_available       varchar(20) NOT NULL, # modes available 
-    
+
     PRIMARY KEY (package_no)
 
 );
 
 create table potential_buyer
 (
-	buyer_no            varchar(4) NOT NULL, # unique id for buyer 
+	buyer_no            varchar(10) NOT NULL, # unique id for buyer
     name                varchar(20) NOT NULL, #name of the buyer
-    address             varchar(20) NOT NULL, #address of buyer
+    address             varchar(50) NOT NULL, #address of buyer
     phone				varchar(15) NOT NULL, #phone number of the buyer
     email               varchar(20) NOT NULL, #email of the buyer
     
     PRIMARY KEY (buyer_no)
 
 );
+
+SET GLOBAL event_scheduler = ON; -- enable event scheduler.
+SELECT @@event_scheduler;  -- check whether event scheduler is ON/OFF
+CREATE EVENT rebate1Expired  -- create your event
+    ON SCHEDULE
+      EVERY 24 HOUR  -- run every 24 hours
+    DO
+      UPDATE dealer_one.rebate1 set expired='1' WHERE end_date = current_date();
+
+CREATE EVENT rebate2Expired  -- create your event
+    ON SCHEDULE
+      EVERY 24 HOUR  -- run every 24 hours
+    DO
+      UPDATE dealer_two.rebate2 set expired='1' WHERE end_date = current_date();

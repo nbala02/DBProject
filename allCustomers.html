@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Local Manager Account">
+    <title>All Customers</title>
+    <link rel="icon" type="image/png" href="images/caricon.png">
+    <link rel="stylesheet" type=text/css href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/util.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
+</head>
+
+<body>
+    <?php session_start(); ?>
+
+    <header>
+        <div id="logo"><a><img src="images/logo.png"></a></div>
+        <nav>
+            <ul>
+                <?php
+                    if(isset($_SESSION['customer']))
+                    {
+                        echo '<li><a href="logout.php">Logout</a></li>';
+                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    {
+                        echo '<li><a href="logout.php">Logout</a></li>';
+                        echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
+                    } else
+                    {
+                        echo '<li>';
+                            echo '<a style=color:red;>Sign In</a>';
+                                echo '<ul class="dropdown">';
+                                    echo '<li><a href="signIn.html">Customers</a></li>';
+                                    echo '<li><a href="empSignin.html">Employees</a></li>';
+                                echo '</ul>';
+                        echo '</li>';
+                        echo '<li><a href="registerPage.html">Register</a></li>';
+                    }
+                ?>
+                <li><a>|</a></li>
+                <li><a href="contactUs.html">Contact Us</a></li>
+                <li><a href="tabVehicles.html">Vehicles</a></li>
+                <li><a href="tabPackages.html">Packages</a></li>
+                <li><a href="tabRebates.html">Rebates</a></li>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+
+        <div class="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="section_title">View All Customers</div>
+                        <div class="section_subtitle">It's all in the tables</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Customers in the database for dealer -->
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <?php
+                    if(isset($_SESSION['ldmanager1']))
+                    {
+                        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
+                    } else if(isset($_SESSION['ldmanager2']))
+                    {
+                        $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
+                    }
+
+                    $query1 = "SELECT * FROM customer_d1";
+                    $output1 = $dbconnect->query($query1);
+
+                    $query2 = "SELECT * FROM customer_d2";
+                    $output2 = $dbconnect->query($query2);
+                ?>
+                <div class="table100 ver2 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column1">Customer No.</th>
+                                    <th class="cell100 column2">Name</th>
+                                    <th class="cell100 column3">Address</th>
+                                    <th class="cell100 column4">Phone</th>
+                                    <th class="cell100 column5">Edit</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="table100-body js-pscroll ps ps--active-y">
+                        <table>
+                            <tbody>
+                                <?php if($output1){
+                                    while($result = mysqli_fetch_assoc($output1)){ ?>
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1"><?php echo $result['customer_no'];?></td>
+                                        <td class="cell100 column2"><?php echo $result['name'];?></td>
+                                        <td class="cell100 column3"><?php echo $result['address'];?></td>
+                                        <td class="cell100 column4"><?php echo $result['phone'];?></td>
+                                        <td class="cell100 column5"><?php echo "<a href='editCustomer.html?customer_no=$result[customer_no]'>edit</a>"?></td>
+                                    </tr>
+
+                                <?php } } else if($output2){
+                                    while($result = mysqli_fetch_assoc($output2)){ ?>
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1"><?php echo $result['buyer_no'];?></td>
+                                        <td class="cell100 column2"><?php echo $result['name'];?></td>
+                                        <td class="cell100 column3"><?php echo $result['address'];?></td>
+                                        <td class="cell100 column4"><?php echo $result['phone'];?></td>
+                                        <td class="cell100 column5"><?php echo "<a href='editCustomer.html?buyer_no=$result[buyer_no]'>Edit Customer Info</a>"?></td>
+                                    </tr>
+                                <?php } } else{ echo '<span class="login100-form-title p-b-33">No Customers</span>';} ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h3>All Rights Reserved, Copyright &copy; 2020</h3>
+    </footer>
+</body>
+</html>

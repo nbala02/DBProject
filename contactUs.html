@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
@@ -22,17 +21,11 @@
         <nav>
             <ul>
                 <?php
-                    if(isset($_SESSION['customer1']) || isset($_SESSION['name']))
+                    if(isset($_SESSION['customer']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['customer2']) || isset($_SESSION['name']))
-                    {
-                        echo '<li><a href="logout.php">Logout</a></li>';
-                        echo '<li><a href="custAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
-                    }
-                    else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
+                    } else if(isset($_SESSION['wsmanager']) || isset($_SESSION['ldmanager1']) || isset($_SESSION['ldmanager2']) ||                    isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))
                     {
                         echo '<li><a href="logout.php">Logout</a></li>';
                         echo '<li><a href="empAccount.html" style=text-decoration:none;>Welcome ' . $_SESSION['fname'] . '</a></li>';
@@ -50,8 +43,9 @@
                 ?>
                 <li><a>|</a></li>
                 <li id="current-page"><a href="contactUs.html">Contact Us</a></li>
-                <li><a href="findDealer.html">Find Dealer</a></li>
-                <li><a href="vehicles.html">Vehicles</a></li>
+                <li><a href="tabVehicles.html">Vehicles</a></li>
+                <li><a href="tabPackages.html">Packages</a></li>
+                <li><a href="tabRebates.html">Rebates</a></li>
                 <li><a href="index.html">Home</a></li>
             </ul>
         </nav>
@@ -75,52 +69,26 @@
                     <form method="POST" class="register-form" id="register-form" action="storeContactInfo.php">
                         <span class="login100-form-title p-b-33">Basic Info:</span>
 
-                        <div class="wrap-input100 validate-input" data-validate="Email required">
-                            <input class="input100" type="text" name="email" maxlength="50" placeholder="Email" id="email" required>
+                        <div class="wrap-input100 validate-input" data-validate="Name required">
+                            <input class="input100" type="text" name="name" maxlength="20" placeholder="Name" id="name" required>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
 
-                        <div class="wrap-input100 validate-input" data-validate="First Name required">
-                            <input class="input100" maxlength="35" type="text" name="fname" placeholder="First Name" id="fname" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input" data-validate="Last Name required">
-                            <input class="input100" type="text" name="lname" maxlength="50" placeholder="Last Name" id="lname" required>
+                        <div class="wrap-input100 validate-input" data-validate="Address required">
+                            <input class="input100" type="text" name="address" maxlength="50" placeholder="Address" id="address" required>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="Phone Number required">
-                            <input class="input100" type="text" maxlength="10" name="phone" placeholder="Phone Number" id="phone" required>
+                            <input class="input100" type="text" name="phone" maxlength="10" placeholder="Phone Number" id="phone" required>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
 
-                        <span class="login100-form-title p-b-33">Address:</span>
-
-                        <div class="wrap-input100 rs1 validate-input" data-validate="Street Address required">
-                            <input class="input100" type="text" maxlength="50" name="streetaddress" placeholder="Street Address" id="streetaddress" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-
-                        <div class="wrap-input100 rs1 validate-input" data-validate="City required">
-                            <input class="input100" type="text" name="city" maxlength="50" placeholder="City" id="city" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-
-                        <div class="wrap-input100 rs1 validate-input" data-validate="State required">
-                            <input class="input100" type="text" name="state" maxlength="50" placeholder="State" id="state" required>
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
-                        </div>
-
-                        <div class="wrap-input100 rs1 validate-input" data-validate="Zip Code required">
-                            <input class="input100" type="text" name="zipcode" maxlength="5" placeholder="Zip Code" id="zipcode" required>
+                        <div class="wrap-input100 validate-input" data-validate="Email required">
+                            <input class="input100" type="text" name="email" maxlength="100" placeholder="Email " id="email" required>
                             <span class="focus-input100-1"></span>
                             <span class="focus-input100-2"></span>
                         </div>
@@ -138,5 +106,4 @@
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>
 </body>
-
 </html>

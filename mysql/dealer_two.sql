@@ -10,9 +10,7 @@ create table sales_person
     comm				decimal(15) NOT NULL, # commission for the salesperson
     base_salary			decimal(15) NOT NULL, # base salary for the salesperson
     ytdsales			decimal(15) NOT NULL, # year to date amount for the salesperson
-   
-    
-    
+
     PRIMARY KEY (sale_no)
 );
 
@@ -33,8 +31,10 @@ create table rebate2
     rebate_amt			decimal(15) NOT NULL, #how much the rebate1 is
     start_date 			DATE	   NOT NULL, # start date of rebate1
     end_date 			DATE	   NOT NULL, # end date of the rebate1
+    expired				int			NOT NULL,
     
-    PRIMARY KEY(rebate_no)
+    PRIMARY KEY(rebate_no),
+    FOREIGN KEY(model) REFERENCES globalviews.model(model)
 );
 
 create table autos
@@ -44,8 +44,10 @@ create table autos
 	color				varchar(10) NOT NULL, #color of the car 
     autotrans			varchar(10)	NOT NUll, # yes or no if its autotransmission
     warehouse			varchar(20) NOT NULL, # warehouse city
+    rebate				varchar(3) NOT NULL, #Yes or not to if the rebate exists or not
 	
-    PRIMARY KEY  (vehicle_no)
+    PRIMARY KEY  (vehicle_no),
+    FOREIGN KEY(model) REFERENCES globalviews.model(model)
 
 );
 
@@ -79,8 +81,8 @@ create table finance
 create table deal
 (
 	deal_no	            varchar(10) NOT NULL, #Unique id for transaction
-    rebate_no			 varchar(10) NOT NULL, #unique id for the rebate no 
-    sale_no              varchar(10) NOT NULL, #unique id for representative 
+    rebate_no			 varchar(10) NULL, #unique id for the rebate no
+    sale_no              varchar(10) NOT NULL, #unique id for representative
     buyer_no		    varchar(10) NOT NULL, #unique id for the customer
     vehicle_no			varchar(10) NOT NULL, #Unique id for car
 	amount				decimal(15) NOT NULL, #how much the transaction is
