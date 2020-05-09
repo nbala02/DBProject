@@ -70,7 +70,7 @@ create table loan
     amount				decimal(15) NOT NULL, #how much the loan is
     start_date 			DATE	   	NOT NULL, # start date of loan
     end_date 			DATE	   	NOT NULL, # end date of the loan
-    months				int(20)	   	NOT NULL, # how many months the loan is
+    months				int(20)	   	NOT NULL, # how many months the loan is 
     balance 			decimal(15) NOT NULL, #how much the balance is 
     
     FOREIGN KEY(serial_no) REFERENCES purchased_cars(serial_no),
@@ -80,7 +80,7 @@ create table loan
 create table transaction
 (
 	deal_no	            varchar(10) NOT NULL, #Unique id for transaction
-    rebate_no			varchar(10) NULL, #unique id for the rebate no
+    rebate_no			varchar(10) NULL, #unique id for the rebate no 
     package_no			varchar(2) 	NULL,
     rep_no              varchar(10) NOT NULL, #unique id for representative 
     customer_no		    varchar(10) NOT NULL, #unique id for the customer

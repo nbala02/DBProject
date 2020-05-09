@@ -10,7 +10,7 @@ create table sales_person
     comm				decimal(15) NOT NULL, #commission for the salesperson
     base_salary			decimal(15) NOT NULL, #base salary for the salesperson
     ytdsales			decimal(15) NOT NULL, #year to date amount for the salesperson
-
+   
     PRIMARY KEY (sale_no)
 );
 
@@ -65,11 +65,11 @@ create table purchased_autos
 create table finance
 (
 	vehicle_no			varchar(10) NOT NULL, #Unique id for car
-    buyer_no         	varchar(10) NOT NULL, #unique id for the customer
+    buyer_no         	varchar(10) NOT NULL, #unique id for the customer 
     amount				decimal(15) NOT NULL, #how much the loan is
     start_date 			DATE	   	NOT NULL, # start date of loan
     end_date 			DATE	   	NOT NULL, # end date of the loan
-    months				int(20)	   	NOT NULL, # how many months the loan is
+    months				int(20)	   	NOT NULL, # how many months the loan is 
     balance 			decimal(15) NOT NULL, #how much the balance is 
     
 	FOREIGN KEY(vehicle_no) REFERENCES purchased_autos(vehicle_no),
@@ -79,9 +79,9 @@ create table finance
 create table deal
 (
 	deal_no	            varchar(10) NOT NULL, #Unique id for transaction
-    rebate_no			varchar(10) NULL, #unique id for the rebate no
+    rebate_no			varchar(10) NULL, #unique id for the rebate no 
     package_no			varchar(2) 	NULL,
-    sale_no             varchar(10) NOT NULL, #unique id for representative
+    sale_no             varchar(10) NOT NULL, #unique id for representative 
     buyer_no		    varchar(10) NOT NULL, #unique id for the customer
     vehicle_no			varchar(10) NOT NULL, #Unique id for car
 	amount				decimal(15) NOT NULL, #how much the transaction is

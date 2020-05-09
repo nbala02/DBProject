@@ -1,13 +1,18 @@
 use globalviews;
 
+SELECT `model`, COUNT(`model`) AS `value_occurrence` 
+	FROM (SELECT sales.serial_no, purchased.model, purchased.color 
+			FROM sales INNER JOIN purchased ON sales.serial_no = purchased.serial_no) AS T
+	GROUP BY `model` ORDER BY `value_occurrence` DESC LIMIT 1;
+    
 create table model
 (
 	model          varchar(20)  NOT NULL, #unique model for car
-    price          varchar(11)  NOT NULL, #price for car
+    price          varchar(11)  NOT NULL, #price for car 
     type           varchar(10)  NOT NULL, # brand of car
     gas_mileage    int(2) 	    NOT NULL, #number of gas miles
     seat           int(1) 	    NOT NULL, # number of seats in car
-    engine 		   DECIMAL(2,1) NOT Null, #engine number 
+    engine 		   DECIMAL(2,1) NOT NULL, #engine number 
  
    PRIMARY KEY (model)
 );
@@ -48,14 +53,14 @@ CREATE EVENT rebate2Expired  -- create your event
       EVERY 24 HOUR  -- run every 24 hours
     DO
       UPDATE dealer_two.rebate2 SET expired='1' WHERE end_date = current_date() OR end_date < current_date();
-
+      
 #Check if a car currently has a rebate
 CREATE EVENT carRebate1  -- create your event
     ON SCHEDULE
       EVERY 24 HOUR  -- run every 24 hours
     DO
       UPDATE dealer_one.cars SET rebate='No' WHERE model NOT IN (SELECT model FROM globalviews.rebate_global);
-
+      
 CREATE EVENT carRebate2  -- create your event
     ON SCHEDULE
       EVERY 24 HOUR  -- run every 24 hours

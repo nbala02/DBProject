@@ -1,11 +1,11 @@
 create database globalviews;
 use globalviews;
 
-CREATE VIEW available_auto AS
+CREATE VIEW available_auto AS 
 	SELECT serial_no, model, color, warehouse, rebate, 'D1' dealer FROM dealer_one.cars
-	UNION ALL
+	UNION ALL 
 	SELECT vehicle_no, model, color, warehouse, rebate, 'D2' dealer FROM dealer_two.autos;
-
+      
 CREATE VIEW salesperson(
 	rep_no,
     base_salary,
@@ -13,16 +13,16 @@ CREATE VIEW salesperson(
     comm,
     dealer
 )
- AS
+ AS 
 	SELECT rep_no, base_salary, ytd_sales, comm, 'D1' from dealer_one.representative
     UNION ALL
     SELECT sale_no, comm, base_salary, ytdsales, 'D2' from dealer_two.sales_person;
-
+ 
 CREATE VIEW customer_global AS
 	SELECT customer_no, name, address, phone from dealer_one.customer_d1
     UNION ALL
     SELECT buyer_no, name, address, phone from dealer_two.customer_d2;
-
+    
 CREATE VIEW sales(
 	dealer,
 	transaction_no,
@@ -54,12 +54,12 @@ AS
 	SELECT rep_no, name, address, phone FROM dealer_one.representative
 	UNION ALL
 	SELECT sale_no, name, address, phone FROM dealer_two.sales_person;
-
-CREATE VIEW purchased AS
+        
+CREATE VIEW purchased AS 
 	SELECT serial_no, model, color, amount FROM dealer_one.purchased_cars
-    UNION ALL
+    UNION ALL 
 	SELECT vehicle_no, model, color, amount FROM dealer_two.purchased_autos;
-
+    
 CREATE VIEW loans(
 	vehicle_no,
     customer_no,
