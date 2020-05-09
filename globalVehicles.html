@@ -74,12 +74,29 @@
         $query = "SELECT * FROM available_auto";
         $output = $dbconnect->query($query);
 
+        //Find the warehouse with the most cars
+        $query1 = "SELECT `warehouse`, COUNT(`warehouse`) AS `value_occurrence` FROM `available_auto` GROUP BY `warehouse` ORDER BY
+                    `value_occurrence` DESC LIMIT 1";
+        $output1 = $dbconnect->query($query1);
+
+        if(!empty($output1))
+        {
+            while($result = mysqli_fetch_assoc($output1))
+            {
+                $warehouse = $result['warehouse'];
+            }
+        }
+
     ?>
 
     <div class="limiter">
         <div class="container-table100">
             <div class="wrap-table100">
                 <?php if($output->num_rows != 0){ ?>
+                <span class="login100-form-title" style="text-align:center;padding:0px;">Warehouse with most vehicles:
+                    <?php echo $warehouse?></span>
+
+                <br>
                 <table class="table-sort table-sort-search">
                     <thead>
                         <tr>

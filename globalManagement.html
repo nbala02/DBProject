@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Local Manager Account">
-    <title>All Vehicles</title>
+    <meta name="description" content="Wholesaler Account">
+    <title>All Sales Personnel</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
@@ -69,17 +69,86 @@
         if(isset($_SESSION['wsmanager']))
         {
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
+            $query = "SELECT * FROM salesperson INNER JOIN employee ON salesperson.rep_no = employee.emp_no";
         }
 
-        $query = "SELECT * FROM salesperson INNER JOIN employee ON salesperson.rep_no = employee.emp_no";
         $output = $dbconnect->query($query);
 
+        //Find the warehouse with the most cars
+        $query1 = "SELECT `dealer`, COUNT(`dealer`) AS `value_occurrence` FROM `salesperson` GROUP BY `dealer` ORDER BY
+                    `value_occurrence` DESC LIMIT 1";
+        $output1 = $dbconnect->query($query1);
+
+        if(!empty($output1))
+        {
+            while($result = mysqli_fetch_assoc($output1))
+            {
+                $dealer = $result['dealer'];
+            }
+        }
+
+        //Find the top N most popular column input
+        if(isset($_POST['top']) && isset($_POST['column']))
+        {
+            $top = $_POST['top'];
+            $column = $_POST['column'];
+
+            $query2 = "SELECT `name` FROM (SELECT employee.name, salesperson.base_salary, salesperson.comm, salesperson.ytd_sales
+                        FROM salesperson INNER JOIN employee ON salesperson.rep_no = employee.emp_no) AS T
+                        ORDER BY `$column` DESC LIMIT $top";
+
+            $output2 = $dbconnect->query($query2);
+
+            $popular = "";
+
+            if(!empty($output2))
+            {
+                while($result = mysqli_fetch_assoc($output2))
+                {
+
+                    $popular .= $result['name'] . " - ";
+                }
+            } else
+            {
+                echo $dbconnect->error;
+            }
+        }
     ?>
 
     <div class="limiter">
         <div class="container-table100">
             <div class="wrap-table100">
                 <?php if($output->num_rows != 0){ ?>
+                <span class="login100-form-title" style="text-align:center;padding:0px;">Dealership with the most sales personnel:
+                    <?php echo $dealer?></span>
+
+                <br>
+                <form method="POST" style="text-align: center">
+                    <div style="width:30%;display:inline-block" class="wrap-input100">
+                        <input class="input100" type="text" name="top" maxlength="2" placeholder="Return top N popular">
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+
+                    <select style="width:30%;display:inline-block" class="wrap-input100" name="column">
+                        <option value="" disabled selected>Select Column</option>
+                        <option value="base_salary">Base Salary</option>
+                        <option value="comm">Commission</option>
+                        <option value="ytd_sales">Year-to-Date Sales</option>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </select>
+
+                    <input style="padding: 10px;" type="submit" name="submit" value="Submit" class="btn-submit">
+
+                    <?php if(isset($output2)){ ?>
+                        <br>
+                        <span class="login100-form-title" style="text-align:center;"><?php echo " - " . $popular?>
+                        </span>
+                    <?php } ?>
+                </form>
+                <br>
+
                 <table class="table-sort">
                     <thead>
                         <tr>

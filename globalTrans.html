@@ -71,23 +71,97 @@
             $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
         }
 
+        //Select everything from sales global view to display in table
         $query = "SELECT * FROM sales";
         $output = $dbconnect->query($query);
 
+        //Find the customer with most purchases to display and dealer with most sales
         $query1 = "SELECT `customer_no`, COUNT(`customer_no`) AS `value_occurrence` FROM `sales` GROUP BY `customer_no` ORDER BY
-                    `value_occurrence` DESC LIMIT 1;";
+                    `value_occurrence` DESC LIMIT 1";
         $output1 = $dbconnect->query($query1);
+
+        $query2 = "SELECT `dealer`, COUNT(`dealer`) AS `value_occurrence` FROM `sales` GROUP BY `dealer` ORDER BY
+                    `value_occurrence` DESC LIMIT 1";
+        $output2 = $dbconnect->query($query2);
+
+        if(!empty($output1) && !empty($output2))
+        {
+            while($result = mysqli_fetch_assoc($output1))
+            {
+                $cust_no = $result['customer_no'];
+            }
+
+            while($result = mysqli_fetch_assoc($output2))
+            {
+                $dealer = $result['dealer'];
+            }
+        }
+
+        //Find the top N most popular column input
+        if(isset($_POST['top']) && isset($_POST['column']))
+        {
+            $top = $_POST['top'];
+            $column = $_POST['column'];
+
+            $query3 = "SELECT `$column`, COUNT(`$column`) AS `value_occurrence`
+                        FROM (SELECT sales.serial_no, purchased.model, purchased.color
+                                FROM sales INNER JOIN purchased ON sales.serial_no = purchased.serial_no) AS T
+                        GROUP BY `$column` ORDER BY `value_occurrence` DESC LIMIT $top";
+
+            $output3 = $dbconnect->query($query3);
+
+            $popular = "";
+
+            if(!empty($output3))
+            {
+                while($result = mysqli_fetch_assoc($output3))
+                {
+                    if($column == "model")
+                    {
+                        $popular .= $result['model'] . " - ";
+                    } else
+                    {
+                        $popular .= $result['color'] . " - ";
+                    }
+                }
+            }
+        }
     ?>
 
     <div class="limiter">
         <div class="container-table100">
             <div class="wrap-table100">
                 <?php if($output->num_rows != 0){ ?>
-                <?php if(!empty($output1)){
-                        while($result = mysqli_fetch_assoc($output1)){ ?>
-                        <span class=login100-form-title style=text-align:center; font-size:30px;>Customer with most purchases:
-                            <?php echo "<a href = 'viewTrans.html?cust_no=$result[customer_no]'>$result[customer_no]</a>"?></span>
-                <?php } } ?>
+                <span class="login100-form-title" style="text-align:center;padding:0px;">Dealership with most sales:
+                    <?php echo $dealer?></span>
+                <span class="login100-form-title" style="text-align:center;">Customer with most purchases:
+                    <?php echo "<a href = 'viewTrans.html?cust_no=$cust_no'>$cust_no</a>"?></span>
+
+                <form method="POST" style="text-align: center">
+                    <div style="width:30%;display:inline-block" class="wrap-input100">
+                        <input class="input100" type="text" name="top" maxlength="1" placeholder="Return top N popular" required>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+
+                    <select style="width:30%;display:inline-block" class="wrap-input100" name="column" required>
+                        <option value="" disabled selected>Select Column</option>
+                        <option value="model">Model</option>
+                        <option value="color">Color</option>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </select>
+
+                    <input style="padding: 10px;" type="submit" name="submit" value="Submit" class="btn-submit">
+                </form>
+
+                <?php if(isset($output3)){ ?>
+                    <br>
+                    <span class="login100-form-title" style="text-align:center;"><?php echo " - " . $popular?>
+                    </span>
+                <?php } ?>
+                <br>
+
                 <table class="table-sort table-sort-search">
                     <thead>
                         <tr>

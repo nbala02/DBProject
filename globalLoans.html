@@ -74,12 +74,43 @@
         $query = "SELECT * FROM loans";
         $output = $dbconnect->query($query);
 
+        //Find the top N most popular column input
+        if(isset($_POST['column']) && isset($_POST['order']))
+        {
+            $order = $_POST['order'];
+            $column = $_POST['column'];
+
+            $query = "SELECT * FROM loans ORDER BY `$column` $order";
+
+            $output = $dbconnect->query($query);
+        }
+
     ?>
 
     <div class="limiter">
         <div class="container-table100">
             <div class="wrap-table100">
                 <?php if($output->num_rows != 0){ ?>
+                <form method="POST" style="text-align: center">
+                    <select style="width:30%;display:inline-block" class="wrap-input100" name="column">
+                        <option value="" disabled selected>Sort By</option>
+                        <option value="amount">Loan</option>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </select>
+
+                    <select style="width:30%;display:inline-block" class="wrap-input100" name="order">
+                        <option value="" disabled selected>Order By</option>
+                        <option value="DESC">High to Low</option>
+                        <option value="ASC">Low to High</option>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </select>
+
+                    <input style="padding: 10px;" type="submit" name="submit" value="Submit" class="btn-submit">
+                </form>
+
+                <br>
                 <table class="table-sort">
                     <thead>
                         <tr>
@@ -111,12 +142,6 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        $(function () {
-            $('table.table-sort').tablesort();
-        });
-    </script>
 
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
