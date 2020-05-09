@@ -111,9 +111,10 @@
                                         <th class="cell100 column1">Customer ID</th>
                                         <th class="cell100 column2">Name</th>
                                         <th class="cell100 column3">Address</th>
+                                        <th class="cell100 column3">Phone</th>
                                         <th class="cell100 column4">Date</th>
                                         <th class="cell100 column5">Transaction No</th>
-                                        <th class="cell100 column6">Representative No</th>
+                                        <th class="cell100 column6">Salesperson No</th>
                                         <th class="cell100 column6">Serial No</th>
                                         <th class="cell100 column6">Sale Amount</th>
                                     </tr>
@@ -151,30 +152,14 @@
                             <?php } } else if(!empty($output1)){
                                 while($result = mysqli_fetch_assoc($output1)){ ?>
                                     <tr class="row100 body">
-                                        <?php if(isset($_SESSION['customer_no'])){ ?>
                                         <td class="cell100 column1"><?php echo $result['customer_no']?></td>
-                                        <?php } else if(isset($_SESSION['buyer_no'])){ ?>
-                                        <td class="cell100 column1"><?php echo $result['buyer_no']?></td>
-                                        <?php } ?>
-
                                         <td class="cell100 column2"><?php echo $result['name']?></td>
                                         <td class="cell100 column3"><?php echo $result['address']?></td>
                                         <td class="cell100 column4"><?php echo $result['phone']?></td>
                                         <td class="cell100 column4"><?php echo $result['date']?></td>
-                                        <td class="cell100 column4"><?php echo $result['deal_no']?></td>
-
-                                        <?php if(isset($_SESSION['customer_no'])){ ?>
-                                        <td class="cell100 column1"><?php echo $result['rep_no']?></td>
-                                        <?php } else if(isset($_SESSION['buyer_no'])){ ?>
-                                        <td class="cell100 column1"><?php echo $result['sale_no']?></td>
-                                        <?php } ?>
-
-                                        <?php if(isset($_SESSION['customer_no'])){ ?>
-                                        <td class="cell100 column1"><?php echo $result['serial_no']?></td>
-                                        <?php } else if(isset($_SESSION['buyer_no'])){ ?>
-                                        <td class="cell100 column1"><?php echo $result['vehicle_no']?></td>
-                                        <?php } ?>
-
+                                        <td class="cell100 column4"><?php echo $result['transaction_no']?></td>
+                                        <td class="cell100 column4"><?php echo $result['rep_no']?></td>
+                                        <td class="cell100 column4"><?php echo $result['serial_no']?></td>
                                         <td class="cell100 column2"><?php echo $result['amount']?></td>
                                     </tr>
                             <?php } } else{ echo '<span class=login100-form-title>No Transactions</span><br><br>'; } ?>
