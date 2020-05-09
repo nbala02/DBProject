@@ -27,17 +27,21 @@ if (! empty($_POST['max_price'])) {
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/tablesort.css">
-    <link rel="stylesheet" type=text/css href="styles/price.css">
+
+
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript" src="styles/tablesort.js"></script>
+ <!--   <script type="text/javascript" src="styles/tablesort.js"></script>
 
 
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" type=text/css href="styles/price.css">
+   <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
-    <script type="text/javascript">
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+ <!--   <script type="text/javascript">
         $(function() {
             $("#slider-range").slider({
                 range: true,
@@ -54,9 +58,9 @@ if (! empty($_POST['max_price'])) {
                 " - $" + $("#slider-range").slider("values", 1));
         });
 
-    </script>
+    </script> -->
 
-    <style>
+   <!-- <style>
         body {
             font-family: Arial;
             margin: 0;
@@ -139,7 +143,7 @@ if (! empty($_POST['max_price'])) {
             vertical-align: middle;
         }
 
-    </style>
+    </style> -->
 
 
 
@@ -203,19 +207,19 @@ if (! empty($_POST['max_price'])) {
 
     </script>
 
+<!--  Scroll bar -->
 
-
-
-    <div class="form-price-range-filter">
+       <div class="form-price-range-filter">
         <form method="post" action="">
             <div>
                 <input type="" id="min" name="min_price" value="<?php echo $min; ?>">
-                <div id="slider-range" class="ui-slider ui-corner-all ui slider- horizontal ui widget ui-widget-content">
+            <!--    <div id="slider-range" class="ui-slider ui-corner-all ui slider- horizontal ui widget ui-widget-content">
                     <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15.7%; width: 32.9%;"></div>
                     <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 10%;"></span>
                     <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 30%;"></span>
 
-                </div>
+                </div> -->
+                <div id="slider-range"></div>
                 <input type="" id="max" name="max_price" value="<?php echo $max; ?>">
             </div>
             <div>
