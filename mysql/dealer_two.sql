@@ -50,6 +50,8 @@ create table autos
     FOREIGN KEY (model) REFERENCES globalviews.model(model)
 );
 
+
+
 create table purchased_autos
 (
 	vehicle_no			varchar(10) NOT NULL, #Unique id for car
