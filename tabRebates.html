@@ -12,9 +12,7 @@
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <link rel="stylesheet" type="text/css" href="styles/tablesort.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript" src="styles/tablesort.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
 </head>
 
 <body>
@@ -66,13 +64,6 @@
         </div>
     </header>
 
-     <script type="text/javascript">
-        $(function() {
-            $('table.table-sort').tablesort();
-        });
-
-    </script>
-
     <?php
         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
         $query = "SELECT * FROM rebate_global";
@@ -83,31 +74,39 @@
         <div class="container-table100">
             <div class="wrap-table100">
                 <?php if($output->num_rows != 0){ ?>
-                <table class="table-sort table-sort-search">
-                    <thead>
-                        <tr>
-                            <th class="cell100 column1">Rebate No.</th>
-                            <th class="cell100 column1">Model</th>
-                            <th class="cell100 column1">Rebate Amount</th>
-                            <th class="cell100 column1">Start Date: </th>
-                            <th class="cell100 column1">End Date: </th>
-                            <th class="cell100 column1">Dealership: </th>
-                        </tr>
-                    </thead>
+                <div class="table100 ver2 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="cell100 column1">Rebate No.</th>
+                                    <th class="cell100 column2">Model</th>
+                                    <th class="cell100 column3">Rebate Amount</th>
+                                    <th class="cell100 column4">Start Date: </th>
+                                    <th class="cell100 column5">End Date: </th>
+                                    <th class="cell100 column6">Dealership: </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
 
-                    <tbody>
-                        <?php while($result = mysqli_fetch_assoc($output)){ ?>
-                            <tr>
-                                <td><?php echo $result['rebate_no'];?></td>
-                                <td><?php echo $result['model'];?></td>
-                                <td><?php echo $result['rebate_amt'];?></td>
-                                <td><?php echo $result['start_date'];?></td>
-                                <td><?php echo $result['end_date'];?></td>
-                                <td><?php echo $result['dealer'];?></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                    <div class="table100-body js-pscroll ps ps--active-y">
+                        <table>
+                            <tbody>
+                                <?php while($result = mysqli_fetch_assoc($output)){ ?>
+                                    <tr>
+                                        <td class="cell100 column1"><?php echo $result['rebate_no'];?></td>
+                                        <td class="cell100 column2"><?php echo $result['model'];?></td>
+                                        <td class="cell100 column3"><?php echo $result['rebate_amt'];?></td>
+                                        <td class="cell100 column4"><?php echo $result['start_date'];?></td>
+                                        <td class="cell100 column5"><?php echo $result['end_date'];?></td>
+                                        <td class="cell100 column6"><?php echo $result['dealer'];?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <?php } else { ?>
                     <section>
                         <h1 id="page_title">No Rebates Available</h1>
