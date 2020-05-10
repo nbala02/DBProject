@@ -1,36 +1,17 @@
-<?php
-$min = 100;
-$max = 90000;
-
-if (! empty($_POST['min_price'])) {
-    $min = $_POST['min_price'];
-}
-
-if (! empty($_POST['max_price'])) {
-    $max = $_POST['max_price'];
-}
-
-
-
-?>
-
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Local Manager Account">
+    <meta name="description" content="Browse Vehicles">
     <title>All Vehicles</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <link rel="stylesheet" type="text/css" href="styles/tablesort.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript" src="styles/tablesort.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
 </head>
 
 <body>
@@ -82,213 +63,225 @@ if (! empty($_POST['max_price'])) {
         </div>
     </header>
 
-
-
-    <div class="form-price-range-filter">
-        <form method="post" action="">
-            <div>
-                <input type="" id="min" name="min_price" value="<?php echo $min; ?>">
-                <div id="slider-range"></div>
-                <input type="" id="max" name="max_price" value="<?php echo $max; ?>">
-            </div>
-            <div>
-                <input type="submit" name="submit_range" value="Filter Product" class="btn-submit">
-            </div>
-        </form>
-    </div>
-
-
-
     <!-- Cars in the database for dealer -->
     <?php
-
         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
 
-      // $query1 = "SELECT * FROM available_auto INNER JOIN rebate_global ON available_auto.model = rebate_Global.model AND available_auto.dealer = rebate_Global.dealer";
+        $query = "SELECT serial_no, color, warehouse, rebate, dealer, model.model, model.price, model.type, model.gas_mileage,
+                    model.seat, model.engine FROM available_auto
+                    INNER JOIN model ON globalviews.available_auto.model = globalviews.model.model";
 
+        $output = $dbconnect->query($query);
 
-        $query2 = "SELECT serial_no, color, warehouse, rebate, dealer, model.model, model.price, model.type, model.gas_mileage, model.seat, model.engine FROM available_auto INNER JOIN model ON globalviews.available_auto.model= globalviews.model.model WHERE model.price BETWEEN '$min' AND '$max'";
-
-
-       $output2 = $dbconnect->query($query2);
-
-        //Find the top N most popular column input
-        if(isset($_POST['column']) && isset($_POST['order']))
+        if($_SERVER["REQUEST_METHOD"] == "POST")
         {
-            $order = $_POST['order'];
-            $column = $_POST['column'];
-
-            $query2 = "SELECT serial_no, color, warehouse, rebate, dealer, model.model, model.price, model.type, model.gas_mileage, model.seat, model.engine FROM available_auto INNER JOIN model ON globalviews.available_auto.model= globalviews.model.model where model.price BETWEEN '$min' AND '$max' ORDER BY `$column` $order";
-
-            $output2 = $dbconnect->query($query2);
-        }
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST")
-        {
-           if(isset($_POST['color']) && isset($_POST['model'])&& isset($_POST['gas_mileage'])&& isset($_POST['seat']) && isset($_POST['engine']))
-            {
-            // collect value of input field
+            //collect value of search input fields
             $color = $_POST['color'];
             $model = $_POST['model'];
             $mileage = $_POST['gas_mileage'];
             $seat = $_POST['seat'];
             $engine = $_POST['engine'];
-            }
+            $min = $_POST['min_price'];
+            $max = $_POST['max_price'];
 
-
-            if(isset($model) || isset($color) || isset($mileage) || isset($seat) || isset($engine))
+            if(isset($column) && isset($order))
             {
-                $query2 = "SELECT serial_no, color, warehouse, rebate, dealer, model.model, model.price, model.type, model.gas_mileage, model.seat, model.engine FROM available_auto INNER JOIN model ON globalviews.available_auto.model= globalviews.model.model WHERE color LIKE '$color' OR model.model LIKE '$model' OR gas_mileage LIKE '$mileage' OR seat LIKE '$seat' OR engine LIKE '$engine'";
-
-                $output2 = $dbconnect->query($query2);
+                //collect value of sort input fields
+                $column = $_POST['column'];
+                $order = $_POST['order'];
             }
+
+            $query = "SELECT serial_no, color, warehouse, rebate, dealer, model.model, model.price, model.type, model.gas_mileage,
+                    model.seat, model.engine FROM available_auto
+                    INNER JOIN model ON globalviews.available_auto.model = globalviews.model.model";
+
+            $conditions = array();
+
+            if(!empty($color))
+            {
+                $conditions[] = "color='$color'";
+            }
+            if(!empty($model))
+            {
+              $conditions[] = "model.model='$model'";
+            }
+            if(!empty($mileage))
+            {
+              $conditions[] = "gas_mileage='$mileage'";
+            }
+            if(!empty($seat))
+            {
+              $conditions[] = "seat='$seat'";
+            }
+            if(!empty($engine))
+            {
+              $conditions[] = "engine='$engine'";
+            }
+            if(!empty($min) && !empty($max))
+            {
+              $conditions[] = "BETWEEN '$min' AND '$max'";
+            }
+            if(!empty($column))
+            {
+              $conditions[] = "ORDER BY '$column'";
+            }
+            if(!empty($order))
+            {
+              $conditions[] = " '$order'";
+            }
+
+            $sql = $query;
+            if (count($conditions) > 0) {
+              $sql .= " WHERE " . implode(' AND ', $conditions);
+            }
+
+            $output = $dbconnect->query($sql);
         }
-
     ?>
-
-
-
-    Rebate: <input type="checkbox" id="myCheck">
-
 
     <div class="limiter">
         <div class="container-table100">
             <div class="wrap-table100">
-                <?php if($output2){ ?>
-                <form method="POST" style="text-align: center">
-                    <select style="width:30%;display:inline-block" class="wrap-input100" name="column">
-                        <option value="" disabled selected>Sort By</option>
-                        <option value="price">Price</option>
-                        <option value="gas_mileage">Gas Mileage</option>
-                        <option value="engine">Engine</option>
-                        <option value="color">Color</option>
-                        <option value="model">Model</option>
-                        <span class="focus-input100-1"></span>
-                        <span class="focus-input100-2"></span>
-                    </select>
-
-                    <select style="width:30%;display:inline-block" class="wrap-input100" name="order">
-                        <option value="" disabled selected>Order By</option>
-                        <option value="DESC">High to Low</option>
-                        <option value="ASC">Low to High</option>
-                        <option value="DESC">Z-A</option>
-                        <option value="ASC">A-Z</option>
-                        <span class="focus-input100-1"></span>
-                        <span class="focus-input100-2"></span>
-                    </select>
-
-                    <input style="padding: 10px;" type="submit" name="submit" value="Submit" class="btn-submit">
-                </form>
-
-                <br>
-
                 <form method="POST" action= "<?php echo $_SERVER['PHP_SELF'];?>">
-                    <div style="width:30%;display:inline-block" class="wrap-input100">
-                        <input class="input100" type="text" name="color" placeholder="Search Color">
-                        <span class="focus-input100-1"></span>
-                        <span class="focus-input100-2"></span>
+                    <div style="text-align:right">
+                        <span class="login100-form-title" style="display:inline-block;float:left;">Search:</span>
+
+                        <div style="width:17%;display:inline-block;" class="wrap-input100">
+                            <input class="input100" type="text" name="color" placeholder="Search Color">
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                        </div>
+
+                        <div style="width:17%;display:inline-block" class="wrap-input100">
+                            <input class="input100" type="text" name="model" placeholder="Search Model">
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                        </div>
+
+                        <div style="width:17%;display:inline-block" class="wrap-input100">
+                            <input class="input100" type="text" name="gas_mileage" placeholder="Search Gas Mileage">
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                        </div>
+
+                        <div style="width:17%;display:inline-block" class="wrap-input100">
+                            <input class="input100" type="text" name="seat" placeholder="Search Seats">
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                        </div>
+
+                        <div style="width:17%;display:inline-block" class="wrap-input100">
+                            <input class="input100" type="text" name="engine" placeholder="Search Engine">
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                        </div>
                     </div>
 
-                    <div style="width:30%;display:inline-block" class="wrap-input100">
-                        <input class="input100" type="text" name="model" placeholder="Search Model">
-                        <span class="focus-input100-1"></span>
-                        <span class="focus-input100-2"></span>
+                    <div style="text-align:right;margin-top:10px;">
+                        <span class="login100-form-title" style="display:inline-block;float:left;">Filter:</span>
+
+                        <div style="width:17%;display:inline-block" class="wrap-input100">
+                            <input class="input100" type="" id="min" name="min_price" placeholder="Minimum Range">
+                        </div>
+
+                        <div style="width:17%;display:inline-block" class="wrap-input100">
+                            <input class="input100" type="" id="max" name="max_price" placeholder="Maximum Range">
+                        </div>
                     </div>
 
-                    <div style="width:30%;display:inline-block" class="wrap-input100">
-                        <input class="input100" type="text" name="gas_mileage" placeholder="Search Gas Mileage">
-                        <span class="focus-input100-1"></span>
-                        <span class="focus-input100-2"></span>
+                    <div style="text-align:right;margin-top:10px;">
+                        <span class="login100-form-title" style="display:inline-block;float:left;">Sort:</span>
+
+                        <select style="width:17%;display:inline-block" class="wrap-input100" name="column">
+                            <option value="" disabled selected>Sort By</option>
+                            <option value="price">Price</option>
+                            <option value="gas_mileage">Gas Mileage</option>
+                            <option value="engine">Engine</option>
+                            <option value="color">Color</option>
+                            <option value="model">Model</option>
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                        </select>
+
+                        <select style="width:17%;display:inline-block" class="wrap-input100" name="order">
+                            <option value="" disabled selected>Order By</option>
+                            <option value="DESC">High to Low</option>
+                            <option value="ASC">Low to High</option>
+                            <option value="DESC">Z-A</option>
+                            <option value="ASC">A-Z</option>
+                            <span class="focus-input100-1"></span>
+                            <span class="focus-input100-2"></span>
+                        </select>
                     </div>
 
-                    <div style="width:30%;display:inline-block" class="wrap-input100">
-                        <input class="input100" type="text" name="seat" placeholder="Search Seats">
-                        <span class="focus-input100-1"></span>
-                        <span class="focus-input100-2"></span>
-                    </div>
-
-                    <div style="width:30%;display:inline-block" class="wrap-input100">
-                        <input class="input100" type="text" name="engine" placeholder="Search Engine">
-                        <span class="focus-input100-1"></span>
-                        <span class="focus-input100-2"></span>
-                    </div>
-
-                    <input style="padding: 10px;" type="submit" name="submit" value="Submit" class="btn-submit">
+                    <input style="padding:10px;float:right;margin:10px 0px" type="submit" name="submit" value="Submit">
                 </form>
 
                 <br>
+                <?php if($output){ ?>
+                <div class="table100 ver2 m-b-110" style="margin-top:50px;">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column1">Serial No.</th>
+                                    <th class="cell100 column2">Model</th>
+                                    <th class="cell100 column3">Color</th>
+                                    <th class="cell100 column4">Warehouse</th>
+                                    <th class="cell100 column5">Dealership</th>
+                                    <th class="cell100 column6">Rebate<input style="margin-left:10px" type="checkbox" id="myCheck"></th>
+                                    <th class="cell100 column7">Price</th>
+                                    <th class="cell100 column8">Type</th>
+                                    <th class="cell100 column9">Gas Mileage</th>
+                                    <th class="cell100 column10">Seat</th>
+                                    <th class="cell100 column11">Engine</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
 
-                <table class="table-sort table-sort-search">
-                    <thead>
-                        <tr class="row100 head">
-                            <th class="table-sort">Serial No.</th>
-                            <th class="table-sort">Model</th>
-                            <th class="table-sort">Color</th>
-                            <th class="table-sort">Warehouse</th>
-                            <th class="table-sort">Dealership</th>
-                            <th class="table-sort">Rebate</th>
-                            <th class="table-sort">price</th>
-                            <th class="table-sort">type</th>
-                            <th class="table-sort">Gas Mileage</th>
-                            <th class="table-sort">Seat</th>
-                            <th class="table-sort">engine</th>
-                        </tr>
-                    </thead>
-
-
-                    <tbody>
-                        <?php if(($output2)){
-                while($result = mysqli_fetch_assoc($output2)){ ?>
-                        <tr class="<?php echo $result['rebate'] ?>">
-                            <td><?php echo $result['serial_no']?></td>
-                            <td><?php echo $result['model']?></td>
-                            <td><?php echo $result['color']?></td>
-                            <td><?php echo $result['warehouse']?></td>
-                            <td><?php echo $result['dealer']?></td>
-                            <td><?php echo $result['rebate']?></td>
-                            <td><?php echo $result['price']?></td>
-                            <td><?php echo $result['type']?></td>
-                            <td><?php echo $result['gas_mileage']?></td>
-                            <td><?php echo $result['seat']?></td>
-                            <td><?php echo $result['engine']?></td>
-
-
-                        </tr>
-
-
-                        <?}}} else{ echo '<span class="login100-form-title p-b-33">No Cars</span>'; echo $dbconnect->error;} ?>
-
-
-
-
-
-
-                    </tbody>
-
-                </table>
-
+                    <div class="table100-body js-pscroll ps ps--active-y">
+                        <table>
+                            <tbody >
+                                <?php if(($output)){
+                                        while($result = mysqli_fetch_assoc($output)){ ?>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1"><?php echo $result['serial_no']?></td>
+                                    <td class="cell100 column2"><?php echo $result['model']?></td>
+                                    <td class="cell100 column3"><?php echo $result['color']?></td>
+                                    <td class="cell100 column4"><?php echo $result['warehouse']?></td>
+                                    <td class="cell100 column5"><?php echo $result['dealer']?></td>
+                                    <td class="cell100 column6"><?php echo $result['rebate']?></td>
+                                    <td class="cell100 column7"><?php echo $result['price']?></td>
+                                    <td class="cell100 column8"><?php echo $result['type']?></td>
+                                    <td class="cell100 column9"><?php echo $result['gas_mileage']?></td>
+                                    <td class="cell100 column10"><?php echo $result['seat']?></td>
+                                    <td class="cell100 column11"><?php echo $result['engine']?></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <?php } } else { ?>
+                    <section>
+                        <h1 id="page_title">No Vehicles Available</h1>
+                    </section>
+                <?php } ?>
             </div>
         </div>
     </div>
 
-        <script>
-
+    <script>
         $(document).ready(function () {
-            $('#myCheck').on('change', function(){
-                if ($(this).prop('checked')) {
-                    $('.No').hide();
-                }
-                else {
-                    $('.No').show();
-                }
+            $('#myCheck').change( function() {
+                $('td:contains("No")').parent().toggle();
             });
         });
-
     </script>
 
     <footer>
         <h3>All Rights Reserved, Copyright &copy; 2020</h3>
     </footer>
 </body>
-
 </html>

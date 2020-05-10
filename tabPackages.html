@@ -11,9 +11,7 @@
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <link rel="stylesheet" type="text/css" href="styles/tablesort.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript" src="styles/tablesort.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
 </head>
 
 <body>
@@ -65,13 +63,6 @@
         </div>
     </header>
 
-    <script type="text/javascript">
-        $(function() {
-            $('table.table-sort').tablesort();
-        });
-
-    </script>
-
     <?php
         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "globalviews");
         $query = "SELECT * FROM add_on";
@@ -85,10 +76,10 @@
                 <table class="table-sort table-sort-search">
                     <thead>
                         <tr>
-                            <th class="table-sort">Package No.</th>
-                            <th class="table-sort">Package Description:</th>
-                            <th class="table-sort">Price:</th>
-                            <th class="table-sort">Mode Available:</th>
+                            <th class="cell100 column1">Package No.</th>
+                            <th class="cell100 column1">Package Description:</th>
+                            <th class="cell100 column1">Price:</th>
+                            <th class="cell100 column1">Mode Available:</th>
                         </tr>
                     </thead>
 

@@ -4,16 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Local Manager Account">
-    <title>All Vehicles</title>
+    <meta name="description" content="Wholesale Manager Account">
+    <title>All Loans</title>
     <link rel="icon" type="image/png" href="images/caricon.png">
     <link rel="stylesheet" type=text/css href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <link rel="stylesheet" type="text/css" href="styles/tablesort.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript" src="styles/tablesort.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
 </head>
 
 <body>
@@ -111,29 +109,37 @@
                 </form>
 
                 <br>
-                <table class="table-sort">
-                    <thead>
-                        <tr>
-                            <th class="table-sort">Serial No</th>
-                            <th class="table-sort">Customer No</th>
-                            <th class="table-sort">Amount</th>
-                            <th class="table-sort">Model</th>
-                            <th class="table-sort"></th>
-                        </tr>
-                    </thead>
+                <div class="table100 ver2 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="cell100 column1">Serial No</th>
+                                    <th class="cell100 column2">Customer No</th>
+                                    <th class="cell100 column3">Amount</th>
+                                    <th class="cell100 column4">Model</th>
+                                    <th class="cell100 column5"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
 
-                    <tbody>
-                       <?php while($result = mysqli_fetch_assoc($output)){ ?>
-                            <tr>
-                                <td><?php echo $result['vehicle_no']?></td>
-                                <td><?php echo $result['customer_no']?></td>
-                                <td><?php echo $result['amount']?></td>
-                                <td><?php echo $result['model']?></td>
-                                <td><?php echo "<a href = 'viewProfile.html?cust_no=$result[customer_no]&amount=$result[amount]'>View</a>"?></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                    <div class="table100-body js-pscroll ps ps--active-y">
+                        <table>
+                            <tbody>
+                               <?php while($result = mysqli_fetch_assoc($output)){ ?>
+                                    <tr>
+                                        <td class="cell100 column1"><?php echo $result['vehicle_no']?></td>
+                                        <td class="cell100 column2"><?php echo $result['customer_no']?></td>
+                                        <td class="cell100 column3"><?php echo $result['amount']?></td>
+                                        <td class="cell100 column4"><?php echo $result['model']?></td>
+                                        <td class="cell100 column5"><?php echo "<a href = 'viewProfile.html?cust_no=$result[customer_no]&amount=$result[amount]'>View</a>"?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <?php } else { ?>
                     <section>
                         <h1 id="page_title">No Vehicles Available</h1>
