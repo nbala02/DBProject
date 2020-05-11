@@ -12,7 +12,7 @@
     $global = mysqli_connect("127.0.0.1", "root", "", "globalviews");
     $sql = "SELECT model FROM rebate_Global WHERE model = '$model'";
     $output = $global->query($sql);
-    echo $sql;
+
     if($output->num_rows != 0)
     {
         $answer = 'Yes';
