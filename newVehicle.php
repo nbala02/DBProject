@@ -11,7 +11,9 @@
 
     $global = mysqli_connect("127.0.0.1", "root", "", "globalviews");
     $sql = "SELECT model FROM rebate_Global WHERE model = '$model'";
-    if($global->query($sql) === TRUE)
+    $output = $global->query($sql);
+    echo $sql;
+    if($output->num_rows != 0)
     {
         $answer = 'Yes';
     } else
@@ -38,5 +40,5 @@
     {
         //echo "Something went wrong" . "<br>" . $connection->error;
         echo "<script>alert('Vehicle already exists'); window.location.href='addVehicle.html';</script>";
-    } 
+    }
 ?>

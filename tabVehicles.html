@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="styles/util.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/table.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </head>
 
 <body>
@@ -84,10 +85,13 @@
             $min = $_POST['min_price'];
             $max = $_POST['max_price'];
 
-            if(isset($column) && isset($order))
+            if(isset($_POST['column']))
             {
                 //collect value of sort input fields
                 $column = $_POST['column'];
+            }
+            if(isset($_POST['order']))
+            {
                 $order = $_POST['order'];
             }
 
@@ -96,43 +100,51 @@
                     INNER JOIN model ON globalviews.available_auto.model = globalviews.model.model";
 
             $conditions = array();
+            $sort = array();
 
             if(!empty($color))
             {
-                $conditions[] = "color='$color'";
+                $conditions[] = "color LIKE '%$color%'";
             }
             if(!empty($model))
             {
-              $conditions[] = "model.model='$model'";
+              $conditions[] = "model.model LIKE '%$model%'";
             }
             if(!empty($mileage))
             {
-              $conditions[] = "gas_mileage='$mileage'";
+              $conditions[] = "gas_mileage LIKE '%$mileage%'";
             }
             if(!empty($seat))
             {
-              $conditions[] = "seat='$seat'";
+              $conditions[] = "seat LIKE '%$seat%'";
             }
             if(!empty($engine))
             {
-              $conditions[] = "engine='$engine'";
+              $conditions[] = "engine LIKE '%$engine%'";
             }
             if(!empty($min) && !empty($max))
             {
-              $conditions[] = "BETWEEN '$min' AND '$max'";
+              $conditions[] = "model.price BETWEEN '$min' AND '$max'";
             }
-            if(!empty($column))
+            if(!empty($column) && !empty($order))
             {
-              $conditions[] = "ORDER BY '$column'";
-            }
-            if(!empty($order))
+              $sort[] = " ORDER BY $column $order";
+            } else if(!empty($column))
             {
-              $conditions[] = " '$order'";
+              $sort[] = "ORDER BY $column";
             }
 
             $sql = $query;
-            if (count($conditions) > 0) {
-              $sql .= " WHERE " . implode(' AND ', $conditions);
+            if(count($conditions) > 0 && count($sort) > 0)
+            {
+                $sql .= " WHERE " . implode(' AND ', $conditions);
+                $sql .= implode(' ', $sort);
+            } else if(count($conditions) == 0 && count($sort) > 0)
+            {
+                $sql .= implode(' ', $sort);
+            } else
+            {
+                $sql .= " WHERE " . implode(' AND ', $conditions);
             }
 
             $output = $dbconnect->query($sql);
@@ -193,7 +205,7 @@
                         <span class="login100-form-title" style="display:inline-block;float:left;">Sort:</span>
 
                         <select style="width:17%;display:inline-block" class="wrap-input100" name="column">
-                            <option value="" disabled selected>Sort By</option>
+                            <option value="" selected>Sort By</option>
                             <option value="price">Price</option>
                             <option value="gas_mileage">Gas Mileage</option>
                             <option value="engine">Engine</option>
@@ -204,7 +216,7 @@
                         </select>
 
                         <select style="width:17%;display:inline-block" class="wrap-input100" name="order">
-                            <option value="" disabled selected>Order By</option>
+                            <option value="" selected>Order By</option>
                             <option value="DESC">High to Low</option>
                             <option value="ASC">Low to High</option>
                             <option value="DESC">Z-A</option>
@@ -242,7 +254,7 @@
 
                     <div class="table100-body js-pscroll ps ps--active-y">
                         <table>
-                            <tbody >
+                            <tbody>
                                 <?php if(($output)){
                                         while($result = mysqli_fetch_assoc($output)){ ?>
                                 <tr class="row100 body">
@@ -265,7 +277,7 @@
                 </div>
                 <?php } } else { ?>
                     <section>
-                        <h1 id="page_title">No Vehicles Available</h1>
+                        <h1 style="margin-top:50px;" id="page_title">No Vehicles Available <?php echo $dbconnect->error?></h1>
                     </section>
                 <?php } ?>
             </div>
