@@ -74,8 +74,8 @@
                             <span class="focus-input100-2"></span>
                         </div>
 
-                        <select class="wrap-input100 rs1 validate-input" name="model">
-                            <option value="" selected>Select Model</option>
+                        <select class="wrap-input100 rs1 validate-input" name="model" required>
+                            <option value="" disabled selected>Select Model</option>
                             <?php
                                 while($row = mysqli_fetch_assoc($result6)){
                             ?>
