@@ -42,7 +42,7 @@
         
         if((isset($id) && $id == $code) && (isset($fullName) && $fullName == $name)) 
         {
-            $sql = "INSERT INTO customeracc (customer_no, fname, lname, email, username, password, location)
+            $sql = "INSERT INTO customer (customer_no, fname, lname, email, username, password, location)
             VALUES ('$code', '$fname', '$lname', '$email', '$username', '$password', '$location')";
 
             $name = $_POST['fname'];

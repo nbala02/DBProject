@@ -11,7 +11,7 @@
         $dealer = $_POST['radio'];
 
         //Checking if the values exist in the database or not
-        $query = "SELECT * FROM customeracc WHERE username='$id' and password='$password'";
+        $query = "SELECT * FROM customer WHERE username='$id' and password='$password'";
 
         $result = mysqli_query($dbconnect, $query) or die(mysqli_error($dbconnect));
         $count = mysqli_num_rows($result);

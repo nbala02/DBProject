@@ -1,6 +1,6 @@
 <?php
     // Create connection
-    $dbconnect = mysqli_connect("127.0.0.1", "root", "", "testingDB");
+    $dbconnect = mysqli_connect("127.0.0.1", "root", "", "user_accounts");
 
     //Check if connection worked
     /*if($dbconnect){

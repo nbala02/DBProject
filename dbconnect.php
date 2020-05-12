@@ -1,6 +1,6 @@
 <?php
     //Create connection
-    $dbconnect = mysqli_connect("127.0.0.1", "root", "", "testingDB");
+    $dbconnect = mysqli_connect("127.0.0.1", "root", "", "user_accounts");
 
     //This section is for the addTrans.html page
     if(isset($_SESSION['salesrep1']) || isset($_SESSION['salesrep2']))

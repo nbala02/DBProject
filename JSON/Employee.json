@@ -1,25 +1,25 @@
 [
     {
-        "fname": "Bob",
-        "lname": "Ross",
-        "email": "bross@nyit.edu",
+        "fname": "Ginni",
+        "lname": "Rometty",
+        "email": "grometty@nyit.edu",
         "password": "hello",
         "position": "Wholesale Manager",
         "location": "NA"
     },
     {
-        "fname": "Rachel",
-        "lname": "Green",
-        "email": "rgreen@nyit.edu",
+        "fname": "Satya",
+        "lname": "Nadella",
+        "email": "snadella@nyit.edu",
         "password": "hello",
         "position": "Local Manager",
         "location": "D1"
         
     },
     {
-        "fname": "Bigg",
-        "lname": "Boss",
-        "email": "bboss@nyit.edu",
+        "fname": "Mark",
+        "lname": "Zuckerberg",
+        "email": "mzuckerberg@nyit.edu",
         "password": "hello",
         "position": "Local Manager",
         "location": "D2"

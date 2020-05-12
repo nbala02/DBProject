@@ -1,5 +1,5 @@
-create database testingDB;
-use testingDB;
+create database user_accounts;
+use user_accounts;
 
 create table employee
 (
@@ -13,7 +13,7 @@ create table employee
     PRIMARY KEY	(emp_no)
 );
 
-create table customeracc
+create table customer
 (
 	customer_no		varchar(6),   #Unique id
 	fname			varchar(50)   NOT NULL, #first name
@@ -27,4 +27,4 @@ create table customeracc
 );
 
 SELECT * FROM employee;
-SELECT * FROM customeracc;
+SELECT * FROM customer;
