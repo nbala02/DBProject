@@ -122,7 +122,7 @@
                     VALUES ('$serial', '$model', '$color', '$autotrans', '$warehouse', '$amount')";
 
         $sql3 = "INSERT INTO loan (serial_no, customer_no, amount, start_date, end_date, months, balance)
-                    VALUES ('$serial', '$custNo', '$amount', '$start', '$end', '$months', '$balance')";
+                    VALUES ('$serial', '$custNo', '$loan', '$start', '$end', '$months', '$balance')";
 
         $sql4 = "INSERT INTO transaction (deal_no, rebate_no, package_no, rep_no, customer_no, serial_no, amount, fin_amt, date)
                     VALUES ('$dealNo', '$rebate', '$package_no', '$empNo', '$custNo', '$serial', '$amount', '$loan', '$date')";
@@ -145,7 +145,7 @@
                     VALUES ('$serial', '$model', '$color', '$autotrans', '$warehouse', '$amount')";
 
         $sql3 = "INSERT INTO finance (vehicle_no, buyer_no, amount, start_date, end_date, months, balance)
-                    VALUES ('$serial', '$custNo', '$amount', '$start', '$end', '$months', '$balance')";
+                    VALUES ('$serial', '$custNo', '$loan', '$start', '$end', '$months', '$balance')";
 
         $sql4 = "INSERT INTO deal (deal_no, rebate_no, package_no, sale_no, buyer_no, vehicle_no, amount, fin_amt, date)
                     VALUES ('$dealNo', '$rebate', '$package_no', '$empNo', '$custNo', '$serial', '$amount', '$loan', '$date')";
