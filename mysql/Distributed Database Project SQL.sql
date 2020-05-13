@@ -27,4 +27,4 @@ create table customer
 );
 
 SELECT * FROM employee;
-SELECT * FROM customer;
+SELECT * FROM customeracc;

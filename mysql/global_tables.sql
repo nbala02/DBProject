@@ -1,10 +1,5 @@
 use globalviews;
 
-SELECT `model`, COUNT(`model`) AS `value_occurrence` 
-	FROM (SELECT sales.serial_no, purchased.model, purchased.color 
-			FROM sales INNER JOIN purchased ON sales.serial_no = purchased.serial_no) AS T
-	GROUP BY `model` ORDER BY `value_occurrence` DESC LIMIT 1;
-    
 create table model
 (
 	model          varchar(20)  NOT NULL, #unique model for car

@@ -16,7 +16,7 @@ CREATE VIEW salesperson(
  AS 
 	SELECT rep_no, base_salary, ytd_sales, comm, 'D1' from dealer_one.representative
     UNION ALL
-    SELECT sale_no, comm, base_salary, ytdsales, 'D2' from dealer_two.sales_person;
+    SELECT sale_no, base_salary, ytdsales, comm,  'D2' from dealer_two.sales_person;
  
 CREATE VIEW customer_global AS
 	SELECT customer_no, name, address, phone from dealer_one.customer_d1
