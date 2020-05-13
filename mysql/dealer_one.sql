@@ -11,7 +11,6 @@ create table representative
     ytd_sales			decimal(15) NOT NULL, # year to date amount for the representative
     comm				decimal(15) NOT NULL, # commission for the representative
     
-    
     PRIMARY KEY (rep_no)
 );
 

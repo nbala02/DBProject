@@ -7,9 +7,9 @@ create table sales_person
     name                varchar(20) NOT NULL, #name of the salesperson
     address             varchar(50) NOT NULL, #address of salesperson
     phone				varchar(15) NOT NULL, #phone number of salesperson
-    comm				decimal(15) NOT NULL, #commission for the salesperson
     base_salary			decimal(15) NOT NULL, #base salary for the salesperson
     ytdsales			decimal(15) NOT NULL, #year to date amount for the salesperson
+	comm				decimal(15) NOT NULL, #commission for the salesperson
    
     PRIMARY KEY (sale_no)
 );
@@ -49,8 +49,6 @@ create table autos
     PRIMARY KEY  (vehicle_no),
     FOREIGN KEY (model) REFERENCES globalviews.model(model)
 );
-
-
 
 create table purchased_autos
 (
