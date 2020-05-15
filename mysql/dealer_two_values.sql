@@ -2,7 +2,7 @@ use dealer_two;
 
 INSERT INTO sales_person(sale_no, name, address, phone, comm, base_salary, ytdsales)
 VALUES('S86592', 'Fernanda Tovar', '45 Cross St', '573-555-8888', '52000', '55000', '109000');
-
+      
 INSERT INTO customer_d2(buyer_no, name, address, phone)
 VALUES('5678', 'Mike King', '33 Second', '573-555-7890');
 
