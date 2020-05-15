@@ -13,7 +13,7 @@
     $connection = mysqli_connect("127.0.0.1", "root", "", "globalviews");
     $sql = "INSERT INTO model (model, price, type, gas_mileage, seat, engine)
             VALUES ('$model', '$price', '$type', '$mileage', '$seat', '$engine')";
-
+             
     if ($connection->query($sql) === TRUE) 
     {
         echo "<script>alert('New Model Added'); window.location.href='empAccount.html';</script>";
