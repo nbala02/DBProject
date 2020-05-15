@@ -5,7 +5,7 @@
 
     $name = filter_input(INPUT_POST, 'name');
     list($fname, $lname) = explode(" ", $name);
-    $address = filter_input(INPUT_POST, 'address');
+    $address = filter_input(INPUT_POST, 'address');       
     $phone = filter_input(INPUT_POST, 'phone');
     $salary = filter_input(INPUT_POST, 'salary');
     $ytd = filter_input(INPUT_POST, 'ytd');
