@@ -2,7 +2,7 @@
     session_start();
 
     include('dbconnect.php');
-
+                          
     $code = filter_input(INPUT_POST, 'cust_no');
     $fname = filter_input(INPUT_POST, 'fname');
     $lname = filter_input(INPUT_POST, 'lname');
