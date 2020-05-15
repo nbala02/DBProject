@@ -3,8 +3,7 @@ use dealer_one;
 
 Insert INTO representative (rep_no,name,address,phone,base_salary, ytd_sales,comm)
 values ('R987', 'Frank Doe', '10 Broad St', '573-555-6666', '60000','122000','56000');
-
-
+                         
 Insert INTO customer_d1 (customer_no,name,address,phone)
 values ('C1234','Mary Jones','23 Hillside','573-555-2345');
 
