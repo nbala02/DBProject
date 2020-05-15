@@ -3,7 +3,7 @@
 
     include('dbconnect.php');
 
-    if(isset($_SESSION['ldmanager1']))
+    if(isset($_SESSION['ldmanager1']))           
     {
         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
         $query = "UPDATE customer_d1 SET name= '$_POST[name]',address= '$_POST[address]',phone= '$_POST[phone]' WHERE customer_no= '$_POST[customer_no]'";
