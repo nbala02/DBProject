@@ -7,7 +7,7 @@
     $model = filter_input(INPUT_POST, 'model');
     $color = filter_input(INPUT_POST, 'color');
     $autotrans = filter_input(INPUT_POST, 'autotrans');
-    $warehouse = filter_input(INPUT_POST, 'warehouse');
+    $warehouse = filter_input(INPUT_POST, 'warehouse');         
 
     $global = mysqli_connect("127.0.0.1", "root", "", "globalviews");
     $sql = "SELECT model FROM rebate_Global WHERE model = '$model'";
