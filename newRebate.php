@@ -6,7 +6,7 @@
     $rebate = filter_input(INPUT_POST, 'rebate');
     $model = filter_input(INPUT_POST, 'model');
     $amount = filter_input(INPUT_POST, 'amount');
-    $start = filter_input(INPUT_POST, 'start');       
+    $start = filter_input(INPUT_POST, 'start');
     $end = filter_input(INPUT_POST, 'end');
     $yes = 'Yes';
 

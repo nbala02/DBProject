@@ -2,7 +2,7 @@
     session_start();
 
     include('dbconnect.php');
-                    
+
     if (isset($_POST['email']) and isset($_POST['password']))
     {
         //Assigning posted values to variables.

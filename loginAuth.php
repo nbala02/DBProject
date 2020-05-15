@@ -9,7 +9,7 @@
         $id = $_POST['username'];
         $password = $_POST['password'];
         $dealer = $_POST['radio'];
-            
+
         //Checking if the values exist in the database or not
         $query = "SELECT * FROM customer WHERE username='$id' and password='$password'";
 

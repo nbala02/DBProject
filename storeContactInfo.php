@@ -5,7 +5,7 @@
 
     $name = filter_input(INPUT_POST, 'name');
     $address = filter_input(INPUT_POST, 'address');
-    $phone = filter_input(INPUT_POST, 'phone');         
+    $phone = filter_input(INPUT_POST, 'phone');
     $email = filter_input(INPUT_POST, 'email');
 
     $pin = "B";

@@ -4,7 +4,7 @@
     include('dbconnect.php');
 
     if(isset($_SESSION['ldmanager1']))
-    {                    
+    {
         $dbconnect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
         $query = "UPDATE representative SET name= '$_POST[name]',address= '$_POST[address]',phone= '$_POST[phone]',base_salary= '$_POST[base_salary]',ytd_sales= '$_POST[ytd_sales]',comm= '$_POST[comm]' WHERE rep_no= '$_POST[rep_no]'";
 

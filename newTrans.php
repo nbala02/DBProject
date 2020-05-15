@@ -8,7 +8,7 @@
     $phone = filter_input(INPUT_POST, 'phone');
 
     //Transaction Details
-    $date = filter_input(INPUT_POST, 'date');           
+    $date = filter_input(INPUT_POST, 'date');
     $rebate = filter_input(INPUT_POST, 'rebate');
     $serial = filter_input(INPUT_POST, 'serial');
     $amount = filter_input(INPUT_POST, 'amount');
