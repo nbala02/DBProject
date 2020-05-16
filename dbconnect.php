@@ -10,7 +10,7 @@
             $connect = mysqli_connect("127.0.0.1", "root", "", "dealer_one");
             $connectGlobal = mysqli_connect("127.0.0.1", "root", "", "globalviews");
 
-            $query1 = "SELECT rebate_no, expired FROM rebate1";
+            $query1 = "SELECT rebate_no, expired, model FROM rebate1";
             $query2 = "SELECT serial_no FROM cars";
             $query3 = "SELECT package_no FROM add_on";
             $query4 = "SELECT customer_no FROM customer_d1";
@@ -20,7 +20,7 @@
             $connect = mysqli_connect("127.0.0.1", "root", "", "dealer_two");
             $connectGlobal = mysqli_connect("127.0.0.1", "root", "", "globalviews");
 
-            $query1 = "SELECT rebate_no, expired FROM rebate2";
+            $query1 = "SELECT rebate_no, expired, model FROM rebate2";
             $query2 = "SELECT vehicle_no FROM autos";
             $query3 = "SELECT package_no FROM add_on";
             $query4 = "SELECT buyer_no FROM customer_d2";
